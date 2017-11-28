@@ -12,6 +12,7 @@ import { MessageService } from './message.service';
 import { AvailableComponent } from './available/available.component';
 
 import { AppRoutingModule } from './/app-routing.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppRoutingModule } from './/app-routing.module';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    AvailableComponent
+    AvailableComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
