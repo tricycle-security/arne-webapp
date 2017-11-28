@@ -15,6 +15,8 @@ if (0) {
 
   email = "contact@tricycle-sec.nl"
   pass = "Test123!";
+
+  console.log("API: Tricycle firebase");
 } else{
   //Jordi's Firebase
   var config = {
@@ -28,11 +30,13 @@ if (0) {
 
   email = "0889529@hr.nl";
   pass = "toor12";
+
+  console.log("API: Jordi's firebase");
 }
 
 // Initialize the default app
 var defaultApp = firebase.initializeApp(config);
-console.log(defaultApp.name);  // "[DEFAULT]"
+//console.log(defaultApp.name);  // get default name "[DEFAULT]"
 var database = firebase.database();
 
 //example angularJS controllers
@@ -93,7 +97,7 @@ function writeUserData(userId, name) {
   database.ref('/users/' + userId).set({
     username: name
   });
-  console.log("set()");
+  console.log("performing set() function on /users/*");
 }
 writeUserData(userId, name);
 
@@ -102,50 +106,6 @@ writeUserData(userId, name);
 database.ref('/users/' + userId).once('value').then(function(snapshot) {
   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
   
-  console.log("here: ");
+  console.log("getting username for DB: ");
   console.log(username);
 });
-
-//
-
-function authService($firebaseAuth, firebaseDataService, cityTimerService) {
-  var firebaseAuthObject = $firebaseAuth();
-
-  var service = {
-     firebaseAuthObject: firebaseAuthObject,
-     register: register,
-     login: login,
-     logout: logout,
-     isLoggedIn: isLoggedIn,
-     sendWelcomeEmail: sendWelcomeEmail
-  };
-
-  return service;
-
-  ////////////
-
-  function register(user) {
-     return firebaseAuthObject.$createUserWithEmailAndPassword(user.email, user.password);
-  }
-
-  function login(user) {
-     return firebaseAuthObject.$signInWithEmailAndPassword(user.email, user.password);
-  }
-
-  function logout() {
-     cityTimerService.reset();
-     firebaseAuthObject.$signOut();
-  }
-
-  function isLoggedIn() {
-     return firebaseAuthObject.$getAuth();
-  }
-
-  function sendWelcomeEmail(emailAddress) {
-     firebaseDataService.emails.push({
-         emailAddress: emailAddress
-     });
-  }
-}
-
-authService();
