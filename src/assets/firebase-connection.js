@@ -28,8 +28,6 @@ if (0) {
 
   email = "0889529@hr.nl";
   pass = "toor12";
-
-  console.log("here");
 }
 
 // Initialize the default app
@@ -107,3 +105,47 @@ database.ref('/users/' + userId).once('value').then(function(snapshot) {
   console.log("here: ");
   console.log(username);
 });
+
+//
+
+function authService($firebaseAuth, firebaseDataService, cityTimerService) {
+  var firebaseAuthObject = $firebaseAuth();
+
+  var service = {
+     firebaseAuthObject: firebaseAuthObject,
+     register: register,
+     login: login,
+     logout: logout,
+     isLoggedIn: isLoggedIn,
+     sendWelcomeEmail: sendWelcomeEmail
+  };
+
+  return service;
+
+  ////////////
+
+  function register(user) {
+     return firebaseAuthObject.$createUserWithEmailAndPassword(user.email, user.password);
+  }
+
+  function login(user) {
+     return firebaseAuthObject.$signInWithEmailAndPassword(user.email, user.password);
+  }
+
+  function logout() {
+     cityTimerService.reset();
+     firebaseAuthObject.$signOut();
+  }
+
+  function isLoggedIn() {
+     return firebaseAuthObject.$getAuth();
+  }
+
+  function sendWelcomeEmail(emailAddress) {
+     firebaseDataService.emails.push({
+         emailAddress: emailAddress
+     });
+  }
+}
+
+authService();
