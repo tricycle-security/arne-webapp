@@ -40,28 +40,28 @@ var defaultApp = firebase.initializeApp(config);
 var database = firebase.database();
 
 //example angularJS controllers
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope) {
-    $scope.firstName = "John";
-    $scope.lastName = "Doe";
-    $scope.fullName = function() {
-        return $scope.firstName + " " + $scope.lastName;
-    };
+var app = angular.module('myApp', []).controller('myCtrl', function($scope) {
+  $scope.firstName = "John";
+  $scope.lastName = "Doe";
+  $scope.fullName = function() {
+      return $scope.firstName + " " + $scope.lastName;
+  };
+  $scope.cars = ["BMW", "Volvo", "Saab"];
 
-    $scope.test = "here";
+  /*$scope.test = "here";
 
-    var ref = firebase.database().ref();
+  var ref = firebase.database().ref();
 
-    ref.on("value", function(snapshot) {
-      // This isn't going to show up in the DOM immediately, because
-      // Angular does not know we have changed this in memory.
-      // $scope.data = snapshot.val();
-      // To fix this, we can use $scope.$apply() to notify Angular that a change occurred.
-      $scope.$apply(function() {
-        $scope.data = snapshot.val();
-      });
+  ref.on("value", function(snapshot) {
+    // This isn't going to show up in the DOM immediately, because
+    // Angular does not know we have changed this in memory.
+    // $scope.data = snapshot.val();
+    // To fix this, we can use $scope.$apply() to notify Angular that a change occurred.
+    $scope.$apply(function() {
+      $scope.data = snapshot.val();
     });
-  });
+  });*/
+});
 
 //Sign in
 
@@ -86,26 +86,39 @@ firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
 
 //Database
 
-var userId = "alovelace";
-var name = "Ada Lovelace";
-var email = "abc";
-var imageUrl = "hereeeeee";
+var userIds = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
+var names = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
+var availabilties = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
 
 //set() query
 
+//example structure
+//users
+//--userId
+//----name
+
 function writeUserData(userId, name) {
   database.ref('/users/' + userId).set({
-    username: name
+    username: name,
+    availabilty: 1
   });
-  console.log("performing set() function on /users/*");
+  console.log("performing set() function on /users/" + userId);
 }
-writeUserData(userId, name);
+
+for (var i = 0; i < userIds.length; i++) {
+  writeUserData(userIds[i], names[i], 1);
+}
 
 //read Database
 
-database.ref('/users/' + userId).once('value').then(function(snapshot) {
-  var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-  
-  console.log("getting username for DB: ");
-  console.log(username);
-});
+function getUserById(userId) {
+  database.ref('/users/' + userId).once('value').then(function(snapshot) {
+    var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+    
+    console.log("Getting username from DB: " + username);
+  });
+}
+
+for (var i = 0; i < userIds.length; i++) {
+  getUserById(userIds[i]);
+}
