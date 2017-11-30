@@ -1,6 +1,7 @@
 // Initialize Firebase
-var email = "";
-var pass = "";
+var email = "";       //login info for api
+var pass = "";        //login info for api
+var allUsers = null;  //Will contain Userinfo table
 
 if (0) {
   //Tricycle
@@ -62,13 +63,12 @@ firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
 
 //Database
 
-//test info
-
+//create basic tables and info
 var uuid = 2;
 
 database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
-  fname: 'Jordi',
-  lname: 'Luijk',
+  fname: 'Arne',
+  lname: 'lname',
   uuid: uuid
 });
 
@@ -107,15 +107,21 @@ function getUserByUuid(userUuid) {
   });
 }
 
-getUserByUuid(2);
+getUserByUuid(uuid);
 
+//Get all users from Userinfo
+database.ref().once("value").then(function(snapshot) {
+  allUsers = snapshot.val().Userinfo.usergeninfo;
+  //console.log(allUsers);
+}, function (error) {
+  console.log("Error getting all users: " + error.code);
+});
 
-//example angularJS controllers
 var app = angular.module('dashboardApp', []).controller('dashboardCtrl', function($scope) {
-  $scope.firstName = "John";
-  $scope.lastName = "Doe";
-  $scope.fullName = function() {
-      return $scope.firstName + " " + $scope.lastName;
-  };
-  $scope.cars = ["BMW", "Volvo", "Saab"];
+ 
+  //This will update $scope.x variables in real time
+  window.setInterval(function(){
+    $scope.allUsers = allUsers;
+    $scope.$apply();
+  }, 1000);
 });
