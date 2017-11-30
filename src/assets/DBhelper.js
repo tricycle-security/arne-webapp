@@ -35,3 +35,11 @@ function getUserById(userId) {
 for (var i = 0; i < userIds.length; i++) {
   getUserById(userIds[i]);
 }
+
+//get all tables + entries
+database.ref().on("value", function(snapshot) {
+  console.log(snapshot.val());
+}, function (error) {
+  console.log("Error: " + error.code);
+});
+
