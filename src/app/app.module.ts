@@ -7,6 +7,7 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
 import { HeroService } from './hero.service';
+import { BhvService } from './bhv.service';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { AvailableComponent } from './available/available.component';
@@ -28,7 +29,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [ HeroService, MessageService ],
+  providers: [ HeroService, MessageService, BhvService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

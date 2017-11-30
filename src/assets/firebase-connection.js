@@ -39,30 +39,6 @@ var defaultApp = firebase.initializeApp(config);
 //console.log(defaultApp.name);  // get default name "[DEFAULT]"
 var database = firebase.database();
 
-//example angularJS controllers
-var app = angular.module('myApp', []).controller('myCtrl', function($scope) {
-  $scope.firstName = "John";
-  $scope.lastName = "Doe";
-  $scope.fullName = function() {
-      return $scope.firstName + " " + $scope.lastName;
-  };
-  $scope.cars = ["BMW", "Volvo", "Saab"];
-
-  /*$scope.test = "here";
-
-  var ref = firebase.database().ref();
-
-  ref.on("value", function(snapshot) {
-    // This isn't going to show up in the DOM immediately, because
-    // Angular does not know we have changed this in memory.
-    // $scope.data = snapshot.val();
-    // To fix this, we can use $scope.$apply() to notify Angular that a change occurred.
-    $scope.$apply(function() {
-      $scope.data = snapshot.val();
-    });
-  });*/
-});
-
 //Sign in
 
 firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
@@ -86,39 +62,60 @@ firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
 
 //Database
 
-var userIds = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
-var names = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
-var availabilties = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
+//test info
 
-//set() query
+var uuid = 2;
 
-//example structure
-//users
-//--userId
-//----name
+database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
+  fname: 'Jordi',
+  lname: 'Luijk',
+  uuid: uuid
+});
 
-function writeUserData(userId, name) {
-  database.ref('/users/' + userId).set({
-    username: name,
-    availabilty: 1
+database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
+  admin: 'active',
+  bhver: true,
+  checkinpole: false
+});
+
+database.ref("/Cardinfo/" + "cardID").set({
+  status: 'active',
+  uuid: uuid
+});
+
+database.ref("/CurrentStatus/" + uuid).set({
+  onLocation: true,
+  uuid: uuid
+});
+
+//read Database example
+
+function getUserByUuid(userUuid) {
+  database.ref('/Userinfo/' + 'usergeninfo/' + userUuid).once('value').then(function(snapshot) {
+    var uuid = (snapshot.val() && snapshot.val().uuid) || 'Anonymous';
+    console.log("Getting username from DB: " + uuid);
+    console.log(snapshot.val().uuid);
+
+    snapshot.forEach(function(child) {
+      console.log(child.key+': '+child.val());
+      /*var tr = document.createElement('tr');
+      var td = document.createElement('td');
+      td.innerText = child.val().email + " --- " + JSON.stringify(child.val());
+      tr.appendChild(td);
+      table.appendChild(tr);*/
+    });
   });
-  console.log("performing set() function on /users/" + userId);
 }
 
-for (var i = 0; i < userIds.length; i++) {
-  writeUserData(userIds[i], names[i], 1);
-}
+getUserByUuid(2);
 
-//read Database
 
-function getUserById(userId) {
-  database.ref('/users/' + userId).once('value').then(function(snapshot) {
-    var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-    
-    console.log("Getting username from DB: " + username);
-  });
-}
-
-for (var i = 0; i < userIds.length; i++) {
-  getUserById(userIds[i]);
-}
+//example angularJS controllers
+var app = angular.module('dashboardApp', []).controller('dashboardCtrl', function($scope) {
+  $scope.firstName = "John";
+  $scope.lastName = "Doe";
+  $scope.fullName = function() {
+      return $scope.firstName + " " + $scope.lastName;
+  };
+  $scope.cars = ["BMW", "Volvo", "Saab"];
+});

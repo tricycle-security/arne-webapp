@@ -6,15 +6,18 @@
 <router-outlet></router-outlet>
 <!--<app-messages></app-messages>-->
 
-<div ng-app="myApp" ng-controller="myCtrl">
-    
+<div ng-app="dashboardApp" ng-controller="dashboardCtrl">
+    <!--
     First Name: <input type="text" ng-model="firstName"><br>
     Last Name: <input type="text" ng-model="lastName"><br>
     Full Name: <input type="text" ng-model="fullName()"><br>
-
+    
     <br>
+    
     <p>First name: {{firstName}}</p>
     <p ng-bind="firstName"></p>
-
-    <h2 ng-repeat="x in cars">a{{x}}</h2>
+    -->
+    <h2 ng-repeat="x in cars">
+        <span ng-bind="x"></span>
+    </h2>
 </div>
