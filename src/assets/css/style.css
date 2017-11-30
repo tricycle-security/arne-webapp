@@ -1,27 +1,3 @@
-/*
-Template Name: Material Pro Admin
-Author: Themedesigner
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/**
- * Table Of Content
- *
- * 	1. Globals
- *	2. Headers
- *	3. Navigations
- *	4. Banners
- *	5. Footers
- *	6. app
- *	7. Widgets
- *	8. Custom Templates
- */
-/*
-Template Name: Material Pro Admin
-Author: Themedesigner
-Email: niravjoshi87@gmail.com
-File: scss
-*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
 /*Theme Colors*/
 /*bootstrap Color*/
@@ -29,13 +5,13 @@ File: scss
 /*Normal Color*/
 /*Extra Variable*/
 /*Preloader*/
-@import url(../scss/icons/font-awesome/css/font-awesome.min.css);
-@import url(../scss/icons/simple-line-icons/css/simple-line-icons.css);
-@import url(../scss/icons/weather-icons/css/weather-icons.min.css);
-@import url(../scss/icons/linea-icons/linea.css);
-@import url(../scss/icons/themify-icons/themify-icons.css);
-@import url(../scss/icons/flag-icon-css/flag-icon.min.css);
-@import url(../scss/icons/material-design-iconic-font/css/materialdesignicons.min.css);
+@import url(/assets/icons/font-awesome/css/font-awesome.min.css);
+@import url(/assets/icons/simple-line-icons/css/simple-line-icons.css);
+@import url(/assets/icons/weather-icons/css/weather-icons.min.css);
+@import url(/assets/icons/linea-icons/linea.css);
+@import url(/assets/icons/themify-icons/themify-icons.css);
+@import url(/assets/icons/flag-icon-css/flag-icon.min.css);
+@import url(/assets/icons/material-design-iconic-font/css/materialdesignicons.min.css);
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
 @import url(spinners.css);
 @import url(animate.css);
