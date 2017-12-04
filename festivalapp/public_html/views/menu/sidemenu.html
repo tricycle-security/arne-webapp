@@ -1,0 +1,10 @@
+<input id="menuinput" type="checkbox">
+<div class="menu-content-div" >
+    <h1>{{sidemenu.title}}</h1>
+    <a ng-href="/festivalapp/#/" ng-class="sidemenu.isActive('Timetable')">Timetable</a>
+    <a ng-href="/festivalapp/#/stages" ng-class="sidemenu.isActive('Stages')">Stages</a>
+
+    <footer>
+        <a ng-href="/festivalapp/#/disclaimer" ng-class="sidemenu.isActive('Disclaimer')">Disclaimer</a>
+    </footer>
+</div>

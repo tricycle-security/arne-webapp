@@ -1,0 +1,36 @@
+<div class="container-fluid">
+
+          
+        <div class="event-content" ng-class="eventCtrl.eventRunning(event.startDate, event.endDate)" ng-click="detailCtrl.showDetailPage = event.title; detailCtrl.disableScroll()">
+            <!--<event-details class="overlay" ng-if="show" ng-click="$event.stopPropagation()"></event-details>-->
+            <img class="event-img" ng-src="{{event.image}}">
+
+            <div class="event-info" ng-class="eventCtrl.eventNotEnded(event.endDate)">
+
+                <div class="event-info-top" ng-class="">
+                    <span class="event-time event-info-left">{{event.beginTime}}-{{event.endTime| date: HH:mm}}</span>
+
+                    <span class="event-stage event-info-right" 
+
+                          ng-click="detailCtrl.showDetailPage = eventCtrl.getStageName(event.stage); $event.stopPropagation(); detailCtrl.disableScroll()" onclick="cancelClick()">{{eventCtrl.getStageName(event.stage)}}</span>
+                </div>
+
+                <div class="event-info-bottom">
+                    <span class="event-title event-info-left">{{event.title}}</span>
+                    
+                    <a ng-click="eventCtrl.addToFav(event)" onclick="cancelClick()" ng-if="!eventCtrl.isFav(event)"><img class = "event-info-right" alt="<3" ng-src="thumbnail_Heart inactive2x.jpg" ng-mouseover="this.src = thumbnail_Heart2x.jpg"></a>
+                    <a ng-click="eventCtrl.addToFav(event)" onclick="cancelClick()" ng-if="eventCtrl.isFav(event)"><img class = "event-info-right" alt="<3" ng-src="thumbnail_Heart2x.jpg" ></a>
+                    
+                </div>
+            </div>
+        </div>
+        <event-details class="overlay" ng-if="detailCtrl.showDetailPage === event.title" ng-click="$event.stopPropagation()"></event-details>
+            <stage-details class="overlay" ng-if="detailCtrl.showDetailPage === eventCtrl.getStageName(event.stage)" ng-click="$event.stopPropagation()"></stage-details>
+
+ 
+        </div>
+        {{stage = eventCtrl.getStageData(event.stage); ""}}
+        <event-details class="overlay" ng-if="detailCtrl.showDetailPage === event.title"></event-details>
+        <stage-details class="overlay" ng-if="detailCtrl.showDetailPage === eventCtrl.getStageName(event.stage)"></stage-details>
+    </div>
+</div>

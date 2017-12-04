@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <div class="row">
+        <div id="stageDetailHeader" >
+            <span class="glyphicon glyphicon-arrow-left backArrow" href="#" ng-click="detailCtrl.showDetailPage = ''; detailCtrl.enableScroll()"></span>
+            <!--        <img class="eventDetail-img" ng-src="{{event.image}}">-->
+        </div>
+    </div> 
+</div>
+<div class="overlayInfo" >
+    <div class="container">
+        <h5 class="overlayTitle">{{stage.name}}</h5>   
+        <div class="overlayDescription">{{stage.description}}</div>
+    </div>
+</div>
+<div class="mapContainer">
+    <div class="container">
+        <ng-map class="overlayMap" center="[{{stage.lat}}, {{stage.lng}}]">
+
+            <marker position="[{{stage.lat}}, {{stage.lng}}]" title="marker"></marker>
+        </ng-map>
+    </div>
+</div>

@@ -1,0 +1,565 @@
+html, body{
+    height:100%
+}
+
+
+.content{
+    background-color: #FEFCF0;
+    position: absolute;
+    width: 100%;
+    height:100vh;
+    
+}
+
+body
+{
+    overflow-x: hidden;
+}
+
+disclaimer .container{
+    height: 90vh;
+}
+
+#disclaimer-div{
+    /*    font-family:'-apple-system', 'HelveticaNeue';
+        font-size:15px;
+        color: #4A4A4A;*/
+    height:100%;
+    background-color: white;
+    max-width:100%;
+}
+
+#disclaimer-wrapper{
+    height:100vh;
+    width:100vw;
+    background-color: white;
+}
+
+/*#disclaimer-div h1{
+    font-family:'-apple-system', 'HelveticaNeue';
+    font-size:20px;
+    color: #66B444;
+}
+
+#disclaimer-div a{
+    color: #66B444;
+}*/
+
+disclaimer div{
+    padding-top:10vh;
+    height:100%;
+    width:100vw;
+}
+
+h1
+{
+    font-family: "Times New Roman", Georgia, Serif;
+    font-size: 4vh;
+}
+
+/*navbar*/
+
+navbar .container-fluid
+{
+
+    max-width: 100vw;
+    height: 8vh;
+    color: black;
+    background-image: url("../thumbnail_navbar 2x.jpg");
+    background-size: 100vw auto;
+    background-repeat: no-repeat;
+}
+
+/*TODO vraag naar de background*/
+
+navbar
+{
+    text-align: center;   
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+
+}
+
+event-nav
+{
+    width: 100vw;
+    margin-top: 8vh;
+    position: fixed;
+    z-index: 98;
+    background-color: white;
+}
+
+
+navar h1
+{
+    display: inline-block;
+}
+
+#nav-map, #nav-list
+{
+    float:right;
+}
+
+navbar label 
+{
+    height: 1vh;
+    float: left;
+    font-size: 5vh;
+    vertical-align: middle;
+    appearance: icon;
+}
+
+navbar a, navbar a:visited, navbar a:hover, navbar a:focus{
+    padding-top: 1.5vh;
+    font-size: 3.5vh;
+    color: black;
+    text-decoration: none;
+}
+
+navbar span{
+    font-size: 3.5vh;
+}
+
+navbar .title-div
+{
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding-top: 1.5vh;
+
+}
+
+
+#menuinput
+{
+/*    display: none;*/
+    position: absolute;
+    z-index: 999;
+}
+
+
+
+
+/*event*/
+
+.event-content
+{
+    height: calc(4em + 0.5vh);
+    margin-top: 1.2vh;
+    margin-bottom: 0.5vh;
+    background-color: #EDEAE1;
+    font-size: 3.5vw;
+    font-weight: 100;
+    padding: 0px;
+    box-shadow: 3px 3px 5px rgba(0 ,0 ,0 , 0.1);
+}
+
+.event-content.running
+{
+    border-right: 2px solid greenyellow;
+}
+
+events
+{
+    width: 100%;
+    margin-top:15vh;
+    position: absolute;
+    background-color: #FEFCF0;
+}
+
+
+
+event
+{
+    margin-bottom: 1vh;
+}
+
+event .container-fluid{
+    margin-bottom:0.5vh;
+}
+
+.event-img
+{
+    float: left;
+    height: calc(4em + 0.5vh);
+    position: absolute;
+    max-width: 15%;
+}
+
+
+
+.event-info
+{
+    color: #999999;
+    font-weight: bold;
+    padding-top: 10px;
+    height: auto;
+    width: 78%;
+    display: inline-block;
+    margin-left: 18%;
+}
+
+.event-info.not-ended
+{
+    color: white;
+}
+
+.event-info-right
+{
+    font-size: 3vw;
+    padding-right: 0.1vw;
+    float:right;
+}
+
+
+
+img.event-info-right
+{
+    height:2vh;
+    max-height: 2vh;
+}
+
+.event-info-top
+{
+    margin-bottom: 1vh;
+}
+
+.event-info-bottom span
+{
+    color: black;
+    font-weight: 500;
+    display:inline-block;
+    width:40vw;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+}
+
+#event-div
+{
+    max-width: 100vw;
+}
+
+event-nav ul
+{
+    margin-bottom: 0px;
+}
+
+event-nav .container-fluid{
+    width:100vw;
+    height: 7vh; 
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    border-bottom:1px solid rgb(230, 230, 230);
+}
+
+event-nav ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;  
+}
+
+event-nav .list-inline{
+    height:7vh;
+}
+
+event-nav .list-inline>li{
+    height:100%;
+    padding-right: 2vw;
+    padding-left: 2vw;
+}
+
+
+event-nav li{
+    font-size: 2vh;
+    padding-top: 2vh;   
+    padding-left: 3vw;
+    color: #999999;
+    box-sizing:border-box;
+}
+
+event-nav li.active
+{
+    /*    height: 7vh;*/
+    color:black;
+    border-bottom: 0.6vh solid black;
+    box-sizing:border-box;
+}
+
+event-nav img
+{
+    height: 2.3vh;
+}
+
+
+/*menu*/
+
+sidemenu
+{
+    color: white;
+    margin: 0px;
+    position: absolute;
+    z-index: 100;
+}
+
+
+sidemenu a, sidemenu a:visited, sidemenu a:focus, sidemenu a:hover
+{
+    color: white;
+    display: block;
+    font-size: 4vh;
+    text-decoration: none;
+}
+
+
+.menu-content-div
+{
+    color: white;
+    margin: 0px;
+    margin-top: 40px;
+    width: 80vw;
+    height: 100vh;
+    background-color: #31779d;
+    text-align: center;
+    font-family: 'Times New Roman';
+    position: fixed;
+    margin-left: -80vw; 
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+}
+
+
+
+@keyframes slideIn {
+    from {margin-left: -80vw;}
+    to {margin-left: 0vw;}
+}
+
+
+
+#menuinput:checked~.menu-content-div
+{
+    -webkit-transform: translateX(80vw);
+    -moz-transform: translateX(80vw);
+    -o-transform: translateX(80vw);
+    -ms-transform: translateX(80vw);
+    transform: translateX(80vw);
+}
+
+
+
+
+
+.menu-content-div h1
+{
+    position: relative;
+    margin: 0px;
+    padding-top: 10vh;
+    padding-bottom: 15vh;
+}
+
+.menu-content-div h1
+{
+    color: white;
+    font-size: 8vh;
+}
+
+
+.menu-content-div p
+{
+    font-size: 5vh;
+}
+
+.menu-content-div footer
+{
+    padding-top: 40vh;
+    font-size: 3vw;
+    vertical-align: bottom;
+}
+
+.menu-content-div a.active
+{
+    background-color: #7ca9c1;
+}
+
+
+
+.event-timegroup-div{
+    width: 100vw;
+    font-weight: bold;
+    text-align: left;
+    padding-left:15px;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    font-size: 4vw;
+    background-color: white;
+    box-shadow: 0px 1px 2px #888888;
+}
+
+
+
+/*overlay/eventdetails/stagedetails*/
+
+.overlay{
+    background-color: white;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    position:fixed;
+    z-index: 200;
+}
+
+.overlay-header{ 
+    height:100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+
+}
+
+
+
+event-details .container-fluid .row{
+    height:25vh;
+}
+
+/*event-details .container-fluid .row .overlayHeader{
+    height:100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}*/
+
+.overlayFav{
+    float:right;
+    height: 2.5vh;
+}
+
+.overlayTime{
+    font-weight:bold;
+    font-size: 2vh;
+    color: #999999;
+    margin: 10px 0;
+}
+
+.overlayInfo{
+    padding-top:1vh;
+    overflow: scroll; overflow-x:hidden;
+    max-height: 35vh;
+}
+
+.overlayInfo h5{
+    font-size:2vh;
+}
+
+.overlayTitle{
+    font-weight: bold;
+}
+
+.overlayDescription{
+    margin-top: 1vh;
+    font-size: 2vh;
+}
+
+.overlayMap{
+    height:90%;
+    width:auto;
+}
+
+.mapContainer{
+    height:40vh;
+    width:100%;
+    margin-top: 2vh;
+}
+
+.mapContainer .container{
+
+    height:100%;
+}
+
+/*stages*/
+
+#stageDetailHeader{
+    background: url('../placeholder-detail@2x.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 25vh;
+}
+
+stage-details .overlayDescription{
+    margin-top: 3vh;
+    font-size: 2vh;
+}
+
+.backArrow{
+    /*    background-color: rgba(255,255,255, 0.1);*/
+
+    font-size:5vh;
+    color: white;
+    /*    mix-blend-mode: difference;*/
+    margin-top: 4%;
+    margin-left:4%;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+
+
+}
+
+
+.list-inline li
+{
+    margin-right: 1vw;
+}
+
+
+.stages
+{
+    padding-top: 8vh;
+    background-color: white;
+    min-height: 100vh;
+}
+
+.stages ul
+{
+    margin: 0px;
+    padding: 0px;
+    width: 100vw;
+    background-color: white;
+}
+
+.stages li
+{
+    list-style-type: none;
+    border-bottom:1px solid rgba(230, 230, 230, 0.5);
+    margin-left: 0vw;
+    margin-right: 1.5vw;
+    padding-bottom: 6vh;
+    height: 5vh;
+    font-size: 2.5vw;
+    background-color: white;
+}
+
+.stage-list-div
+{
+    padding-top: 2vh;
+}
+
+
+.stages span{
+}
+
+.arrow
+{
+    float: right;
+    /*    text-align: right;*/
+    color: #C3C6BF;
+}
+
+#map-index-div
+{
+    padding-top: 8vh;
+    height:100vh;
+    padding-bottom:50vh;
+    background-color: white;
+}

@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <ul class="list-inline ">
+        <li ng-class="{active: eventCtrl.currentTab  == 'fav'}" ng-click="eventCtrl.currentTab  = 'fav'" class="img-li">
+            <img ng-click="eventCtrl.getStage('fav')" class="event-nav-link" src="thumbnail_Heart2x.jpg" alt="<3">
+        </li>
+        <li ng-class="{active: eventCtrl.currentTab  == 'all'}" ng-click="eventCtrl.currentTab  = 'all'">
+            <span ng-click="eventCtrl.getStage('all')" class="event-nav-span">Alles</span>
+        </li>
+        <li ng-repeat="event in eventCtrl.getAllStages() | unique: 'stage'" ng-click="eventCtrl.currentTab  =  event.stage" ng-class="{active: eventCtrl.currentTab  == event.stage}">
+            <span ng-click="eventCtrl.getStage(event.stage)">{{eventCtrl.getStageName(event.stage)}}</span>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,8 @@
+<div id="map-index-div" class="mapContainer" ng-controller="stageController as stageCtrl" ng-init="stageCtrl.getStages(); navbar.map = false; navbar.list = true; navbar.title='Map'; sidemenu.activeTab = 'Stages'; sidemenu.removeOnLoad()">
+    <div class="container">
+        <ng-map class="overlayMap" center="[{{stageCtrl.stages[0].lat}}, {{stageCtrl.stages[0].lng}}]">
+            
+            <marker position="[{{stage.lat}}, {{stage.lng}}]" title="marker" ng-repeat="stage in stageCtrl.stages"></marker>
+        </ng-map>
+    </div>
+</div>
