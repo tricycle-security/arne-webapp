@@ -1,1 +1,21 @@
-<h1>{{dashy.text}}</h1>
+
+<h3>Available HBVs</h3>
+<!--
+   <h1>{{dashboardCtrl.text}}</h1>
+<p ng-bind="dashboardCtrl.text"></p> 
+    
+    <ul>
+    <li ng-repeat="user in dashboardCtrl.allUsers">
+        <span>{{user.fname}}</span> {{user.lname}}
+    </li>
+</ul>-->
+
+
+
+<div class="grid grid-pad">
+    <a ng-repeat="user in dashboardCtrl.allUsers" class="col-1-4">
+        <div class="module hbs">
+            <h4><span ng-bind="user.fname"></span></h4>
+        </div>
+    </a>
+</div>

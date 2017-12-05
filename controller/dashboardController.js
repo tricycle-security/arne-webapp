@@ -1,5 +1,9 @@
-app.controller('dashboardController', function ($routeParams)
+app.controller('dashboardController', function ($routeParams, $scope, $timeout)
 {
+    var testUser = {fname: "Test", lname: "Testing", uuid: 1}
+    var testUser2 = {fname: "Test", lname: "Testing", uuid: 1}
+    this.allUsers = [];
+    this.allUsers.push(testUser);this.allUsers.push(testUser2);
 
     this.text = "hello world";
 
@@ -41,6 +45,7 @@ app.controller('dashboardController', function ($routeParams)
     // Initialize the firebase
     try{
         firebase.initializeApp(config);
+        var database = firebase.database();
     }
     catch(Exception)
     {
@@ -61,7 +66,18 @@ app.controller('dashboardController', function ($routeParams)
         console.log(errorCode);
         console.log(errorMessage);
     });
+    
+    var self = this;
+    database.ref('Userinfo/usergeninfo').on("child_added", function (data){
+        var tempData = data.val();
+        var tempUser = {fname: tempData.fname, lname: tempData.lname, uuid: tempData.uuid};
 
+        self.allUsers.push(tempUser);
+        //console.log(self.allUsers);
 
+        $timeout(function (){
+            $scope.$apply();
+        });
 
+    });
 });
