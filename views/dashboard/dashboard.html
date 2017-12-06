@@ -7,15 +7,22 @@
     <ul>
     <li ng-repeat="user in dashboardCtrl.allUsers">
         <span>{{user.fname}}</span> {{user.lname}}
-    </li>
+    </li>col-1-4
 </ul>-->
 
 
 
+
 <div class="grid grid-pad">
-    <a ng-repeat="user in dashboardCtrl.allUsers" class="col-1-4">
+    <a ng-repeat="user in dashboardCtrl.allUsers" class="margin_left_20 margin_right_20">
         <div class="module hbs">
-            <h4><span ng-bind="user.fname"></span></h4>
+            <h4>{{user.fname}} {{user.lname}}</h4>
+            <div ng-if="user.onLocation">
+                <p>Available</p>
+            </div>
+            <div ng-if="!user.onLocation">
+                <p>Unavailable</p>
+            </div>
         </div>
     </a>
 </div>
