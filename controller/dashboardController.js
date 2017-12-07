@@ -44,9 +44,9 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
     console.log("API: Jordi's firebase");
 
     // Initialize the firebase
+    var database = null;
     try{
         firebase.initializeApp(config);
-        var database = firebase.database();
     }
     catch(Exception)
     {
@@ -54,7 +54,8 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
         console.log(Exception);
     }
     finally {
-        firebaseSet = true;
+        database = firebase.database();
+//        firebaseSet = true;
     }
 
     //Sign in
