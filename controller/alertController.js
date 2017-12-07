@@ -79,6 +79,19 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
             }
         
         });
+        alertRef.on('child_removed', function(snap){
+            console.log(snap.val())
+            for (var i = 0; i < self.alerts.length; i++) {
+                if(self.alerts[i].id === snap.val().id){
+                    self.alerts.splice(i, 1);
+                    $timeout(function (){
+                        $scope.$apply();
+                    });
+                    break;
+                }
+            }
+        
+        });
     }
 
     var notRunning = true
