@@ -60,3 +60,11 @@
       min-width: 60px;
     }
   }
+
+.color-available {
+  color: limegreen;
+}
+
+.color-unavailable {
+  color: maroon;
+}

@@ -1,13 +1,12 @@
 app.controller('dashboardController', function ($routeParams, $scope, $timeout)
 {
+    //test information
     var testUser = {fname: "Test", lname: "Testing", uuid: 1, onLocation: true}
     var testUser2 = {fname: "Test", lname: "Testing", uuid: 1, onLocation: false}
     this.allUsers = [];
     this.allUsers.push(testUser);this.allUsers.push(testUser2);
 
-    this.availabilityUsers = [];
-
-    this.text = "hello world";
+    this.title = "Available HBVs";
 
     /*var config = {
         apiKey: "AIzaSyD8suoQjYrq58S3yHoA7HoXqIVy3HJiJYM",
@@ -113,34 +112,13 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
             });
         });
     });
-
-
 });
 
 
-//console.log(self.allUsers);
-
-        /*
-                var tempUuid = data.val().uuid;
-        var tempAvailability = []; 
-        database.ref('CurrentStatus').child('uuid').child(tempUuid).once('value', function(mediaSnap) {
-            console.log(tempUuid + ":");// + mediaSnap.val().onLocation);
-            console.log(mediaSnap.val());
-        });*/
-        /*
-        database.ref('CurrentStatus/' + tempUuid).once('value', function(mediaSnap) {
-            console.log(tempUuid + ":");// + mediaSnap.val().onLocation);
-            console.log(mediaSnap.val());
-            tempAvailability = mediaSnap.val();
-        });*/
-
-                //tempUser += tempAvailability;
-
-        //console.log("here "+tempUser);
 
 
-            //get all users
-    
+//helper
+//get all users
     /*database.ref('Userinfo/usergeninfo').on("child_added", function (data){
         var tempData = data.val();
         var tempUser = {fname: tempData.fname, lname: tempData.lname, uuid: tempData.uuid};
@@ -167,3 +145,21 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
         });
 
     });*/
+
+    /*
+        var tempUuid = data.val().uuid;
+var tempAvailability = []; 
+database.ref('CurrentStatus').child('uuid').child(tempUuid).once('value', function(mediaSnap) {
+    console.log(tempUuid + ":");// + mediaSnap.val().onLocation);
+    console.log(mediaSnap.val());
+});*/
+/*
+database.ref('CurrentStatus/' + tempUuid).once('value', function(mediaSnap) {
+    console.log(tempUuid + ":");// + mediaSnap.val().onLocation);
+    console.log(mediaSnap.val());
+    tempAvailability = mediaSnap.val();
+});*/
+
+        //tempUser += tempAvailability;
+
+//console.log("here "+tempUser);

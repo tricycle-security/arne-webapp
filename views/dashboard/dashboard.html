@@ -1,5 +1,5 @@
+<h3>{{dashboardCtrl.title}}</h3>
 
-<h3>Available HBVs</h3>
 <!--
    <h1>{{dashboardCtrl.text}}</h1>
 <p ng-bind="dashboardCtrl.text"></p> 
@@ -10,18 +10,17 @@
     </li>col-1-4
 </ul>-->
 
-
-
-
 <div class="grid grid-pad">
     <a ng-repeat="user in dashboardCtrl.allUsers" class="margin_left_20 margin_right_20">
         <div class="module hbs">
             <h4>{{user.fname}} {{user.lname}}</h4>
-            <div ng-if="user.onLocation">
-                <p>Available</p>
-            </div>
-            <div ng-if="!user.onLocation">
-                <p>Unavailable</p>
+            <div ng:class="{true:'color-available', false:'color-unavailable'}[user.onLocation]">
+                <div ng-if="user.onLocation">
+                    <p>Available</p>
+                </div>
+                <div ng-if="!user.onLocation">
+                    <p>Unavailable</p>
+                </div>
             </div>
         </div>
     </a>
