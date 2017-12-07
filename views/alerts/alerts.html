@@ -1,9 +1,28 @@
 <h1>{{alertsCtrl.title}}</h1>
 
+<!--TODO make a view of this!-->
+<div class="grid grid-pad">
+
+    <label for="username">description: </label>
+    <input type="text" id="username" ng-model="newAlert.description">
+    <br />
+    <label for="username">kind: </label>
+    <input type="text" id="username" ng-model="newAlert.kind">
+    <br />
+    <label for="username">location: </label>
+    <input type="text" id="username" ng-model="newAlert.location">
+    <br />
+
+
+    <button ng-click="alertsCtrl.sendAlert(newAlert)">Create Alert!</button>
+</div>
+
+
+<!--TODO make a view of this!-->
 <!--var tempAlert = {active: snap.active, description: snap.description, id: snap.id, kind: snap.kind, location: snap.location, time: snap.time};-->
 <div class="grid grid-pad">
     <a ng-repeat="alert in alertsCtrl.alerts" class="margin_left_20 margin_right_20">
-        
+
         <div class="module hbs">
             <h4>{{alert.kind}}</h4>
             Active: {{alert.active}} description: {{alert.description}} id {{alert.id}} kind {{alert.kind}} location {{alert.location}} time: {{alert.time}}

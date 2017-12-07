@@ -44,30 +44,30 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
     console.log("API: Jordi's firebase");
 
     // Initialize the firebase
-    var database = null;
-    try{
-        firebase.initializeApp(config);
-    }
-    catch(Exception)
-    {
-        console.log('firebase already exists');
-        console.log(Exception);
-    }
-    finally {
-        database = firebase.database();
-//        firebaseSet = true;
-    }
+//    var database = null;
+//    try{
+//        firebase.initializeApp(config);
+//    }
+//    catch(Exception)
+//    {
+//        console.log('firebase already exists');
+//        console.log(Exception);
+//    }
+//    finally {
+//        database = firebase.database();
+////        firebaseSet = true;
+//    }
 
-    //Sign in
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        console.log("authError Here:");
-        console.log(errorCode);
-        console.log(errorMessage);
-    });
+//    //Sign in
+//    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+//        // Handle Errors here.
+//        var errorCode = error.code;
+//        var errorMessage = error.message;
+//
+//        console.log("authError Here:");
+//        console.log(errorCode);
+//        console.log(errorMessage);
+//    });
     
     //create basic tables and info
     var uuid = 2;

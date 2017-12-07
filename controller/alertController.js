@@ -38,7 +38,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
     }
     
     var email = "contact@tricycle-sec.nl"
-    var pass = "<nope!>"
+    var pass = "nope"
     
     firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
         // Handle Errors here.
@@ -93,6 +93,22 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
         
         });
     }
+    
+    
+    this.sendAlert = function(alert) {
+        console.log('sendalert')
+        
+        if(alert != null){
+            console.log(alert)
+            alert.active = true
+            var id = firebase.database().ref().child('alerts').push().key;
+            alert.id = id;
+            alert.time = (new Date).getTime();
+            firebase.database().ref('alerts/' + id).set(alert);
+        }
+        
+}
+    
 
     var notRunning = true
 
@@ -106,4 +122,6 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
         console.log('not logged in!')
     }
     });
+    
+    
 });
