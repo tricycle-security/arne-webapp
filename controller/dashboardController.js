@@ -1,25 +1,21 @@
 app.controller('dashboardController', function ($routeParams, $scope, $timeout)
 {
     //test information
+    var testUser = {fname: "Test", lname: "Testing", uuid: 1, onLocation: true}
+    var testUser2 = {fname: "Test", lname: "Testing", uuid: 1, onLocation: false}
     this.allUsers = [];
-//    this.allUsers.push(testUser);this.allUsers.push(testUser2);
+    this.allUsers.push(testUser);this.allUsers.push(testUser2);
 
     this.title = "Available HBVs";
 
-    
-
-
-    var config = {
-    apiKey: "AIzaSyB9vsnSG_L4Cc_io4Z0cGE8_rhR66QBEVk",
-    authDomain: "tricycle-41751.firebaseapp.com",
-    databaseURL: "https://tricycle-41751.firebaseio.com",
-    projectId: "tricycle-41751",
-    storageBucket: "tricycle-41751.appspot.com",
-    messagingSenderId: "284978501316"
+    /*var config = {
+        apiKey: "AIzaSyD8suoQjYrq58S3yHoA7HoXqIVy3HJiJYM",
+        authDomain: "festivalapp-9e0ae.firebaseapp.com",
+        databaseURL: "https://festivalapp-9e0ae.firebaseio.com",
+        storageBucket: "festivalapp-9e0ae.appspot.com",
+        messagingSenderId: "423570948804"
     };
-    
-    var database = null
-    // Initialize the firebase
+
     try{
         firebase.initializeApp(config);
     }
@@ -29,22 +25,21 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
         console.log(Exception);
     }
     finally {
-        database = firebase.database();
-    }
-    
-    var email = "contact@tricycle-sec.nl"
-    var pass = "Test123!"
-    
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        firebaseSet = true;
+    }*/
 
-        console.log("authError Here:");
-        console.log(errorCode);
-        console.log(errorMessage);
-    });
-    
+    //Jordi's Firebase
+    var config = {
+        apiKey: "AIzaSyByv741uQXo8RsFtML7ASYpYvMeYmOadfg",
+        authDomain: "ye-olde-project.firebaseapp.com",
+        databaseURL: "https://ye-olde-project.firebaseio.com",
+        projectId: "ye-olde-project",
+        storageBucket: "ye-olde-project.appspot.com",
+        messagingSenderId: "1006813715006"
+    };
+
+    var email = "0889529@hr.nl";
+    var pass = "toor12";
 
     console.log("API: Jordi's firebase");
 
@@ -75,33 +70,33 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
 //    });
     
     //create basic tables and info
-//    var uuid = 2;
-//
-//    database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
-//    fname: 'Arne',
-//    lname: 'Lname',
-//    uuid: uuid
-//    });
-//
-//    database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
-//    admin: 'active',
-//    bhver: true,
-//    checkinpole: false
-//    });
-//
-//    database.ref("/Cardinfo/" + "cardID").set({
-//    status: 'active',
-//    uuid: uuid
-//    });
-//
-//    database.ref("/CurrentStatus/" + uuid).set({
-//    onLocation: true,
-//    uuid: uuid
-//    });
+    var uuid = 2;
+
+    database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
+    fname: 'Arne',
+    lname: 'Lname',
+    uuid: uuid
+    });
+
+    database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
+    admin: 'active',
+    bhver: true,
+    checkinpole: false
+    });
+
+    database.ref("/Cardinfo/" + "cardID").set({
+    status: 'active',
+    uuid: uuid
+    });
+
+    database.ref("/CurrentStatus/" + uuid).set({
+    onLocation: true,
+    uuid: uuid
+    });
 
     var self = this;
-    var statusinfo = database.ref().child('currentstatus');
-    var userinfo = database.ref().child('userinfo/usergeninfo');
+    var statusinfo = database.ref().child('CurrentStatus');
+    var userinfo = database.ref().child('Userinfo/usergeninfo');
 
     //Gets users with their onLocation status
     statusinfo.on('child_added', function(snap){
