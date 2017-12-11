@@ -1,4 +1,4 @@
-    <h3>{{dash.title}}</h3>
+    <h3>{{dashCtrl.title}}</h3>
 
 <!--
    <h1>{{dashboardCtrl.text}}</h1>
@@ -11,7 +11,7 @@
 </ul>-->
 
     <div class="grid grid-pad">
-        <a ng-repeat="user in dash.allUsers" class="margin_left_20 margin_right_20">
+        <a ng-repeat="user in dashCtrl.allUsers" class="margin_left_20 margin_right_20">
             <div class="module hbs">
                 <h4>{{user.fname}} {{user.lname}}</h4>
                 <div ng:class="{true:'color-available', false:'color-unavailable'}[user.onLocation]">

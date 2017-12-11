@@ -21,11 +21,12 @@
 <!--TODO make a view of this!-->
 <!--var tempAlert = {active: snap.active, description: snap.description, id: snap.id, kind: snap.kind, location: snap.location, time: snap.time};-->
 <div class="grid grid-pad">
-    <a ng-repeat="alert in alertsCtrl.alerts" class="margin_left_20 margin_right_20">
+    <a ng-repeat="alert in alertsCtrl.alerts track by $index" class="margin_left_20 margin_right_20">
 
         <div class="module hbs">
             <h4>{{alert.kind}}</h4>
-            Active: {{alert.active}} description: {{alert.description}} id {{alert.id}} kind {{alert.kind}} location {{alert.location}} time: {{alert.time}}
+            <span ng-hide="false">{{alert.description}}</span>
+<!--            <button ng-click=""></button>-->
         </div>
     </a>
 </div>       
