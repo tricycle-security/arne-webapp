@@ -1,31 +1,32 @@
-app.controller('loginController', function ($scope, $rootScope, AUTH_EVENTS, AuthService)
+app.controller('loginController', function ($scope, $window, Auth, USER_ROLES, AUTH_EVENTS)
 {
-    /*var version = angular.module('myModule').constant('AUTH_EVENTS', {
-        loginSuccess: 'auth-login-success',
-        loginFailed: 'auth-login-failed',
-        logoutSuccess: 'auth-logout-success',
-        sessionTimeout: 'auth-session-timeout',
-        notAuthenticated: 'auth-not-authenticated',
-        notAuthorized: 'auth-not-authorized'
-    });*/
+    //get Constants from app
+    //this.text = USER_ROLES.admin;
+    //this.text = AUTH_EVENTS.loginSuccess;
 
-
-    //this.text = "hello login";
-
-   /* $scope.credentials = {
-        username: '',
-        password: ''
-    };
-    $scope.login = function (credentials) {
-        AuthService.login(credentials).then(function (user) {
-            $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-            $scope.setCurrentUser(user);
-        }, function () {
-            $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-        });
-    };*/
-
-
+    //Use service Auth
+    //Auth.setUser('her');
+    //console.log(Auth.isLoggedIn());
     
+    if(Auth.isLoggedIn()){
+        console.log("Logged in right now");
+    }
 
+    $scope.submit = function() {
+      if ($scope.username) {
+        database.ref('Userinfo/usergeninfo/').on("child_added", function (data){
+            var tempData = data.val();
+            var tempUser = {fname: tempData.fname, lname: tempData.lname, uuid: tempData.uuid};
+
+            if(tempData.fname == $scope.username && tempData.lname == $scope.password){
+                console.log("OK");
+                //redirect after login
+                $window.location.href = './#/login';
+            }
+        });
+        //empty input fields
+        $scope.username = '';
+        $scope.password = '';
+      }
+    };
 });

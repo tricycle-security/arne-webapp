@@ -3,34 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var app = angular.module('festivalapp', ['angular.filter', 'firebase', 'ngMap', 'ngStorage', 'ngRoute']);
-app.config(function ($routeProvider) {
-    $routeProvider
-            .when("/", {
-                templateUrl: "dashboard.html"
-            })
-            .when("/login", {
-                templateUrl: "login.html"
-            })
-            .when("/stages", {
-                templateUrl: "stage-index.html"
-            })
-            .when("/map", {
-                templateUrl: "map-index.html"
-            })
-            .when("/disclaimer", {
-                templateUrl: "disclaimer-index.html"
-            });
-});
+var app = angular.module('webapp_ARNE', ['angular.filter', 'firebase', 'ngMap', 'ngStorage', 'ngRoute']);
 
-// Configure the main application module.
-var loginApp = angular.module('loginApp', ['ui.router', 'ui.bootstrap'])
-/*Constants regarding user login defined here*/
-.constant('USER_ROLES', {
+app.constant('USER_ROLES', {
 	all : '*',
 	admin : 'admin',
-	editor : 'editor',
-	guest : 'guest'
+	responder : 'responder',
+	viewer : 'viewer'
 }).constant('AUTH_EVENTS', {
 	loginSuccess : 'auth-login-success',
 	loginFailed : 'auth-login-failed',
@@ -38,14 +17,29 @@ var loginApp = angular.module('loginApp', ['ui.router', 'ui.bootstrap'])
 	sessionTimeout : 'auth-session-timeout',
 	notAuthenticated : 'auth-not-authenticated',
 	notAuthorized : 'auth-not-authorized'
-})
-/* Adding the auth interceptor here, to check every $http request*/
-.config(function ($httpProvider) {
-  $httpProvider.interceptors.push([
-    '$injector',
-    function ($injector) {
-      return $injector.get('AuthInterceptor');
-    }
-  ]);
-})
+});
 
+app.config(function ($routeProvider, USER_ROLES) {
+    $routeProvider
+        .when("/", {
+            templateUrl: "dashboard.html",
+            data: {
+                authorizedRoles: [USER_ROLES.admin, USER_ROLES.responder, USER_ROLES.viewer]
+            }
+        })
+        .when("/login", {
+            templateUrl: "login.html",
+            data: {
+                authorizedRoles: []
+            }
+        })
+        .when("/stages", {
+            templateUrl: "stage-index.html"
+        })
+        .when("/map", {
+            templateUrl: "map-index.html"
+        })
+        .when("/disclaimer", {
+            templateUrl: "disclaimer-index.html"
+        });
+});

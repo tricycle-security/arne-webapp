@@ -2,19 +2,10 @@
 
 
 
-<!--<form name="myForm">
-    <p>Username:
-        <input name="myName" ng-model="myName" required>
-        <span ng-show="myForm.myName.$touched && myForm.myName.$invalid">Username is required.</span>
-    </p>
-</form>-->
-
-<form name="loginForm" ng-controller="LoginController" ng-submit="login(credentials)" novalidate>
-    <label for="username">Username:</label>
-    <input type="text" id="username" ng-model="credentials.username">
-    <br />
-    <label for="password">Password:</label>
-    <input type="password" id="password" ng-model="credentials.password">
-    <br />
-    <button type="submit">Login</button>
-</form>
+<form ng-submit="submit()" ng-controller="loginController">
+    Username: 
+    <input type="text" ng-model="username" name="username" /><br>
+    Password: 
+    <input type="text" ng-model="password" name="text" /><br>
+    <input type="submit" id="submit" value="Submit" />
+  </form>
