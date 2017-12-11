@@ -20,7 +20,10 @@ app.config(function ($routeProvider) {
             })
             .when("/disclaimer", {
                 templateUrl: "disclaimer-index.html"
-            });
+            })
+        .when("/user", {
+            templateUrl: "user.html"
+        });
 });
 
 // Configure the main application module.
