@@ -4,29 +4,9 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
     var testUser = {fname: "Test", lname: "Testing", uuid: 1, onLocation: true}
     var testUser2 = {fname: "Test", lname: "Testing", uuid: 1, onLocation: false}
     this.allUsers = [];
-    this.allUsers.push(testUser);this.allUsers.push(testUser2);
+    //this.allUsers.push(testUser);this.allUsers.push(testUser2);
 
     this.title = "Available HBVs";
-
-    /*var config = {
-        apiKey: "AIzaSyD8suoQjYrq58S3yHoA7HoXqIVy3HJiJYM",
-        authDomain: "festivalapp-9e0ae.firebaseapp.com",
-        databaseURL: "https://festivalapp-9e0ae.firebaseio.com",
-        storageBucket: "festivalapp-9e0ae.appspot.com",
-        messagingSenderId: "423570948804"
-    };
-
-    try{
-        firebase.initializeApp(config);
-    }
-    catch(Exception)
-    {
-        console.log('firebase already exists');
-        console.log(Exception);
-    }
-    finally {
-        firebaseSet = true;
-    }*/
 
     //Jordi's Firebase
     var config = {
@@ -71,27 +51,27 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
     //create basic tables and info
     var uuid = 2;
 
-    database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
-    fname: 'Arne',
-    lname: 'Lname',
-    uuid: uuid
-    });
-
-    database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
-    admin: 'active',
-    bhver: true,
-    checkinpole: false
-    });
-
-    database.ref("/Cardinfo/" + "cardID").set({
-    status: 'active',
-    uuid: uuid
-    });
-
-    database.ref("/CurrentStatus/" + uuid).set({
-    onLocation: true,
-    uuid: uuid
-    });
+    // database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
+    // fname: 'Arne',
+    // lname: 'Lname',
+    // uuid: uuid
+    // });
+    //
+    // database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
+    // admin: 'active',
+    // bhver: true,
+    // checkinpole: false
+    // });
+    //
+    // database.ref("/Cardinfo/" + "cardID").set({
+    // status: 'active',
+    // uuid: uuid
+    // });
+    //
+    // database.ref("/CurrentStatus/" + uuid).set({
+    // onLocation: true,
+    // uuid: uuid
+    // });
 
     var self = this;
     var statusinfo = database.ref().child('CurrentStatus');
@@ -102,6 +82,7 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
         var tempSnap = snap.val();
         userinfo.child(snap.val().uuid).on('value', user => {
             var tempUserInfo = user.val();
+        if (tempUserInfo != null) {
             var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, onLocation: tempSnap.onLocation};
 
             self.allUsers.push(tempUser); //allusers contains all userinfo + onLocation
@@ -110,6 +91,7 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
             $timeout(function (){
                 $scope.$apply();
             });
+        }
         });
     });
 });

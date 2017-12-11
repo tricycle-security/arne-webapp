@@ -1,9 +1,19 @@
 app.controller('userController', ['$scope', '$firebaseArray',
     function ($scope, $firebaseArray) {
+        //Jordi's Firebase
+        var config = {
+            apiKey: "AIzaSyByv741uQXo8RsFtML7ASYpYvMeYmOadfg",
+            authDomain: "ye-olde-project.firebaseapp.com",
+            databaseURL: "https://ye-olde-project.firebaseio.com",
+            projectId: "ye-olde-project",
+            storageBucket: "ye-olde-project.appspot.com",
+            messagingSenderId: "1006813715006"
+        };
+
         // Initialize the firebase
         try {
             //start second app to create a user later
-            var secondaryApp = firebase.initializeApp(configJoey, "Secondary");
+            var secondaryApp = firebase.initializeApp(config, "Secondary");
             var database = firebase.database();
         }
         catch (Exception) {
@@ -44,7 +54,6 @@ app.controller('userController', ['$scope', '$firebaseArray',
 
         //Remove user method
         $scope.removeUser = function (index, user) {
-
             // CHECK THAT USER IS VALID
             if (user.uuid === undefined) return;
             //DISABLE USER
@@ -55,15 +64,13 @@ app.controller('userController', ['$scope', '$firebaseArray',
             // });
 
             //Remove user from both paths
-            $scope.users.$remove(user);
-            database.ref().child('Userinfo/userstatus/' + user.uuid).remove()
-                .then(function () {
-                    console.log("Remove succeeded.")
-                })
-                .catch(function (error) {
-                    console.log("Remove failed: " + error.message)
-                });
+            remove('Userinfo/usergeninfo/' + user.uuid);
+            remove('Userinfo/userstatus/' + user.uuid);
+            remove('/CurrentStatus/' + user.uuid);
+            //TODO last delete is not complete
+            ///Cardinfo/" + "cardID"
         };
+
 
         //UPDATE USER METHOD
         $scope.updateUser = function (index, user) {
@@ -75,4 +82,15 @@ app.controller('userController', ['$scope', '$firebaseArray',
             // $scope.users.$save(user);
 
         };
+
+        function remove(remove) {
+            console.log("starting delete");
+            database.ref().child(remove).remove()
+                .then(function () {
+                    console.log("Remove succeeded.")
+                })
+                .catch(function (error) {
+                    console.log("Remove failed: " + error.message)
+                });
+        }
     }]);
