@@ -40,6 +40,12 @@ img {
 /*	border: 3px solid #cccccc;*/
 }
 
+/*House colors*/
+.house-colors{
+    color : rgba(38, 164, 179, 0.95);/*For opacity*/
+    color : #26a4b3;
+}
+
 .cleaner { clear: both; width: 100%; height: 0px; font-size: 0px;  }
 
 .margin_top_10 { margin-top: 10px; }
