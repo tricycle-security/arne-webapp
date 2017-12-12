@@ -1,0 +1,38 @@
+<h1>{{alertsCtrl.title}}</h1>
+
+<!--TODO make a view of this!-->
+<div class="grid grid-pad">
+
+    <label>description: </label>
+    <input type="text" ng-model="alertsCtrl.editableAlert.description">
+    <br />
+    <label>kind: </label>
+    <input type="text" ng-model="alertsCtrl.editableAlert.kind">
+    <br />
+    <label>location: </label>
+    <input type="text" ng-model="alertsCtrl.editableAlert.location">
+    <br />
+    <label>active: </label>
+    <input type="checkbox" ng-model="alertsCtrl.editableAlert.active" ng-checked = "true" ng-init="alertsCtrl.editableAlert.active = true">
+    <br />
+    <button ng-click="alertsCtrl.createAlert(alertsCtrl.editableAlert)">Create Alert!</button>
+    <button ng-click="alertsCtrl.editAlert(alertsCtrl.editableAlert)">Edit Alert!</button>
+</div>
+
+
+<!--TODO make a view of this!-->
+<!--var tempAlert = {active: snap.active, description: snap.description, id: snap.id, kind: snap.kind, location: snap.location, time: snap.time};-->
+<div class="grid grid-pad">
+    <a ng-repeat="alert in alertsCtrl.alerts track by $index" class="margin_left_20 margin_right_20">
+
+        <div class="module hbs">
+            <h4>{{alert.kind}}</h4>
+            <span ng-hide="false">{{alert.time}}</span>
+            <span ng-hide="false">{{alert.description}}</span>
+            <span ng-hide="false">{{alert.active}}</span>
+            <button ng-click="alertsCtrl.selectAlert(alert)">Edit</button>
+        </div>
+    </a>
+</div>       
+
+

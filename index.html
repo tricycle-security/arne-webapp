@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!--
-This site is made for nothing at all.
--->
 
-<html ng-app="festivalapp">
+<html ng-app="dashboardapp">
+<!-- <html ng-app="webapp_ARNE"> -->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,104 +30,56 @@ This site is made for nothing at all.
         <!--        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD56nz3KfV3ve5cTGElikghgLrZCGkxz7c&callback="></script>-->
 
         <script src="js/app.js" type="text/javascript"></script>
+        <script src="js/firebase-connection.js" type="text/javascript"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/layout.css" rel="stylesheet" type="text/css"/>
         <link href="css/dashboard.css" rel="stylesheet" type="text/css"/>
         <script src="js/javascript.js" type="text/javascript"></script>
-    </head>
+    </head>  
+    <header></header>
     <body>
-
-    <header>
-        <a href="#" id="logo"></a>
-        <nav>
-            <a href="./#/" id="menu-icon"></a>
-            <ul>
-                <li style="list-style: none; display: inline"></li>
-                <li>
-                    <a href="./#/">Home</a>
-                </li>
-                <li style="list-style: none; display: inline"></li>
-                <li>
-                    <a href="./#/login">Login</a>
-                </li>
-                <li style="list-style: none; display: inline"></li>
-                <li>
-                    <a href="./#/user">User</a>
-                </li>
-                <li style="list-style: none; display: inline"></li>
-                <li>
-                    <a href="./#/">c</a>
-                </li>
-                <li style="list-style: none; display: inline"></li>
-                <li>
-                    <a href="./#/">d</a>
-                </li>
-                <li style="list-style: none; display: inline"></li>
-                <li>
-                    <a href="./#/">Other</a>
-                </li>
-                <li style="list-style: none; display: inline"></li>
-            </ul>
-        </nav>
-    </header>
-
-
-    <!--show only on "/" route-->
-        <div ng-view ng-controller="dashboardController as dashboardCtrl">
-            
-        </div>
-
-        <!--show only on "/login" route-->
-        <div ng-view ng-controller="loginController as loginCtrl">
-            
-        </div>
-
-    <!--show only on "/user" route-->
-    <div ng-view ng-controller="userController as userCtrl">
-
-    </div>
 
     <!--dashboard-->
         <script src="views/dashboard/dashboard.js" type="text/javascript"></script>
+        <div ng-view></div>
 
+
+        <!--dashboard-->
+        <script src="views/dashboard/dashboard.js" type="text/javascript"></script>
+      
+       <!--alerts-->
+        <script src="views/alerts/alerts.js" type="text/javascript"></script>
+        
         <!--login-->
         <script src="views/login/login.js" type="text/javascript"></script>
-    <script src="views/user/user.js" type="text/javascript"></script>
+
+        <script src="views/user/user.js" type="text/javascript"></script>
         <!--controllers-->
         <script src="controller/dashboardController.js" type="text/javascript"></script>
         <script src="controller/loginController.js" type="text/javascript"></script>
-    <script src="controller/userController.js" type="text/javascript"></script>
+        <script src="controller/userController.js" type="text/javascript"></script>
+        <script src="controller/alertController.js" type="text/javascript"></script>
+
         <!--Factory -->
         <script src="services/authInterceptor.js"></script>
-        
-        <!--services-->
+
+
+<!--         services -->
         <script src="services/auth.js"></script>
+
         <script src="services/session.js"></script>
 
-    <script>
-        $('nav').on('click', function () {
-            $('nav ul').toggleClass('active');
-        });
-    </script>
+        <script>
+            $('nav').on('click', function () {
+                $('nav ul').toggleClass('active');
+            });
+        </script>
 
+        <!--partials-->
+        <script src="views/menu/menu.js" type="text/javascript"></script>
+        <script src="views/footer/footer.js" type="text/javascript"></script>
     </body>
-<div id="footer">
-    
-    <ul class="footer_list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">A</a></li>
-        <li><a href="#">B</a></li>
-        <li><a href="#">C</a></li>
-        <li><a href="#">About Us</a></li>
-        <li class="last"><a href="#">Contact Us</a></li>
-    </ul> 
-
-    <div class="margin_bottom_10"></div>
-
-    Copyright © 2017 <a href="#">Tricycle</a> | <a href="" target="_parent">Website</a> by <a href="" target="_parent">Tricycle</a>
-
-    <div class="margin_bottom_10"></div>
-</div>
+    <footer></footer>
 </html>
 
 
