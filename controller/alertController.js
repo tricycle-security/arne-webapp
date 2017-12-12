@@ -7,52 +7,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
     console.log('alertController')
     this.title = "Alerts!"
 
-    this.alerts = [
-    ]
-
-
-
-    var config = {
-        apiKey: "AIzaSyB9vsnSG_L4Cc_io4Z0cGE8_rhR66QBEVk",
-        authDomain: "tricycle-41751.firebaseapp.com",
-        databaseURL: "https://tricycle-41751.firebaseio.com",
-        projectId: "tricycle-41751",
-        storageBucket: "tricycle-41751.appspot.com",
-        messagingSenderId: "284978501316"
-    };
-//    firebase.initializeApp(config);
-
-
-//
-//    var email = "0889529@hr.nl";
-//    var pass = "toor12";
-
-    var database = null
-    // Initialize the firebase
-    try {
-        firebase.initializeApp(config);
-    }
-    catch (Exception)
-    {
-        console.log('firebase already exists');
-        console.log(Exception);
-    }
-    finally {
-        database = firebase.database();
-    }
-
-    var email = "contact@tricycle-sec.nl"
-    var pass = "nope!"
-
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        console.log("authError Here:");
-        console.log(errorCode);
-        console.log(errorMessage);
-    });
+    this.alerts = []
 
     var self = this
     function retrieveAlerts() {

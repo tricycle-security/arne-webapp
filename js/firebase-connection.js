@@ -1,24 +1,24 @@
 //Jordi's Firebase
 var config = {
-    apiKey: "AIzaSyByv741uQXo8RsFtML7ASYpYvMeYmOadfg",
-    authDomain: "ye-olde-project.firebaseapp.com",
-    databaseURL: "https://ye-olde-project.firebaseio.com",
-    projectId: "ye-olde-project",
-    storageBucket: "ye-olde-project.appspot.com",
-    messagingSenderId: "1006813715006"
+    apiKey: "AIzaSyB9vsnSG_L4Cc_io4Z0cGE8_rhR66QBEVk",
+    authDomain: "tricycle-41751.firebaseapp.com",
+    databaseURL: "https://tricycle-41751.firebaseio.com",
+    projectId: "tricycle-41751",
+    storageBucket: "tricycle-41751.appspot.com",
+    messagingSenderId: "284978501316"
 };
 
-var email = "0889529@hr.nl";
-var pass = "toor12";
+var email = "contact@tricycle-sec.nl";
+var pass = "Test123!";
 
 console.log("API: Jordi's firebase");
 
 // Initialize the firebase
-try{
+try {
     firebase.initializeApp(config);
     var database = firebase.database();
 }
-catch(Exception)
+catch (Exception)
 {
     console.log('firebase already exists');
     console.log(Exception);
@@ -28,7 +28,7 @@ finally {
 }
 
 //Sign in
-firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
@@ -40,25 +40,25 @@ firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
 
 //create basic tables and info
 /*var uuid = 4;
-
-database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
-fname: '123',
-lname: '456',
-uuid: uuid
-});
-
-database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
-admin: 'active',
-bhver: true,
-checkinpole: false
-});
-
-database.ref("/Cardinfo/" + "cardID").set({
-status: 'active',
-uuid: uuid
-});
-
-database.ref("/CurrentStatus/" + uuid).set({
-onLocation: true,
-uuid: uuid
-});*/
+ 
+ database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
+ fname: '123',
+ lname: '456',
+ uuid: uuid
+ });
+ 
+ database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
+ admin: 'active',
+ bhver: true,
+ checkinpole: false
+ });
+ 
+ database.ref("/Cardinfo/" + "cardID").set({
+ status: 'active',
+ uuid: uuid
+ });
+ 
+ database.ref("/CurrentStatus/" + uuid).set({
+ onLocation: true,
+ uuid: uuid
+ });*/
