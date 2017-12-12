@@ -13,6 +13,7 @@ app.controller('userController', ['$scope', '$firebaseArray',
         // Initialize the firebase
         try {
             //start second app to create a user later
+
             var secondaryApp = firebase.initializeApp(config, "Secondary");
             var database = firebase.database();
         }
@@ -24,7 +25,7 @@ app.controller('userController', ['$scope', '$firebaseArray',
             firebaseSet = true;
         }
 
-        var userInfoRef = database.ref().child('Userinfo/usergeninfo');
+        var userInfoRef = database.ref().child('userinfo/usergeninfo');
 
         // GET USERINFO AS AN ARRAY
         $scope.users = $firebaseArray(userInfoRef);
@@ -37,12 +38,12 @@ app.controller('userController', ['$scope', '$firebaseArray',
                 //Send password reset email to currently registered email
                 secondaryApp.auth().sendPasswordResetEmail(firebaseUser.email);
                 //Set data in both paths with uuid that was returned by creation
-                database.ref("/Userinfo/usergeninfo/" + firebaseUser.uid).set({
+                database.ref("/userinfo/usergeninfo/" + firebaseUser.uid).set({
                     fname: $scope.firstName,
                     lname: $scope.lastName,
                     uuid: firebaseUser.uid
                 });
-                database.ref("/Userinfo/userstatus/" + firebaseUser.uid).set({
+                database.ref("/userinfo/userstatus/" + firebaseUser.uid).set({
                     admin: 'active',
                     bhver: true,
                     checkinpole: false
@@ -64,9 +65,9 @@ app.controller('userController', ['$scope', '$firebaseArray',
             // });
 
             //Remove user from both paths
-            remove('Userinfo/usergeninfo/' + user.uuid);
-            remove('Userinfo/userstatus/' + user.uuid);
-            remove('/CurrentStatus/' + user.uuid);
+            remove('userinfo/usergeninfo/' + user.uuid);
+            remove('userinfo/userstatus/' + user.uuid);
+            remove('/currentStatus/' + user.uuid);
             //TODO last delete is not complete
             ///Cardinfo/" + "cardID"
         };
