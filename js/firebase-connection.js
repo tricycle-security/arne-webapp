@@ -17,6 +17,7 @@ console.log("API: Jordi's firebase");
 try {
     firebase.initializeApp(config);
     var database = firebase.database();
+    var secondaryApp = firebase.initializeApp(config, "Secondary");
 }
 catch (Exception)
 {

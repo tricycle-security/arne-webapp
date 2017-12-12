@@ -1,29 +1,6 @@
 app.controller('userController', ['$scope', '$firebaseArray',
     function ($scope, $firebaseArray) {
-        //Jordi's Firebase
-        var config = {
-            apiKey: "AIzaSyByv741uQXo8RsFtML7ASYpYvMeYmOadfg",
-            authDomain: "ye-olde-project.firebaseapp.com",
-            databaseURL: "https://ye-olde-project.firebaseio.com",
-            projectId: "ye-olde-project",
-            storageBucket: "ye-olde-project.appspot.com",
-            messagingSenderId: "1006813715006"
-        };
-
-        // Initialize the firebase
-        try {
-            //start second app to create a user later
-
-            var secondaryApp = firebase.initializeApp(config, "Secondary");
-            var database = firebase.database();
-        }
-        catch (Exception) {
-            console.log('firebase already exists');
-            console.log(Exception);
-        }
-        finally {
-            firebaseSet = true;
-        }
+        
 
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
 
