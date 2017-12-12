@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<!--
-This site is made for nothing at all.
--->
 
 <html ng-app="dashboardapp">
+<!-- <html ng-app="webapp_ARNE"> -->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,47 +30,16 @@ This site is made for nothing at all.
         <!--        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD56nz3KfV3ve5cTGElikghgLrZCGkxz7c&callback="></script>-->
 
         <script src="js/app.js" type="text/javascript"></script>
+        <script src="js/firebase-connection.js" type="text/javascript"></script>
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/layout.css" rel="stylesheet" type="text/css"/>
         <link href="css/dashboard.css" rel="stylesheet" type="text/css"/>
         <script src="js/javascript.js" type="text/javascript"></script>
-    </head>
+    </head>  
+    <header></header>
     <body>
-        <div id="menu">
-            <div id='cssmenu' class="fixed">
-                <ul>
-                    <li><a ng-href="#/" class="active"><span></span>Home</a></li>
-                    <li><a ng-href="#/login"><span></span>Login</a></li>  
-                    <li><a ng-href="/dashboardapp/#/stages"><span></span>Stages</a></li>              
-                    <li><a ng-href="#/alerts"><span></span>alerts</a></li>
-                    <li><a ng-href="/dashboardapp/#/"><span></span>d</a></li>
-                    <li><a ng-href="/dashboardapp/#/" class="last"><span></span>Other</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div ng-view></div> 
-        
-        
 
-        <!--show only on "/" route-->
-<!--        <div ng-view ng-controller="dashboardController as dashboardCtrl">
-            
-        </div>-->
-        
-<!--        show only on "/alerts" route
-        <div ng-view ng-controller="alertController as alertCtrl">
-            
-        </div>-->
-
-<!--        show only on "/login" route
-        <div ng-view ng-controller="loginController as loginCtrl">
-            
-        </div>-->
-        
-        
-        
-        
+        <div ng-view></div>
 
         <!--dashboard-->
         <script src="views/dashboard/dashboard.js" type="text/javascript"></script>
@@ -88,31 +55,23 @@ This site is made for nothing at all.
         <script src="controller/loginController.js" type="text/javascript"></script>
         <script src="controller/alertController.js" type="text/javascript"></script>
         
-<!--        Factory 
-        <script src="services/authInterceptor.js"></script>
-        
-        services
+
+<!--         services -->
         <script src="services/auth.js"></script>
-        <script src="services/session.js"></script>-->
-        
-    <div id="footer">
-        <ul class="footer_list">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">A</a></li>
-            <li><a href="#">B</a></li>
-            <li><a href="#">C</a></li>
-            <li><a href="#">About Us</a></li>
-            <li class="last"><a href="#">Contact Us</a></li>
-        </ul> 
 
-        <div class="margin_bottom_10"></div>
+        <script src="services/session.js"></script>
 
-        Copyright © 2017 <a href="#">Tricycle</a> | <a href="" target="_parent">Website</a> by <a href="" target="_parent">Tricycle</a>
+        <script>
+            $('nav').on('click', function () {
+                $('nav ul').toggleClass('active');
+            });
+        </script>
 
-        <div class="margin_bottom_10"></div>
-    </div>
+        <!--partials-->
+        <script src="views/menu/menu.js" type="text/javascript"></script>
+        <script src="views/footer/footer.js" type="text/javascript"></script>
     </body>
-
+    <footer></footer>
 </html>
 
 
