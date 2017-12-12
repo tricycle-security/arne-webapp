@@ -1,28 +1,33 @@
-app.controller('loginController', function ($scope, $rootScope, $window, Auth, USER_ROLES, AUTH_EVENTS)
+app.controller('loginController', function ($scope, $rootScope, $window)
 {    
-    this.text = "title";
-    this.isLoggedIn = $rootScope.isLoggedIn;
-    console.log($rootScope.isLoggedIn);
+    this.title = "Log in";
+    
+    $scope.submit = function (){
+        console.log("logging in...");
+        var email = "contact@tricycle-sec.nl";
+        var password = "Test123!";
 
-    $scope.submit = function() {
-      if ($scope.username) {
-        database.ref('Userinfo/usergeninfo/').on("child_added", function (data){
-            var tempData = data.val();
-            var tempUser = {fname: tempData.fname, lname: tempData.lname, uuid: tempData.uuid};
+        this.signIn = firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            console.log("auth sign in Error Here:");
+            console.log(error.code);
+            console.log(error.message);
+        });
 
-            if(tempData.fname == $scope.username && tempData.lname == $scope.password){
-                $rootScope.isLoggedIn = true;
-                $rootScope.privilege = USER_ROLES.admin;
-                console.log(AUTH_EVENTS.loginSuccess);
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
                 //redirect after login
                 $window.location.href = './#/';
             } else {
-                console.log(AUTH_EVENTS.loginFailed);
+                console.log('not logged in!')
             }
         });
-        //empty input fields
-        //$scope.username = '';
-        //$scope.password = '';
-      }
-    };
+    }
+
+    var user = firebase.auth().currentUser;
+    
+    if (user) {// User is signed in.
+        console.log("Logged in");
+    } else {// No user is signed in.
+        console.log("Logged out");
+    }
 });
