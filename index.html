@@ -38,20 +38,43 @@ This site is made for nothing at all.
         <script src="js/javascript.js" type="text/javascript"></script>
     </head>
     <body>
-        <div id="menu">
-            <div id='cssmenu' class="fixed">
-                <ul>
-                    <li><a ng-href="/dashboardapp/#/" class="active"><span></span>Home</a></li>
-                    <li><a ng-href="/dashboardapp/#/login"><span></span>Login</a></li>  
-                    <li><a ng-href="/dashboardapp/#/stages"><span></span>Stages</a></li>              
-                    <li><a ng-href="/dashboardapp/#/"><span></span>c</a></li>
-                    <li><a ng-href="/dashboardapp/#/"><span></span>d</a></li>
-                    <li><a ng-href="/dashboardapp/#/" class="last"><span></span>Other</a></li>
-                </ul>
-            </div>
-        </div>
 
-        <!--show only on "/" route-->
+    <header>
+        <a href="#" id="logo"></a>
+        <nav>
+            <a href="./#/" id="menu-icon"></a>
+            <ul>
+                <li style="list-style: none; display: inline"></li>
+                <li>
+                    <a href="./#/">Home</a>
+                </li>
+                <li style="list-style: none; display: inline"></li>
+                <li>
+                    <a href="./#/login">Login</a>
+                </li>
+                <li style="list-style: none; display: inline"></li>
+                <li>
+                    <a href="./#/stages">Stages</a>
+                </li>
+                <li style="list-style: none; display: inline"></li>
+                <li>
+                    <a href="./#/">c</a>
+                </li>
+                <li style="list-style: none; display: inline"></li>
+                <li>
+                    <a href="./#/">d</a>
+                </li>
+                <li style="list-style: none; display: inline"></li>
+                <li>
+                    <a href="./#/">Other</a>
+                </li>
+                <li style="list-style: none; display: inline"></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!--show only on "/" route-->
         <div ng-view ng-controller="dashboardController as dashboardCtrl">
             
         </div>
@@ -61,7 +84,8 @@ This site is made for nothing at all.
             
         </div>
 
-        <!--dashboard-->
+
+    <!--dashboard-->
         <script src="views/dashboard/dashboard.js" type="text/javascript"></script>
 
         <!--login-->
@@ -77,6 +101,12 @@ This site is made for nothing at all.
         <!--services-->
         <script src="services/auth.js"></script>
         <script src="services/session.js"></script>
+
+    <script>
+        $('nav').on('click', function () {
+            $('nav ul').toggleClass('active');
+        });
+    </script>
 
     </body>
 <div id="footer">
