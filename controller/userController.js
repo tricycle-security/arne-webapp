@@ -56,7 +56,7 @@ app.controller('userController', ['$scope', '$firebaseArray',
             //Remove user from both paths
             remove('userinfo/usergeninfo/' + user.uuid);
             remove('userinfo/userstatus/' + user.uuid);
-            remove('/currentStatus/' + user.uuid);
+            remove('/currentstatus/' + user.uuid);
             //TODO last delete is not complete
             ///Cardinfo/" + "cardID"
         };

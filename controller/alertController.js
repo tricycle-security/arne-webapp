@@ -70,7 +70,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
     this.sendAlert = function (alert) {
         console.log('sendalert')
         if (alert != null) {
-            firebase.database().ref('alerts/' + id).set(alert);
+            firebase.database().ref('alerts/' + alert.id).set(alert);
         }
 
     }

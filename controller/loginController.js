@@ -6,7 +6,7 @@ app.controller('loginController', function ($scope, $rootScope, $window, Auth, U
 
     $scope.submit = function() {
       if ($scope.username) {
-        database.ref('Userinfo/usergeninfo/').on("child_added", function (data){
+          database.ref('userinfo/usergeninfo/').on("child_added", function (data) {
             var tempData = data.val();
             var tempUser = {fname: tempData.fname, lname: tempData.lname, uuid: tempData.uuid};
 
