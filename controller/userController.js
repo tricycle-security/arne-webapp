@@ -3,27 +3,30 @@ app.controller('userController', ['$scope', '$firebaseArray',
         
 
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
+        var self = this
+        this.fname = "Test"
+        this.lname = "User"
 
         // GET USERINFO AS AN ARRAY
         $scope.users = $firebaseArray(userInfoRef);
 
         // ADD USER
         $scope.addUser = function () {
+            
             //Use secondary app
             secondaryApp.auth().createUserWithEmailAndPassword($scope.userName, $scope.password).then(function (firebaseUser) {
                 console.log("User " + firebaseUser.uid + " created successfully!");
                 //Send password reset email to currently registered email
                 secondaryApp.auth().sendPasswordResetEmail(firebaseUser.email);
                 //Set data in both paths with uuid that was returned by creation
+                console.log("Firstname : " + self.fname + "Lastname : " + self.lname + "uid : " + firebaseUser.uid)
                 database.ref("/userinfo/usergeninfo/" + firebaseUser.uid).set({
-                    fname: $scope.firstName,
-                    lname: $scope.lastName,
+                    fname: self.fname,
+                    lname: self.lname,
                     uuid: firebaseUser.uid
                 });
                 database.ref("/userinfo/userstatus/" + firebaseUser.uid).set({
-                    admin: 'active',
-                    bhver: true,
-                    checkinpole: false
+                    bhver: true
                 });
                 //Logout the second app. Not the admin panel
                 secondaryApp.auth().signOut();

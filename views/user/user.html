@@ -1,4 +1,4 @@
-<div ng-controller="userController" class="container">
+<div ng-controller="userController as userCtrl" class="container">
 
     <!--ADD ITEM FORM-->
     <form name="userForm">
@@ -24,7 +24,7 @@
 
             <input type="text"
                    name="firstNameField"
-                   ng-model="firstName"
+                   ng-model="userCtrl.fname"
                    placeholder="firstName"
                    required ng-minlength="3"
                    class="form-control"
@@ -33,7 +33,7 @@
 
             <input type="text"
                    name="lastNameField"
-                   ng-model="lastName"
+                   ng-model="userCtrl.lname"
                    placeholder="lastName"
                    required ng-minlength="3"
                    class="form-control"
