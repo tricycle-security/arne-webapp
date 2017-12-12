@@ -2,7 +2,6 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
 {
     //test information
     this.allUsers = [];
-//    this.allUsers.push(testUser);this.allUsers.push(testUser2);
 
     this.title = "Available BHV";
 
@@ -15,6 +14,7 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
         var tempSnap = snap.val();
         userinfo.child(snap.val().uuid).on('value', user => {
             var tempUserInfo = user.val();
+        if (tempUserInfo != null) {
             var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, onLocation: tempSnap.onLocation};
 
             self.allUsers.push(tempUser); //allusers contains all userinfo + onLocation
@@ -23,6 +23,7 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
             $timeout(function () {
                 $scope.$apply();
             });
+        }
         });
     });
  });

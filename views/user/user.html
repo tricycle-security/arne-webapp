@@ -1,0 +1,81 @@
+<div ng-controller="userController" class="container">
+
+    <!--ADD ITEM FORM-->
+    <form name="userForm">
+
+        <div>
+            <input type="email"
+                   name="userNameField"
+                   ng-model="userName"
+                   placeholder="Add new User (min 3 chars)"
+                   required ng-minlength="3"
+                   class="form-control"
+                   style="margin-bottom: 10px"
+            />
+
+            <input type="password"
+                   name="passwordField"
+                   ng-model="password"
+                   placeholder="password"
+                   required ng-minlength="3"
+                   class="form-control"
+                   style="margin-bottom: 10px"
+            />
+
+            <input type="text"
+                   name="firstNameField"
+                   ng-model="firstName"
+                   placeholder="firstName"
+                   required ng-minlength="3"
+                   class="form-control"
+                   style="margin-bottom: 10px"
+            />
+
+            <input type="text"
+                   name="lastNameField"
+                   ng-model="lastName"
+                   placeholder="lastName"
+                   required ng-minlength="3"
+                   class="form-control"
+                   style="margin-bottom: 10px"
+            />
+
+
+            <button ng-click="addUser()"
+                    ng-hide="myForm.userNameField.$invalid"
+                    class="btn btn-primary" type="button"
+            > Add user
+            </button>
+        </div>
+
+    </form>
+
+    <hr/>
+
+    <!--USER LIST-->
+
+    <h4>Users</h4>
+
+    <div ng-repeat="user in users"
+         class="row list-item">
+
+        <div class="col-md-6">
+
+            <!--USER NAME-->
+            <span>{{user.fname}} {{user.lname}}</span>
+        </div>
+        <div class="col-md-6 text-right">
+            <!--USER START BUTTON-->
+            <a class="btn btn-warning"
+               ng-click="startUser($index, user)">
+                Enable
+            </a>
+
+            <!--USER REMOVE BUTTON-->
+            <a class="btn btn-danger"
+               ng-click="removeUser($index, user)">
+                Remove
+            </a>
+        </div>
+    </div>
+</div>
