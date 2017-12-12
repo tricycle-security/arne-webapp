@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var app = angular.module('webapp_ARNE', ['angular.filter', 'firebase', 'ngMap', 'ngStorage', 'ngRoute']);
-
+var app = angular.module('dashboardapp', ['angular.filter', 'firebase', 'ngMap', 'ngStorage', 'ngRoute']);
 app.constant('USER_ROLES', {
 	all : '*',
 	admin : 'admin',
@@ -18,22 +17,21 @@ app.constant('USER_ROLES', {
 	notAuthenticated : 'auth-not-authenticated',
 	notAuthorized : 'auth-not-authorized'
 });
-
 app.config(function ($routeProvider) {
     $routeProvider
-        .when("/", {
-            templateUrl: "dashboard-index.html",
-        })
-        .when("/login", {
-            templateUrl: "login-index.html",
-        })
-        .when("/stages", {
-            templateUrl: "stage-index.html"
-        })
-        .when("/map", {
-            templateUrl: "map-index.html"
-        })
-        .when("/disclaimer", {
-            templateUrl: "disclaimer-index.html"
-        });
+            .when("/", {
+                templateUrl: "dashboard-index.html"
+            })
+            .when("/login", {
+                templateUrl: "login-index.html"
+            })
+            .when("/alerts", {
+                templateUrl: "alerts-index.html"
+            })
+            .when("/map", {
+                templateUrl: "map-index.html"
+            })
+            .when("/disclaimer", {
+                templateUrl: "disclaimer-index.html"
+            });
 });
