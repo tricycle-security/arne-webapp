@@ -1,16 +1,10 @@
-app.controller('loginController', function ($scope, $window, Auth, USER_ROLES, AUTH_EVENTS)
-{
-    //get Constants from app
-    //this.text = USER_ROLES.admin;
-    //this.text = AUTH_EVENTS.loginSuccess;
-
-    //Use service Auth
-    //Auth.setUser('her');
-    //console.log(Auth.isLoggedIn());
+app.controller('loginController', function ($scope, $rootScope, $window, Auth, USER_ROLES, AUTH_EVENTS)
+{   
+    //Auth.isLoggedIn($rootScope.isLoggedIn);
     
-    if(Auth.isLoggedIn()){
-        console.log("Logged in right now");
-    }
+    this.text = "title";
+    this.isLoggedIn = $rootScope.isLoggedIn;
+    console.log($rootScope.isLoggedIn);
 
     $scope.submit = function() {
       if ($scope.username) {
@@ -19,14 +13,18 @@ app.controller('loginController', function ($scope, $window, Auth, USER_ROLES, A
             var tempUser = {fname: tempData.fname, lname: tempData.lname, uuid: tempData.uuid};
 
             if(tempData.fname == $scope.username && tempData.lname == $scope.password){
-                console.log("OK");
+                $rootScope.isLoggedIn = true;
+                $rootScope.privilege = USER_ROLES.admin;
+                console.log(AUTH_EVENTS.loginSuccess);
                 //redirect after login
-                $window.location.href = './#/login';
+                $window.location.href = './#/';
+            } else {
+                console.log(AUTH_EVENTS.loginFailed);
             }
         });
         //empty input fields
-        $scope.username = '';
-        $scope.password = '';
+        //$scope.username = '';
+        //$scope.password = '';
       }
     };
 });

@@ -1,11 +1,14 @@
-<h1>{{loginCtrl.text}}</h1>
+<div ng-if="!loginCtrl.isLoggedIn; loggedin">
+  <h1>{{loginCtrl.text}}</h1>
 
-
-
-<form ng-submit="submit()" ng-controller="loginController">
-    Username: 
-    <input type="text" ng-model="username" name="username" /><br>
-    Password: 
-    <input type="text" ng-model="password" name="text" /><br>
-    <input type="submit" id="submit" value="Submit" />
+  <form ng-submit="submit()" ng-controller="loginController">
+      Username: 
+      <input type="text" ng-model="username" name="username" /><br>
+      Password: 
+      <input type="text" ng-model="password" name="text" /><br>
+      <input type="submit" id="submit" value="Submit" />
   </form>
+</div>
+<ng-template #loggedin>
+  <h1>You are logged in. Log out?</h1>
+</ng-template>

@@ -34,37 +34,17 @@
         <link href="css/layout.css" rel="stylesheet" type="text/css"/>
         <link href="css/dashboard.css" rel="stylesheet" type="text/css"/>
         <script src="js/javascript.js" type="text/javascript"></script>
-    </head>
+    </head>  
+    <header></header>
     <body>
-        <div id="menu">
-            <div id='cssmenu' class="fixed">
-                <ul>
-                    <li><a ng-href="./#/" class="active"><span></span>Home</a></li>
-                    <li><a ng-href="./#/login"><span></span>Login</a></li>  
-                    <li><a ng-href="./#/stages"><span></span>Stages</a></li>              
-                    <li><a ng-href="./#/"><span></span>c</a></li>
-                    <li><a ng-href="./#/"><span></span>d</a></li>
-                    <li><a ng-href="./#/" class="last"><span></span>Other</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <!--show only on "/" route-->
-        <div ng-view ng-controller="dashboardController as dashboardCtrl">
-            
-        </div>
-
-        <!--show only on "/login" route-->
-        <div ng-view ng-controller="loginController as loginCtrl">
-            
-        </div>
+        <div ng-view></div> 
 
         <!--dashboard-->
         <script src="views/dashboard/dashboard.js" type="text/javascript"></script>
 
         <!--login-->
         <script src="views/login/login.js" type="text/javascript"></script>
-        
+
         <!--controllers-->
         <script src="controller/dashboardController.js" type="text/javascript"></script>
         <script src="controller/loginController.js" type="text/javascript"></script>
@@ -76,24 +56,11 @@
         <script src="services/auth.js"></script>
         <script src="services/session.js"></script>
 
+        <!--partials-->
+        <script src="views/menu/menu.js" type="text/javascript"></script>
+        <script src="views/footer/footer.js" type="text/javascript"></script>
     </body>
-<div id="footer">
-    
-    <ul class="footer_list">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">A</a></li>
-        <li><a href="#">B</a></li>
-        <li><a href="#">C</a></li>
-        <li><a href="#">About Us</a></li>
-        <li class="last"><a href="#">Contact Us</a></li>
-    </ul> 
-
-    <div class="margin_bottom_10"></div>
-
-    Copyright © 2017 <a href="#">Tricycle</a> | <a href="" target="_parent">Website</a> by <a href="" target="_parent">Tricycle</a>
-
-    <div class="margin_bottom_10"></div>
-</div>
+    <footer></footer>
 </html>
 
 

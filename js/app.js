@@ -19,19 +19,13 @@ app.constant('USER_ROLES', {
 	notAuthorized : 'auth-not-authorized'
 });
 
-app.config(function ($routeProvider, USER_ROLES) {
+app.config(function ($routeProvider) {
     $routeProvider
         .when("/", {
-            templateUrl: "dashboard.html",
-            data: {
-                authorizedRoles: [USER_ROLES.admin, USER_ROLES.responder, USER_ROLES.viewer]
-            }
+            templateUrl: "dashboard-index.html",
         })
         .when("/login", {
-            templateUrl: "login.html",
-            data: {
-                authorizedRoles: []
-            }
+            templateUrl: "login-index.html",
         })
         .when("/stages", {
             templateUrl: "stage-index.html"

@@ -6,7 +6,7 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
     this.allUsers = [];
     this.allUsers.push(testUser);this.allUsers.push(testUser2);
 
-    this.title = "Available HBVs";
+    this.title = "Available BHVs";
     
     var self = this;
     var statusinfo = database.ref().child('CurrentStatus');
