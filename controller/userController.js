@@ -3,18 +3,20 @@ app.controller('userController', ['$scope', '$firebaseArray',
         
 
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
-        var self = this
-        this.fname = "Test"
-        this.lname = "User"
+        var self = this;
 
         // GET USERINFO AS AN ARRAY
         $scope.users = $firebaseArray(userInfoRef);
 
         // ADD USER
         $scope.addUser = function () {
-            
+
+            if (!$scope.userForm.$valid) {
+                console.log("invalid");
+                return;
+            }
             //Use secondary app
-            secondaryApp.auth().createUserWithEmailAndPassword($scope.userName, $scope.password).then(function (firebaseUser) {
+            secondaryApp.auth().createUserWithEmailAndPassword(self.email, randomPassword(16)).then(function (firebaseUser) {
                 console.log("User " + firebaseUser.uid + " created successfully!");
                 //Send password reset email to currently registered email
                 secondaryApp.auth().sendPasswordResetEmail(firebaseUser.email);
@@ -30,6 +32,13 @@ app.controller('userController', ['$scope', '$firebaseArray',
                 });
                 //Logout the second app. Not the admin panel
                 secondaryApp.auth().signOut();
+
+                self.fname = "";
+                self.lname = "";
+                self.email = "";
+
+
+
             })
         };
 
@@ -73,5 +82,15 @@ app.controller('userController', ['$scope', '$firebaseArray',
                 .catch(function (error) {
                     console.log("Remove failed: " + error.message)
                 });
+        }
+
+        function randomPassword(length) {
+            var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+            var pass = "";
+            for (var x = 0; x < length; x++) {
+                var i = Math.floor(Math.random() * chars.length);
+                pass += chars.charAt(i);
+            }
+            return pass;
         }
     }]);
