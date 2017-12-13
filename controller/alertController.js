@@ -82,6 +82,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
     this.editAlert = function (alert) {
         
         self.editableAlert = alert
+        self.sendAlert(alert)
         
     }
 
