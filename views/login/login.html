@@ -1,9 +1,9 @@
 <div ng-if="true">
   <h1>{{loginCtrl.title}}</h1>
-
+  <h1>{{loginCtrl.error}}</h1>
   <form ng-submit="submit()" ng-controller="loginController">
       Email: 
-      <input type="text" ng-model="username" name="email" /><br>
+      <input type="text" ng-model="email" name="email" /><br>
       Password: 
       <input type="password" ng-model="password" name="text" /><br>
       <input type="submit" id="submit" value="Submit" />

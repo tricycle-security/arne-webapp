@@ -3,16 +3,16 @@
 <!--TODO make a view of this!-->
 <div class="grid grid-pad">
 
-    <label>description: </label>
+    <label>Description: </label>
     <input type="text" ng-model="alertsCtrl.editableAlert.description">
     <br />
-    <label>kind: </label>
+    <label>Type e.g. fire, injury, health, cardiac: </label>
     <input type="text" ng-model="alertsCtrl.editableAlert.kind">
     <br />
-    <label>location: </label>
+    <label>Location: </label>
     <input type="text" ng-model="alertsCtrl.editableAlert.location">
     <br />
-    <label>active: </label>
+    <label>Active: </label>
     <input type="checkbox" ng-model="alertsCtrl.editableAlert.active" ng-checked = "true" ng-init="alertsCtrl.editableAlert.active = true">
     <br />
     <button ng-click="alertsCtrl.createAlert(alertsCtrl.editableAlert)">Create Alert!</button>
