@@ -72,7 +72,6 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
         if (alert != null) {
             firebase.database().ref('alerts/' + alert.id).set(alert);
         }
-
     }
     this.selectAlert = function (alert) {
         console.log("edit : ", alert)

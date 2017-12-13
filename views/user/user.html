@@ -68,11 +68,14 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>UUID</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="user in users | toArray | filter: { uuid :'!' + fireuid }">
                 <td>{{user.fname}} {{user.lname}}</td>
+                <td>{{user.uuid}}</td>
                 <td>
                     <a class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                     <a href="" ng-click="removeUser($index, user)" class="delete"><i class="material-icons"
