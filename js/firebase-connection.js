@@ -24,26 +24,8 @@ finally {
 }
 
 //Sign in
-var developerMode = true;
-if(developerMode){//if true no need to log in every time while testing
-    console.log("Developer Mode");
-    
-    var email = "contact@tricycle-sec.nl";
-    var pass = "Test123!";
-
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-
-        console.log("authError Here:");
-        console.log(errorCode);
-        console.log(errorMessage);
-    });
-} else{
-    firebase.auth().signOut().then(function() {
-        console.log('Signed Out');
-    }, function(error) {
-        console.error('Sign Out Error', error);
-    });
-}
+firebase.auth().signOut().then(function() {
+    console.log('Signed Out');
+}, function(error) {
+    console.error('Sign Out Error', error);
+});
