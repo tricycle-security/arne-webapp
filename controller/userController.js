@@ -1,16 +1,23 @@
 app.controller('userController', ['$scope', '$firebaseArray',
     function ($scope, $firebaseArray) {
-        
+
 
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
         var self = this;
 
+
         // GET USERINFO AS AN ARRAY
         $scope.users = $firebaseArray(userInfoRef);
 
+
+        firebase.auth().onAuthStateChanged(function (user) {
+            var firebaseuid = user.uid;
+            $scope.fireuid = firebaseuid;
+            console.log(firebaseuid);
+        });
+
         // ADD USER
         $scope.addUser = function () {
-
             if (!$scope.userForm.$valid) {
                 console.log("invalid");
                 return;
@@ -38,7 +45,6 @@ app.controller('userController', ['$scope', '$firebaseArray',
                 self.email = "";
 
 
-
             })
         };
 
@@ -53,14 +59,18 @@ app.controller('userController', ['$scope', '$firebaseArray',
             // checknpole: false
             // });
 
-            //Remove user from both paths
-            remove('userinfo/usergeninfo/' + user.uuid);
-            remove('userinfo/userstatus/' + user.uuid);
-            remove('/currentstatus/' + user.uuid);
-            //TODO last delete is not complete
-            ///Cardinfo/" + "cardID"
-        };
 
+            if (user.uuid.length >= 28 && $scope.fireuid != user.uuid) {
+                // //Remove user from both paths
+                remove('userinfo/usergeninfo/' + user.uuid);
+                remove('userinfo/userstatus/' + user.uuid);
+                remove('/currentstatus/' + user.uuid);
+            }
+            else {
+                console.log("You can't delete yourself")
+            }
+            ;
+        };
 
         //UPDATE USER METHOD
         $scope.updateUser = function (index, user) {
@@ -70,7 +80,6 @@ app.controller('userController', ['$scope', '$firebaseArray',
             // // UPDATE STATUS TO IN PROGRESS AND SAVE
             // user.status = 'in progress';
             // $scope.users.$save(user);
-
         };
 
         function remove(remove) {
