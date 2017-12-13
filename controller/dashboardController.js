@@ -26,4 +26,19 @@ app.controller('dashboardController', function ($routeParams, $scope, $timeout)
         }
         });
     });
+    var self = this;
+    statusinfo.on('child_changed', function (snap) {
+        var tempSnap = snap.val();
+        for(var i = 0; i < self.allUsers.length; i++){
+            console.log(self.allUsers[i])
+            console.log(tempSnap)
+            if(self.allUsers[i].uuid === tempSnap.uuid){
+                self.allUsers[i].onLocation = tempSnap.onLocation
+                $timeout(function () {
+                    $scope.$apply();
+                });
+                break;
+            }
+        }
+    });
  });
