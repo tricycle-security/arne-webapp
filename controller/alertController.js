@@ -70,9 +70,8 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
     this.sendAlert = function (alert) {
         console.log('sendalert')
         if (alert != null) {
-            firebase.database().ref('alerts/' + id).set(alert);
+            firebase.database().ref('alerts/' + alert.id).set(alert);
         }
-
     }
     this.selectAlert = function (alert) {
         console.log("edit : ", alert)
@@ -82,6 +81,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
     this.editAlert = function (alert) {
         
         self.editableAlert = alert
+        self.sendAlert(alert)
         
     }
 

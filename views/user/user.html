@@ -1,48 +1,52 @@
-<div ng-controller="userController" class="container">
+<div ng-controller="userController as userCtrl" class="container">
 
     <!--ADD ITEM FORM-->
     <form name="userForm">
 
         <div>
-            <input type="email"
-                   name="userNameField"
-                   ng-model="userName"
-                   placeholder="Add new User (min 3 chars)"
-                   required ng-minlength="3"
-                   class="form-control"
-                   style="margin-bottom: 10px"
-            />
+            <div class="form-group" ng-class="{ 'has-error' : (userForm.userNameField.$invalid) }">
+                <label>Email</label>
+                <input type="email"
+                       name="userNameField"
+                       ng-model="userCtrl.email"
+                       placeholder="Email"
+                       ng-required="true"
+                       ng-minlength="5"
+                       ng-pattern="/^[a-z0-9._]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
+                       class="form-control"
 
-            <input type="password"
-                   name="passwordField"
-                   ng-model="password"
-                   placeholder="password"
-                   required ng-minlength="3"
-                   class="form-control"
-                   style="margin-bottom: 10px"
-            />
+                />
+                <p ng-show="(userForm.userNameField.$invalid)" class="help-block">Email is not valid</p>
+            </div>
 
-            <input type="text"
-                   name="firstNameField"
-                   ng-model="firstName"
-                   placeholder="firstName"
-                   required ng-minlength="3"
-                   class="form-control"
-                   style="margin-bottom: 10px"
-            />
+            <div class="form-group" ng-class="{ 'has-error' : (userForm.firstNameField.$invalid) }">
+                <label>First name</label>
+                <input type="text"
+                       name="firstNameField"
+                       ng-model="userCtrl.fname"
+                       placeholder="firstName"
+                       required ng-minlength="2"
+                       class="form-control"
+                       style="margin-bottom: 10px"
+                />
 
-            <input type="text"
-                   name="lastNameField"
-                   ng-model="lastName"
-                   placeholder="lastName"
-                   required ng-minlength="3"
-                   class="form-control"
-                   style="margin-bottom: 10px"
-            />
+                <p ng-show="(userForm.firstNameField.$invalid)" class="help-block">Put a first name</p>
+            </div>
 
-
+            <div class="form-group" ng-class="{ 'has-error' : (userForm.lastNameField.$invalid) }">
+                <label>Last name</label>
+                <input type="text"
+                       name="lastNameField"
+                       ng-model="userCtrl.lname"
+                       placeholder="lastName"
+                       required ng-minlength="2"
+                       class="form-control"
+                       style="margin-bottom: 10px"
+                />
+                <p ng-show="(userForm.lastNameField.$invalid)" class="help-block">Put a last name</p>
+            </div>
             <button ng-click="addUser()"
-                    ng-hide="myForm.userNameField.$invalid"
+                    ng-disabled="userForm.$invalid"
                     class="btn btn-primary" type="button"
             > Add user
             </button>
@@ -50,32 +54,36 @@
 
     </form>
 
-    <hr/>
 
     <!--USER LIST-->
-
-    <h4>Users</h4>
-
-    <div ng-repeat="user in users"
-         class="row list-item">
-
-        <div class="col-md-6">
-
-            <!--USER NAME-->
-            <span>{{user.fname}} {{user.lname}}</span>
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Users</h2>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6 text-right">
-            <!--USER START BUTTON-->
-            <a class="btn btn-warning"
-               ng-click="startUser($index, user)">
-                Enable
-            </a>
-
-            <!--USER REMOVE BUTTON-->
-            <a class="btn btn-danger"
-               ng-click="removeUser($index, user)">
-                Remove
-            </a>
-        </div>
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>UUID</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users | toArray | filter: { uuid :'!' + fireuid }">
+                <td>{{user.fname}} {{user.lname}}</td>
+                <td>{{user.uuid}}</td>
+                <td>
+                    <a class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    <a href="" ng-click="removeUser($index, user)" class="delete"><i class="material-icons"
+                                                                                     data-toggle="tooltip"
+                                                                                     title="Delete">&#xE872;</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
