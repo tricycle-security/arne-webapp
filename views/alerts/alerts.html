@@ -1,38 +1,99 @@
-<h1>{{alertsCtrl.title}}</h1>
+<div class="container">
 
-<!--TODO make a view of this!-->
-<div class="grid grid-pad">
+    <h1>{{alertsCtrl.title}}</h1>
 
-    <label>Description: </label>
-    <input type="text" ng-model="alertsCtrl.editableAlert.description">
-    <br />
-    <label>Type e.g. fire, injury, health, cardiac: </label>
-    <input type="text" ng-model="alertsCtrl.editableAlert.kind">
-    <br />
-    <label>Location: </label>
-    <input type="text" ng-model="alertsCtrl.editableAlert.location">
-    <br />
-    <label>Active: </label>
-    <input type="checkbox" ng-model="alertsCtrl.editableAlert.active" ng-checked = "true" ng-init="alertsCtrl.editableAlert.active = true">
-    <br />
-    <button ng-click="alertsCtrl.createAlert(alertsCtrl.editableAlert)">Create Alert!</button>
-    <button ng-click="alertsCtrl.editAlert(alertsCtrl.editableAlert)">Edit Alert!</button>
-</div>
+    <!--TODO make a view of this!-->
+    <div class="grid grid-pad">
+        <form name="alertForm">
+            <div class="form-group" ng-class="{ 'has-error' : (alertForm.description.$invalid) }">
+                <label>Description: </label>
+                <input type="text"
+                       name="description"
+                       ng-model="alertsCtrl.editableAlert.description"
+                       placeholder="Kleine brand"
+                       required ng-minlength="2"
+                       class="form-control"
+                       style="margin-bottom: 10px"
+                />
+                <p ng-show="(alertForm.description.$invalid)" class="help-block">Put a description with mininmum length
+                    2</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : (alertForm.kind.$invalid) }">
+                <label>Kind: </label>
+                <input type="text"
+                       name="kind"
+                       ng-model="alertsCtrl.editableAlert.kind"
+                       placeholder="Brand"
+                       required ng-minlength="2"
+                       class="form-control"
+                       style="margin-bottom: 10px"
+                />
+                <p ng-show="(alertForm.kind.$invalid)" class="help-block">Put a kind with mininmum length 2</p>
+            </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : (alertForm.location.$invalid) }">
+                <label>location: </label>
+                <input type="text"
+                       name="location"
+                       ng-model="alertsCtrl.editableAlert.location"
+                       placeholder="Wijnhaven 107"
+                       required ng-minlength="2"
+                       class="form-control"
+                       style="margin-bottom: 10px"
+                />
+                <p ng-show="(alertForm.location.$invalid)" class="help-block">Put a location with mininmum length 2</p>
+            </div>
+            <div class="form-group">
+                <label>Active: </label>
+                <input class="form-control" type="checkbox" ng-model="alertsCtrl.editableAlert.active"
+                       ng-init="alertsCtrl.editableAlert.active = true">
+            </div>
+            <button ng-click="alertsCtrl.createAlert(alertsCtrl.editableAlert)"
+                    ng-disabled="alertForm.$invalid"
+                    class="btn btn-primary" type="button"
+            > Create Alert
+            </button>
+            <button ng-click="alertsCtrl.editAlert(alertsCtrl.editableAlert)"
+                    ng-disabled="alertForm.$invalid"
+                    class="btn btn-primary" type="button"
+            > Edit alert
+            </button>
+        </form>
+    </div>
 
 
-<!--TODO make a view of this!-->
-<!--var tempAlert = {active: snap.active, description: snap.description, id: snap.id, kind: snap.kind, location: snap.location, time: snap.time};-->
-<div class="grid grid-pad">
-    <a ng-repeat="alert in alertsCtrl.alerts track by $index" class="margin_left_20 margin_right_20">
-
-        <div class="module hbs">
-            <h4>{{alert.kind}}</h4>
-            <span ng-hide="false">{{alert.time}}</span>
-            <span ng-hide="false">{{alert.description}}</span>
-            <span ng-hide="false">{{alert.active}}</span>
-            <button ng-click="alertsCtrl.selectAlert(alert)">Edit</button>
+    <!--TODO make a view of this!-->
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>{{alertsCtrl.title}}</h3>
+                </div>
+            </div>
         </div>
-    </a>
-</div>       
-
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Kind</th>
+                <th>Time</th>
+                <th>Description</th>
+                <th>Active</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="alert in alertsCtrl.alerts| toArray | orderBy: '-time' track by $index">
+                <td><b>{{alert.kind}}</b></td>
+                <td>{{alert.time | date:'dd-MM-yyyy HH:mm'}}</td>
+                <td>{{alert.description}}</td>
+                <td>{{alert.active}}</td>
+                <td><a href="" ng-click="alertsCtrl.selectAlert(alert)" class="edit"><i class="material-icons"
+                                                                                        data-toggle="tooltip"
+                                                                                        title="edit">&#xE254;</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 

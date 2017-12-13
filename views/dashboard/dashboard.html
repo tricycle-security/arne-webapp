@@ -1,17 +1,33 @@
-<h3>{{dashboardCtrl.title}}</h3>
-
-<div class="grid grid-pad">
-    <a ng-repeat="user in dashboardCtrl.allUsers" class="margin_left_20 margin_right_20">
-        <div class="module hbs">
-            <h4>{{user.fname}} {{user.lname}}</h4>
-            <div ng:class="{true:'color-available', false:'color-unavailable'}[user.onLocation]">
-                <div ng-if="user.onLocation">
-                    <p>Available</p>
-                </div>
-                <div ng-if="!user.onLocation">
-                    <p>Unavailable</p>
-                </div>
+<!--USER LIST-->
+<div class="table-wrapper">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>{{dashboardCtrl.title}}</h3>
             </div>
         </div>
-    </a>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Availability</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="user in dashboardCtrl.allUsers">
+            <td>{{user.fname}} {{user.lname}}</td>
+            <td>
+                <div ng:class="{true:'color-available', false:'color-unavailable'}[user.onLocation]">
+                    <div ng-if="user.onLocation">
+                        <p>Available</p>
+                    </div>
+                    <div ng-if="!user.onLocation">
+                        <p>Unavailable</p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
