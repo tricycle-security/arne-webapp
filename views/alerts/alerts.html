@@ -84,7 +84,7 @@
             <tbody>
             <tr ng-repeat="alert in alertsCtrl.alerts| toArray | orderBy: '-time' track by $index">
                 <td><b>{{alert.kind}}</b></td>
-                <td>{{alert.time | date:'dd-MM-yyyy mm:HH'}}</td>
+                <td>{{alert.time | date:'dd-MM-yyyy HH:mm'}}</td>
                 <td>{{alert.description}}</td>
                 <td>{{alert.active}}</td>
                 <td><a href="" ng-click="alertsCtrl.selectAlert(alert)" class="edit"><i class="material-icons"
