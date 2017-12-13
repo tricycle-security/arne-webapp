@@ -8,11 +8,6 @@ var config = {
     messagingSenderId: "284978501316"
 };
 
-var email = "contact@tricycle-sec.nl";
-var pass = "Test123!";
-
-console.log("API: Jordi's firebase");
-
 // Initialize the firebase
 try {
     firebase.initializeApp(config);
@@ -29,37 +24,8 @@ finally {
 }
 
 //Sign in
-firebase.auth().signInWithEmailAndPassword(email, pass).catch(function (error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-
-    console.log("authError Here:");
-    console.log(errorCode);
-    console.log(errorMessage);
+firebase.auth().signOut().then(function() {
+    console.log('Signed Out');
+}, function(error) {
+    console.error('Sign Out Error', error);
 });
-
-//create basic tables and info
-/*var uuid = 4;
- 
- database.ref("/Userinfo/" + "usergeninfo/" + uuid).set({
- fname: '123',
- lname: '456',
- uuid: uuid
- });
- 
- database.ref("/Userinfo/" + "userstatus/" +  uuid).set({
- admin: 'active',
- bhver: true,
- checkinpole: false
- });
- 
- database.ref("/Cardinfo/" + "cardID").set({
- status: 'active',
- uuid: uuid
- });
- 
- database.ref("/CurrentStatus/" + uuid).set({
- onLocation: true,
- uuid: uuid
- });*/

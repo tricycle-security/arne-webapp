@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 var app = angular.module('dashboardapp', ['angular.filter', 'firebase', 'ngMap', 'ngStorage', 'ngRoute']);
 app.constant('USER_ROLES', {
 	all : '*',
@@ -17,24 +12,52 @@ app.constant('USER_ROLES', {
 	notAuthenticated : 'auth-not-authenticated',
 	notAuthorized : 'auth-not-authorized'
 });
+
+this.restrictUser = function($location,$q) {
+    var user = firebase.auth().currentUser;
+    var deferred = $q.defer();
+    if (user) {// User is signed in.
+        deferred.resolve();
+    } else {
+        deferred.reject();
+        $location.path('/login');
+    }
+    return deferred.promise;
+  }
+
 app.config(function ($routeProvider) {
     $routeProvider
-            .when("/", {
-                templateUrl: "dashboard-index.html"
-            })
-            .when("/login", {
-                templateUrl: "login-index.html"
-            })
-            .when("/alerts", {
-                templateUrl: "alerts-index.html"
-            })
-            .when("/map", {
-                templateUrl: "map-index.html"
-            })
-            .when("/disclaimer", {
-                templateUrl: "disclaimer-index.html"
-            })
-            .when("/user", {
-                templateUrl: "user.html"
-            });
+        .when("/", {
+            templateUrl: "dashboard-index.html",
+            resolve:{
+                loggedIn: restrictUser
+            }
+        })
+        .when("/login", {
+            templateUrl: "login-index.html"
+        })
+        .when("/alerts", {
+            templateUrl: "alerts-index.html",
+            resolve:{
+                loggedIn: restrictUser
+            }
+        })
+        .when("/user", {
+            templateUrl: "user.html",
+            resolve:{
+                loggedIn: restrictUser
+            }
+        })
+        .when("/logout", {
+            templateUrl: "logout-index.html",
+            resolve:{
+                loggedIn: restrictUser
+            }
+        })
+        .otherwise({
+            templateUrl: "dashboard-index.html",
+            resolve:{
+                loggedIn: restrictUser
+            }
+        });
 });
