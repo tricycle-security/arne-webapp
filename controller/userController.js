@@ -35,7 +35,7 @@ app.controller('userController', ['$scope', '$firebaseArray',
                     uuid: firebaseUser.uid
                 });
                 database.ref("/userinfo/userstatus/" + firebaseUser.uid).set({
-                    bhver: true
+                    responder: true
                 });
                 //Logout the second app. Not the admin panel
                 secondaryApp.auth().signOut();
