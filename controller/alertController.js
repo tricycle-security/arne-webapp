@@ -58,7 +58,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
         console.log(self.editableAlert)
         if (alert != null) {
             console.log(alert)
-            alert.active = true
+//            alert.active = true
             var id = firebase.database().ref().child('alerts').push().key;
             alert.id = id;
             alert.time = (new Date).getTime();
@@ -78,25 +78,19 @@ app.controller('alertController', function ($routeParams, $scope, $timeout)
         self.editableAlert = alert
         
     }
-    this.editAlert = function (alert) {
-        
+    this.editAlert = function (alert) {    
         self.editableAlert = alert
         self.sendAlert(alert)
-        
     }
-
-
-
+    
+    
     var notRunning = true
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user && notRunning) {
             notRunning = false;
-            console.log('logged in!')
             retrieveAlerts();
 
-        } else {
-            console.log('not logged in!')
         }
     });
 

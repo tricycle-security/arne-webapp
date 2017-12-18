@@ -734,3 +734,42 @@ table.table .avatar {
 }
 
 /* Table layout end*/
+
+/*create alert button css*/
+.clickthrough-btn{
+	font-family: Arial;
+	background-color: #337ab7;
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	position: relative;
+	padding: 10px 10px;
+}
+.clickthrough-btn:hover{
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+
+.clickthrough-btn svg path{
+	fill:white;
+}
+
+.clickthrough-btn svg{
+    height: 40px;
+    display: block;
+    margin: 0 auto;
+}
+
+.clickthrough-icon-div{
+	fill:white;
+	width: 40px;
+	height: 40px;
+	display: block;
+	margin: 0 auto;
+}
+.clickthrough-text-div{
+	color:white;
+	width: 100%;
+	text-align: center;
+}
