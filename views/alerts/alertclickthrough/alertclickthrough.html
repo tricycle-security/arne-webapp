@@ -1,0 +1,45 @@
+<div class="container" ng-controller="alertController as alertCtrl">
+    <div class="alert-type">
+        <div class="alert-clickthrough-title">
+            <h1>
+                Kies het type van de melding:
+            </h1>
+        </div>
+
+        <div class="alert-clickthrough-content" >
+            
+            
+            <div class="alert-clickthrough-item" ng-repeat="button in alertCtrl.buttons">
+                <alertbutton></alertbutton>
+            </div>
+
+<!--            <div class="alert-clickthrough-item">
+                <chestpainbutton></chestpainbutton>
+            </div>
+
+            <div class="alert-clickthrough-item">
+                <firebutton></firebutton>
+            </div>
+
+            <div class="alert-clickthrough-item">
+                <headinjurybutton></headinjurybutton>
+            </div>-->
+        </div>
+    </div>
+    <div class="clearfix">
+
+        <div class="col-2">
+            <descriptionbutton></descriptionbutton>
+        </div>
+
+        <div class="col-2">
+            <editbutton></editbutton>
+        </div>
+
+        <div class="col-2">
+            <floorplanbutton></floorplanbutton>
+        </div>
+
+    </div>
+</div>
+
