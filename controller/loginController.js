@@ -1,4 +1,4 @@
-app.controller('loginController', function ($scope, $rootScope, $window)
+app.controller('loginController', function ($scope, $rootScope, $window, USER_ROLES)
 {    
     this.title = "Log in";
     $scope.submit = function (){
@@ -14,7 +14,7 @@ app.controller('loginController', function ($scope, $rootScope, $window)
             password = "password";
         }
 
-        this.signIn = firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
             console.log("auth sign in Error Here:");
             console.log(error.code);
             console.log(error.message);
@@ -24,7 +24,23 @@ app.controller('loginController', function ($scope, $rootScope, $window)
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                console.log("Logged in");
+                console.log("Logged in.");
+
+                var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
+            
+                userStatus.on('value', function (statusSnap) {
+
+                    if(statusSnap.val().responder){
+                        $rootScope.privilege = USER_ROLES.responder;
+                        if(statusSnap.val().alertmanager){
+                            $rootScope.privilege = USER_ROLES.manager;
+                            if(statusSnap.val().admin){
+                                $rootScope.privilege = USER_ROLES.admin;
+                            }
+                        }
+                    }
+                });
+
                 //redirect after login
                 $window.location.href = './#/';
             } else {
