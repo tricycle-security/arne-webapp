@@ -1,27 +1,42 @@
-<a href="#" id="logo"></a>
-<nav>
-    <a href="./#/" id="menu-icon"></a>
-    <ul>
-        <li style="list-style: none; display: inline"></li>
-        <li>
-            <a href="./#/">Home</a>
-        </li>
-        <li style="list-style: none; display: inline"></li>
-        <li>
-            <a href="./#/alerts">Alerts</a>
-        </li>
-        <li style="list-style: none; display: inline"></li>
-        <li>
-            <a href="./#/user">Users</a>
-        </li>
-        <li style="list-style: none; display: inline"></li>
-        <li>
-            <a href="./#/">Other</a>
-        </li>
-        <li style="list-style: none; display: inline"></li>
-        <li>
-            <a href="./#/logout">Logout</a>
-        </li>
-        <li style="list-style: none; display: inline"></li>
-    </ul>
-</nav>
+<div ng-controller="menuController as menuCtrl">
+    <a href="#" id="logo"></a>
+    <nav>
+        <a href="./#/" id="menu-icon"></a>
+        <ul>
+            <li style="list-style: none; display: inline"></li>
+
+            <li ng-if="privilege == ''">
+                    <a href="./#/">{{titleLogin}}</a>
+                </li>
+
+            <li style="list-style: none; display: inline"></li>
+
+            <li ng-if="privilege != ''">
+                <a href="./#/">{{titleHome}}</a>
+            </li>
+
+            <li style="list-style: none; display: inline"></li>
+
+            <li ng-if="privilege == userRoles.admin">
+                <a href="./#/alerts">{{titleAlerts}}</a>
+            </li>
+
+            <li style="list-style: none; display: inline"></li>
+
+            <li ng-if="privilege == userRoles.admin">
+                <a href="./#/user">{{titleUsers}}</a>
+            </li>
+
+            <li style="list-style: none; display: inline"></li>
+            
+            <li ng-if="privilege == userRoles.admin">
+                <a href="./#/logout">Logout</a>
+            </li>
+
+            <li style="list-style: none; display: inline"></li>
+        </ul>
+    </nav>
+</div>
+<div ng-if="user.onLocation">
+    <p>Available</p>
+</div>
