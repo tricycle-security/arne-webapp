@@ -8,6 +8,7 @@ app.controller('menuController', function ($scope, $rootScope, USER_ROLES)
     $scope.titleUsers = "Users";
 
     $rootScope.privilege = "";
+    $rootScope.privilegeLv = 0;
 
     $rootScope.$watch(function(rootScope) {
         return $rootScope.privilege;
@@ -15,6 +16,7 @@ app.controller('menuController', function ($scope, $rootScope, USER_ROLES)
         setTimeout(function(){
             $rootScope.$apply(function(){
                 $scope.privilege = $rootScope.privilege;
+                $scope.privilegeLv = $rootScope.privilegeLv;
             })
         }, 1000);
     }, true);

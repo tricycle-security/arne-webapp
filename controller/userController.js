@@ -13,22 +13,22 @@ app.controller('userController', ['$scope', '$firebaseArray',
         firebase.auth().onAuthStateChanged(function (user) {
             var firebaseuid = user.uid;
             $scope.fireuid = firebaseuid;
-            console.log(firebaseuid);
+            //console.log(firebaseuid);
         });
 
         // ADD USER
         $scope.addUser = function () {
             if (!$scope.userForm.$valid) {
-                console.log("invalid");
+                //console.log("invalid");
                 return;
             }
             //Use secondary app
             secondaryApp.auth().createUserWithEmailAndPassword(self.email, randomPassword(16)).then(function (firebaseUser) {
-                console.log("User " + firebaseUser.uid + " created successfully!");
+                //console.log("User " + firebaseUser.uid + " created successfully!");
                 //Send password reset email to currently registered email
                 secondaryApp.auth().sendPasswordResetEmail(firebaseUser.email);
                 //Set data in both paths with uuid that was returned by creation
-                console.log("Firstname : " + self.fname + "Lastname : " + self.lname + "uid : " + firebaseUser.uid)
+                //console.log("Firstname : " + self.fname + "Lastname : " + self.lname + "uid : " + firebaseUser.uid)
                 database.ref("/userinfo/usergeninfo/" + firebaseUser.uid).set({
                     fname: self.fname,
                     lname: self.lname,
@@ -83,10 +83,10 @@ app.controller('userController', ['$scope', '$firebaseArray',
         };
 
         function remove(remove) {
-            console.log("starting delete");
+            //console.log("starting delete");
             database.ref().child(remove).remove()
                 .then(function () {
-                    console.log("Remove succeeded.")
+                    //console.log("Remove succeeded.")
                 })
                 .catch(function (error) {
                     console.log("Remove failed: " + error.message)

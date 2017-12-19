@@ -5,38 +5,35 @@
         <ul>
             <li style="list-style: none; display: inline"></li>
 
-            <li ng-if="privilege == ''">
+            <li ng-if="privilegeLv == 0">
                     <a href="./#/">{{titleLogin}}</a>
                 </li>
 
             <li style="list-style: none; display: inline"></li>
 
-            <li ng-if="privilege != ''">
+            <li ng-if="privilegeLv > 0">
                 <a href="./#/">{{titleHome}}</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>
 
-            <li ng-if="privilege == userRoles.admin">
+            <li ng-if="privilegeLv >= userRoles.adminLv">
                 <a href="./#/alerts">{{titleAlerts}}</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>
 
-            <li ng-if="privilege == userRoles.admin">
+            <li ng-if="privilegeLv >= userRoles.adminLv">
                 <a href="./#/user">{{titleUsers}}</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>
             
-            <li ng-if="privilege == userRoles.admin">
+            <li ng-if="privilegeLv >= userRoles.adminLv">
                 <a href="./#/logout">Logout</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>
         </ul>
     </nav>
-</div>
-<div ng-if="user.onLocation">
-    <p>Available</p>
 </div>

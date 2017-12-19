@@ -4,7 +4,12 @@ app.constant('USER_ROLES', {
     admin : 'admin',
     manager : 'alertmanager',
 	responder : 'responder',
-	viewer : 'viewer'
+    viewer : 'viewer',
+
+    adminLv : 3,
+    managerLv : 2,
+	responderLv : 1,
+	viewerLv : 0
 }).constant('AUTH_EVENTS', {
 	loginSuccess : 'auth-login-success',
 	loginFailed : 'auth-login-failed',
@@ -24,21 +29,22 @@ app.factory('restrictUserByLevel',['$q', '$location', 'USER_ROLES', function($q,
     
             userStatus.once('value', function (statusSnap) {
     
-                var privilegeLevel = "";
+                var privilegeLevel = 0;
                 if(statusSnap.val().responder){
-                    privilegeLevel = USER_ROLES.responder;
+                    privilegeLevel = 1;
                     if(statusSnap.val().alertmanager){
-                        privilegeLevel = USER_ROLES.manager;
+                        privilegeLevel = 2;
                         if(statusSnap.val().admin){
-                            privilegeLevel = USER_ROLES.admin;
+                            privilegeLevel = 3;
                         }
                     }
                 }
+
                 //is user the right privilege level for this page?
-                if (privilegeLevel == minPrivilegeLevel) {
+                if (privilegeLevel >= minPrivilegeLevel) {
                     deferred.resolve();
                 } else {
-                    $location.path('/login');
+                    $location.path('/error/:' + privilegeLevel);
                     deferred.reject();
                 }
             });
@@ -57,7 +63,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "dashboard-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.admin);
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
                 }
             }
         })
@@ -68,7 +74,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "alerts-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.admin);
+                    return restrictUserByLevel.action(USER_ROLES.managerLv);//2
                 }
             }
         })
@@ -76,7 +82,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "user.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.admin);
+                    return restrictUserByLevel.action(USER_ROLES.adminLv);//3
                 }
             }
         })
@@ -84,15 +90,24 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "logout-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.admin);
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
                 }
             }
+        })
+        .when("/error", {
+            templateUrl: "error-index.html"
+        })
+        .when("/error/:lv", {
+            templateUrl: "error-index.html"
+        })
+        .when("/error/:lv/:page", {
+            templateUrl: "error-index.html"
         })
         .otherwise({
             templateUrl: "dashboard-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.admin);
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);
                 }
             }
         });
