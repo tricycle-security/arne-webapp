@@ -43,7 +43,7 @@ app.controller('userController', ['$scope', '$firebaseArray',
                 self.lname = "";
                 self.email = "";
 
-
+                self.closeModal('custom-modal-add-user');
             })
         };
 
@@ -64,11 +64,12 @@ app.controller('userController', ['$scope', '$firebaseArray',
                 remove('userinfo/usergeninfo/' + user.uuid);
                 remove('userinfo/userstatus/' + user.uuid);
                 remove('/currentstatus/' + user.uuid);
+
+                self.closeModal('custom-modal-delete-user');
             }
             else {
                 console.log("You can't delete yourself")
-            }
-            ;
+            };
         };
 
         //UPDATE USER METHOD
@@ -103,8 +104,14 @@ app.controller('userController', ['$scope', '$firebaseArray',
         }
 
 
-        this.openModal = function (id) {
+        this.openModal = function (id) {//id is which modal to use
             $("#" + id).show();
+        }
+
+        this.openModal = function (id, index, user) {//index and user determines which user gets deleted
+            $("#" + id).show();
+            this.index = id;
+            this.user = user;
         }
 
         this.closeModal = function (id) {
