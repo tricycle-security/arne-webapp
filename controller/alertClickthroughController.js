@@ -1,7 +1,19 @@
-app.controller('alertClickThroughController', function ($routeParams, $scope, $timeout, $sce)
+app.controller('alertClickThroughController', function ($firebaseArray, $routeParams, $scope, $timeout, $sce)
 {
     var self = this
     this.currentAlert = {}
+    this.baseSection = {
+        name:"base",
+        base: true
+    }
+    this.currentSections = []
+    
+    var sectionsRef = database.ref().child('building_sections');
+
+    // GET USERINFO AS AN ARRAY
+    $scope.sections = $firebaseArray(sectionsRef);
+    
+    
 
     this.editCurrentAlert = function (parameter, value) {
         switch (parameter) {
@@ -157,6 +169,22 @@ app.controller('alertClickThroughController', function ($routeParams, $scope, $t
     this.sendAlert = function (alert) {
         if (alert != null) {
             firebase.database().ref('alerts/' + alert.id).set(alert);
+        }
+    }
+    
+    this.addSection = function(text){
+        self.currentSections.push({
+        name:text,
+        base: false
+    })
+    }
+    
+    this.removeSection = function(section){
+        var index = self.currentSections.indexOf(section);
+        if(index != -1){
+            for(var i = self.currentSections.length; i > index; i--){
+                self.currentSections.pop(i);
+            }
         }
     }
 

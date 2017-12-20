@@ -10,4 +10,18 @@
             </div>
         </div>
     </div>
+    <div>
+        <h3>Select your location:</h3>
+        <div>
+            <span>{{alertCTCtrl.baseSection}}</span>
+            <button ng-click="alertCTCtrl.addSection()">Add</button>
+            <button ng-click="alertCTCtrl.removeSection(section)">Remove</button>
+        </div>
+        <div ng-repeat="section in alertCTCtrl.currentSections">
+            <span>{{section}}</span>
+            <button ng-click="alertCTCtrl.addSection(section.name + 'test')">Add</button>
+            <button ng-click="alertCTCtrl.removeSection(section)">Remove</button>
+        </div>
+        <span>{{sections}}</span>
+    </div>
 </div>
