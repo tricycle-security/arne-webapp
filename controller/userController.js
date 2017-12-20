@@ -4,8 +4,7 @@ app.controller('userController', ['$scope', '$firebaseArray',
 
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
         var self = this;
-
-
+        
         // GET USERINFO AS AN ARRAY
         $scope.users = $firebaseArray(userInfoRef);
 
@@ -101,5 +100,14 @@ app.controller('userController', ['$scope', '$firebaseArray',
                 pass += chars.charAt(i);
             }
             return pass;
+        }
+
+
+        this.openModal = function (id) {
+            $("#" + id).show();
+        }
+
+        this.closeModal = function (id) {
+            $("#" + id).hide();
         }
     }]);

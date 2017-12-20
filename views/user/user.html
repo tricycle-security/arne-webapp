@@ -1,66 +1,14 @@
 <div ng-controller="userController as userCtrl" class="container">
-
-    <!--ADD ITEM FORM-->
-    <form name="userForm">
-
-        <div>
-            <div class="form-group" ng-class="{ 'has-error' : (userForm.userNameField.$invalid) }">
-                <label>Email</label>
-                <input type="email"
-                       name="userNameField"
-                       ng-model="userCtrl.email"
-                       placeholder="Email"
-                       ng-required="true"
-                       ng-minlength="5"
-                       ng-pattern="/^[a-z0-9._]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
-                       class="form-control"
-
-                />
-                <p ng-show="(userForm.userNameField.$invalid)" class="help-block">Email is not valid</p>
-            </div>
-
-            <div class="form-group" ng-class="{ 'has-error' : (userForm.firstNameField.$invalid) }">
-                <label>First name</label>
-                <input type="text"
-                       name="firstNameField"
-                       ng-model="userCtrl.fname"
-                       placeholder="firstName"
-                       required ng-minlength="2"
-                       class="form-control"
-                       style="margin-bottom: 10px"
-                />
-
-                <p ng-show="(userForm.firstNameField.$invalid)" class="help-block">Put a first name</p>
-            </div>
-
-            <div class="form-group" ng-class="{ 'has-error' : (userForm.lastNameField.$invalid) }">
-                <label>Last name</label>
-                <input type="text"
-                       name="lastNameField"
-                       ng-model="userCtrl.lname"
-                       placeholder="lastName"
-                       required ng-minlength="2"
-                       class="form-control"
-                       style="margin-bottom: 10px"
-                />
-                <p ng-show="(userForm.lastNameField.$invalid)" class="help-block">Put a last name</p>
-            </div>
-            <button ng-click="addUser()"
-                    ng-disabled="userForm.$invalid"
-                    class="btn btn-primary" type="button"
-            > Add user
-            </button>
-        </div>
-
-    </form>
-
-
     <!--USER LIST-->
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
                     <h2>Users</h2>
+                    <button ng-click="userCtrl.openModal('custom-modal-1')"
+                            class="btn btn-primary" type="button"
+                    > Add user
+                    </button>
                 </div>
             </div>
         </div>
@@ -86,4 +34,70 @@
             </tbody>
         </table>
     </div>
+
+    <!-- The Modal -->
+    <div id="custom-modal-1" class="modal">
+
+        <div ng-click="userCtrl.closeModal('custom-modal-1')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="userCtrl.closeModal('custom-modal-1')" class="close">&times;</span>
+            <form name="userForm">
+
+                <div>
+                    <div class="form-group" ng-class="{ 'has-error' : (userForm.userNameField.$invalid) }">
+                        <label>Email</label>
+                        <input type="email"
+                               name="userNameField"
+                               ng-model="userCtrl.email"
+                               placeholder="Email"
+                               ng-required="true"
+                               ng-minlength="5"
+                               ng-pattern="/^[a-z0-9._]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
+                               class="form-control"
+
+                        />
+                        <p ng-show="(userForm.userNameField.$invalid)" class="help-block">Email is not valid</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : (userForm.firstNameField.$invalid) }">
+                        <label>First name</label>
+                        <input type="text"
+                               name="firstNameField"
+                               ng-model="userCtrl.fname"
+                               placeholder="firstName"
+                               required ng-minlength="2"
+                               class="form-control"
+                               style="margin-bottom: 10px"
+                        />
+
+                        <p ng-show="(userForm.firstNameField.$invalid)" class="help-block">Put a first name</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : (userForm.lastNameField.$invalid) }">
+                        <label>Last name</label>
+                        <input type="text"
+                               name="lastNameField"
+                               ng-model="userCtrl.lname"
+                               placeholder="lastName"
+                               required ng-minlength="2"
+                               class="form-control"
+                               style="margin-bottom: 10px"
+                        />
+                        <p ng-show="(userForm.lastNameField.$invalid)" class="help-block">Put a last name</p>
+                    </div>
+                    <button ng-click="addUser()"
+                            ng-disabled="userForm.$invalid"
+                            class="btn btn-primary" type="button"
+                    > Add user
+                    </button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
 </div>
