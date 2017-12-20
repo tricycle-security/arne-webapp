@@ -1,6 +1,6 @@
 app.controller('alertController', function ($routeParams, $scope, $timeout, $sce)
 {
-    
+    this.title = "Current alerts: "
     this.editableAlert = {
     }
     
@@ -92,20 +92,20 @@ app.controller('alertController', function ($routeParams, $scope, $timeout, $sce
     }
     
     this.createAlert = function (alert) {
-        console.log('createAlert')
-        console.log(self.editableAlert)
+//        console.log('createAlert')
+//        console.log(self.editableAlert)
         if (alert != null) {
             console.log(alert)
 //            alert.active = true
             var id = firebase.database().ref().child('alerts').push().key;
             alert.id = id;
             alert.time = (new Date).getTime();
-            self.sendAlert(alert)
+            $scope.sendAlert(alert)
         }
     }
 
 
-    this.sendAlert = function (alert) {
+    $scope.sendAlert = function (alert) {
         console.log('sendalert')
         if (alert != null) {
             firebase.database().ref('alerts/' + alert.id).set(alert);
@@ -118,7 +118,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout, $sce
     }
     this.editAlert = function (alert) {    
         self.editableAlert = alert
-        self.sendAlert(alert)
+        $scope.sendAlert(alert)
     }
     
     

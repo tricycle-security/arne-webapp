@@ -737,6 +737,7 @@ table.table .avatar {
 
 /*clickthrough alerts*/
 .alert-clickthrough-title{
+    margin-bottom: 16px;
     text-align: center;
 }
 
@@ -759,6 +760,7 @@ table.table .avatar {
     width: 160px;
     height: 160px;
     position: relative;
+    margin-bottom: 16px;
 }
 .clickthrough-btn:hover{
     opacity: 0.5;
