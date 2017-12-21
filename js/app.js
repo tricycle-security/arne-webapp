@@ -29,26 +29,26 @@ app.factory('restrictUserByLevel',['$q', '$location', 'USER_ROLES', function($q,
     
             userStatus.once('value', function (statusSnap) {
     
-                var privilegeLevel = 0;
+                var privilegeLevel = 0;//viewer
                 if(statusSnap.val().responder){
-                    privilegeLevel = 1;
+                    privilegeLevel = 1;//responder
                     if(statusSnap.val().alertmanager){
-                        privilegeLevel = 2;
+                        privilegeLevel = 2;//manager
                         if(statusSnap.val().admin){
-                            privilegeLevel = 3;
+                            privilegeLevel = 3;//admin
                         }
                     }
                 }
 
                 //is user the right privilege level for this page?
                 if (privilegeLevel >= minPrivilegeLevel) {
-                    deferred.resolve();
-                } else {
+                    deferred.resolve();//allow access to page
+                } else {//if user is logged in but doesn't have enough privilege level, redirect to error page explaining that
                     $location.path('/error/:' + privilegeLevel);
                     deferred.reject();
                 }
             });
-        } else {
+        } else {//user is not logged in. Redirect to login page
             $location.path('/login');
             deferred.reject();
         }
@@ -107,7 +107,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "dashboard-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.viewerLv);
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
                 }
             }
         });
