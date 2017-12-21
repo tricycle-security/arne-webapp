@@ -12,16 +12,15 @@
     </div>
     <div>
         <h3>Select your location:</h3>
-        <div>
-            <span>{{alertCTCtrl.baseSection}}</span>
-            <button ng-click="alertCTCtrl.addSection()">Add</button>
-            <button ng-click="alertCTCtrl.removeSection(section)">Remove</button>
+
+        <select ng-model="alertCTCtrl.selectedSection" ng-change="alertCTCtrl.generateDropdowns(alertCTCtrl.selectedSection)" ng-options="s.$id as s.name for s in firstSections">
+            <option value="">Select Location</option>
+        </select>
+        <div ng-hide="!levelDropdown.length" class="dropdown-menu-item" ng-repeat="levelDropdown in currentLevelDropdowns">
+            <select ng-model="alertCTCtrl.currentSections[levelDropdown[0].level].$id" ng-change="alertCTCtrl.generateDropdowns(alertCTCtrl.currentSections[levelDropdown[0].level].$id)" ng-options="s.$id as s.name for s in levelDropdown">
+            <option value="">Select Location</option>
+        </select>
         </div>
-        <div ng-repeat="section in alertCTCtrl.currentSections">
-            <span>{{section}}</span>
-            <button ng-click="alertCTCtrl.addSection(section.name + 'test')">Add</button>
-            <button ng-click="alertCTCtrl.removeSection(section)">Remove</button>
-        </div>
-        <span>{{sections}}</span>
+        
     </div>
 </div>

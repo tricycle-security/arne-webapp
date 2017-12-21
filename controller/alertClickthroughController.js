@@ -1,28 +1,62 @@
 app.controller('alertClickThroughController', function ($firebaseArray, $routeParams, $scope, $timeout, $sce)
 {
-    var self = this
-    this.currentAlert = {}
-    this.baseSection = {
-        name:"base",
-        base: true
-    }
-    this.currentSections = []
-    
-    var sectionsRef = database.ref().child('building_sections');
 
-    // GET USERINFO AS AN ARRAY
-    $scope.sections = $firebaseArray(sectionsRef);
+
+    var self = this;
+    this.selectedSection = "";
+    this.currentSections = []
+    var firstLevelSectionRef = database.ref().child('building_sections').orderByChild("level").startAt(0).endAt(0);
+    var sectionsRef = database.ref().child('building_sections');
     
+    $scope.myTrackingFunction = function(value){
+        return value + 1;
+    }
+
+    // GET SECTIONS AS AN ARRAY
+    $scope.firstSections = $firebaseArray(firstLevelSectionRef);
+    $scope.sections = $firebaseArray(sectionsRef);
+    $scope.currentLevelDropdowns = [];
+//    this.currentSections = []
+
+    this.generateDropdowns = function (selection) {
+        if (selection != null) {
+            //get the selection object
+            function filterByID(obj) {
+                return obj.$id === selection;
+            }
+            var section = $scope.sections.filter(filterByID)[0]
+            if(section != null){
+                self.currentSections = self.currentSections.slice(0, section.level);
+                self.currentSections.push(section);
+                $scope.currentLevelDropdowns = []
+                for(var i = 1; i <= (section.level + 1); i++){
+                    var curRef = database.ref().child('building_sections').orderByChild("parentId").startAt(Number(self.currentSections[i - 1].$id)).endAt(Number(self.currentSections[i - 1].$id));
+                    $scope.currentLevelDropdowns.push($firebaseArray(curRef));
+                }  
+            }          
+        }
+    }
+    this.currentAlert = {}
+
     
 
     this.editCurrentAlert = function (parameter, value) {
         switch (parameter) {
-            case "kind": self.currentAlert.kind = value; break;
-            case "location": self.currentAlert.location = value; break;
-            case "description": self.currentAlert.description = value; break;
-            case "send": self.createAlert(self.currentAlert); break;
+            case "kind":
+                self.currentAlert.kind = value;
+                break;
+            case "location":
+                self.currentAlert.location = value;
+                break;
+            case "description":
+                self.currentAlert.description = value;
+                break;
+            case "send":
+                self.createAlert(self.currentAlert);
+                break;
         }
     }
+
 
 //    alert clickthrough button svgs
     $scope.CHESTPAINSVG = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 101.614 287.8525" style="enable-background:new 0 0 101.614 230.282;" xml:space="preserve"><g><path d="M30.866,170.439l19.697-36.048l4.124-1.262l-6.386,33.295c-0.482,2.511-0.198,5.036,0.829,7.378l21.5,48.999   c2.056,4.687,6.642,7.481,11.453,7.481c1.677,0,3.382-0.339,5.017-1.057c6.32-2.774,9.198-10.148,6.424-16.469l-19.94-45.442   l8.603-44.847c0.103-0.539,0.157-1.074,0.19-1.607c0.365-1.355,0.374-2.824-0.066-4.265l-6.846-22.373   c-1.278,0.156-2.467,0.199-3.5,0.205h-0.011h-0.011c-5.771-0.027-12.351-1.361-21.343-4.322c-0.326-0.108-0.644-0.232-0.95-0.37   c-6.458,4.677-12.148,8.275-17.255,10.897c-3.896,1.971-7.214,3.304-10.273,4.129l5.795,18.938L7.108,161.785   c-1.197,2.191-1.706,4.626-1.481,7.114l4.501,49.999c0.584,6.496,6.037,11.38,12.436,11.381c0.375,0,0.752-0.017,1.133-0.051   c6.877-0.618,11.949-6.694,11.33-13.569L30.866,170.439z"/><path d="M3.311,98.482c1.331,1.71,3.206,3.173,5.281,4.057c2.071,0.898,4.269,1.258,6.415,1.258c0.006,0,0.012,0,0.018,0   c5.146-0.055,10.225-1.791,16.457-4.943c4.717-2.422,10.078-5.764,16.293-10.227c-3.359-2.507-4.911-6.972-3.522-11.163   c1.265-3.816,4.659-6.465,8.605-6.813c-2.686-1.44-6.075-1.278-8.649,0.698c-8.406,6.452-15.067,10.73-20.025,13.266   c-3.834,1.999-6.668,2.847-8.185,3.1c-0.022-1.913,0.861-5.372,2.239-8.592l2.027,0.331c-0.845,1.896-1.5,3.893-1.885,5.542   c1.247-0.438,2.881-1.113,4.879-2.153c5.269-2.695,12.088-7.214,19.732-13.08c1.762-1.351,3.866-2.067,6.082-2.067   c2.868,0,5.521,1.204,7.416,3.31c0.133,0.038,0.268,0.071,0.399,0.115c5.168,1.729,8.881,2.558,11.348,2.953   c-0.126-0.185-0.254-0.37-0.387-0.552c-2.032-2.856-5.083-5.991-7.775-7.992l1.438-1.414c2.783,2.118,5.84,5.256,7.963,8.241   c1.064,1.483,1.899,2.926,2.404,4.07c-2.787,0.011-8.075-0.885-15.619-3.407c-4.193-1.391-8.72,0.883-10.109,5.077   c-1.391,4.194,0.882,8.721,5.075,10.109c8.586,2.828,15.125,4.196,20.728,4.223c4.084-0.023,8.005-0.724,11.471-3.325   c1.693-1.288,3.103-3.08,3.936-4.995c0.846-1.918,1.153-3.877,1.151-5.654c-0.071-4.567-1.678-8.203-3.638-11.712   c-3.014-5.197-7.25-10.013-11.876-13.924c-0.007-0.006-0.014-0.012-0.02-0.018c-2.33-1.947-4.749-3.654-7.334-4.995   c-2.599-1.307-5.341-2.39-8.847-2.434c-1.391-0.003-2.936,0.219-4.47,0.792l-3.584,1.097c-0.26,0.864-0.573,1.716-0.931,2.556   c-0.244,0.42-0.446,0.861-0.609,1.317c-0.102,0.206-0.2,0.414-0.309,0.617c-3.072,5.778-8.209,10.017-14.468,11.931   c-2.339,0.717-4.752,1.079-7.177,1.079c-5.136,0-9.94-1.581-13.924-4.332c-0.5,0.532-0.977,1.08-1.452,1.642   c-2.717,3.354-4.997,7.419-6.792,11.823c-0.342,0.858-0.658,1.728-0.959,2.603C0.877,80.126,0.026,83.901,0,87.834   C0.02,91.177,0.618,94.988,3.311,98.482z"/><ellipse transform="matrix(0.9562 -0.2926 0.2926 0.9562 -10.6722 9.1516)" cx="25.259" cy="40.254" rx="22.499" ry="22.5"/><polygon points="68.397,39.2 85.163,19.972 75.597,17.833 86.155,2.11 82.478,0 70.968,19.925 79.696,21.247 67.577,38.68  "/><polygon points="88.829,36.868 72.606,44.573 72.99,45.295 93.378,38.23 87.252,32.637 101.614,25.532 99.802,22.437    82.976,32.228  "/><polygon points="58.362,37.902 59.158,38.001 64.864,17.532 56.905,19.353 59.202,3.747 55.677,3.48 54.177,22.587 61.216,20.451     "/></g></svg>'
@@ -112,7 +146,7 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
         ,
         {
             previous: 1,
-            next:3,
+            next: 3,
             title: "Do you want to use this description?",
             buttons: [
                 buttons.description,
@@ -124,7 +158,7 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
         ,
         {
             previous: 2,
-            next:4,
+            next: 4,
             title: "Do you want to fire the alert?",
             buttons: [
                 buttons.fire,
@@ -147,13 +181,35 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
 //    set the correct view in the clickthrough
     this.clickButton = function (next, value) {
         if (next) {
+            var parameter = self.currentView.parameter;
+            switch (parameter) {
+            case "kind":
+                if(parameter === "Custom"){
+                    value = "getCustomTypeFunc(parameter)"
+                };
+                break;
+            case "location":
+                if(parameter === "Custom"){
+                    value = "getCustomLocFunc(parameter)"
+                }else{
+                    value = "alertLocationPicker(parameter)"
+                };
+                break;
+            case "description":
+                if(parameter === "Custom"){
+                    value = "getCustomDescFunc(parameter)"
+                }else{
+                    value = "getGeneratedDescFunc(parameter)"
+                }
+                break;
+        }
             self.editCurrentAlert(self.currentView.parameter, value)
             self.currentView = self.views[self.currentView.next];
         } else {
             self.currentView = self.views[self.currentView.previous];
         }
     }
-    
+
     this.createAlert = function (alert) {
 //        console.log('createAlert')
 //        console.log(self.editableAlert)
@@ -169,22 +225,6 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
     this.sendAlert = function (alert) {
         if (alert != null) {
             firebase.database().ref('alerts/' + alert.id).set(alert);
-        }
-    }
-    
-    this.addSection = function(text){
-        self.currentSections.push({
-        name:text,
-        base: false
-    })
-    }
-    
-    this.removeSection = function(section){
-        var index = self.currentSections.indexOf(section);
-        if(index != -1){
-            for(var i = self.currentSections.length; i > index; i--){
-                self.currentSections.pop(i);
-            }
         }
     }
 
