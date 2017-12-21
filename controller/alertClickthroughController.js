@@ -1,4 +1,4 @@
-app.controller('alertClickThroughController', function ($firebaseArray, $routeParams, $scope, $timeout, $sce)
+app.controller('alertClickThroughController', function ($firebaseArray, $routeParams, $scope, $sce)
 {
 
 
