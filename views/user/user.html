@@ -1,66 +1,14 @@
 <div ng-controller="userController as userCtrl" class="container">
-
-    <!--ADD ITEM FORM-->
-    <form name="userForm">
-
-        <div>
-            <div class="form-group" ng-class="{ 'has-error' : (userForm.userNameField.$invalid) }">
-                <label>Email</label>
-                <input type="email"
-                       name="userNameField"
-                       ng-model="userCtrl.email"
-                       placeholder="Email"
-                       ng-required="true"
-                       ng-minlength="5"
-                       ng-pattern="/^[a-z0-9._]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/"
-                       class="form-control"
-
-                />
-                <p ng-show="(userForm.userNameField.$invalid)" class="help-block">Email is not valid</p>
-            </div>
-
-            <div class="form-group" ng-class="{ 'has-error' : (userForm.firstNameField.$invalid) }">
-                <label>First name</label>
-                <input type="text"
-                       name="firstNameField"
-                       ng-model="userCtrl.fname"
-                       placeholder="firstName"
-                       required ng-minlength="2"
-                       class="form-control"
-                       style="margin-bottom: 10px"
-                />
-
-                <p ng-show="(userForm.firstNameField.$invalid)" class="help-block">Put a first name</p>
-            </div>
-
-            <div class="form-group" ng-class="{ 'has-error' : (userForm.lastNameField.$invalid) }">
-                <label>Last name</label>
-                <input type="text"
-                       name="lastNameField"
-                       ng-model="userCtrl.lname"
-                       placeholder="lastName"
-                       required ng-minlength="2"
-                       class="form-control"
-                       style="margin-bottom: 10px"
-                />
-                <p ng-show="(userForm.lastNameField.$invalid)" class="help-block">Put a last name</p>
-            </div>
-            <button ng-click="addUser()"
-                    ng-disabled="userForm.$invalid"
-                    class="btn btn-primary" type="button"
-            > Add user
-            </button>
-        </div>
-
-    </form>
-
-
     <!--USER LIST-->
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
                     <h2>Users</h2>
+                    <button ng-click="userCtrl.openModal('custom-modal-add-user')"
+                            class="btn btn-primary" type="button"
+                    > Add user
+                    </button>
                 </div>
             </div>
         </div>
@@ -73,17 +21,146 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in users | toArray | filter: { uuid :'!' + fireuid }">
+            <tr ng-repeat="user in userCtrl.users | toArray | filter: { uuid :'!' + fireuid }">
                 <td>{{user.fname}} {{user.lname}}</td>
                 <td>{{user.uuid}}</td>
                 <td>
-                    <a class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                    <a href="" ng-click="removeUser($index, user)" class="delete"><i class="material-icons"
+                    <a ng-click="userCtrl.openModal('custom-modal-edit-user', user)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                    <a ng-click="userCtrl.openModal('custom-modal-delete-user', user)" class="delete"><i class="material-icons"
                                                                                      data-toggle="tooltip"
                                                                                      title="Delete">&#xE872;</i></a>
                 </td>
             </tr>
             </tbody>
         </table>
+    </div>
+
+    <!-- The Add User Modal -->
+    <div id="custom-modal-add-user" class="modal">
+
+        <div ng-click="userCtrl.closeModal('custom-modal-add-user')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="userCtrl.closeModal('custom-modal-add-user')" class="close">&times;</span>
+            <form name="createForm">
+                <div>
+                    <div class="form-group" ng-class="{ 'has-error' : (createForm.userNameField.$invalid) }">
+                        <label>Email</label>
+                        <input type="email"
+                               name="userNameField"
+                               ng-model="userCtrl.email"
+                               placeholder="Email"
+                               ng-required="true"
+                               ng-minlength="5"
+                               ng-pattern="/^[a-z0-9._]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/"
+                               class="form-control"
+
+                        />
+                        <p ng-show="createForm.userNameField.$touched && createForm.userNameField.$invalid" class="help-block">Email is not valid</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : (createForm.firstNameField.$invalid) }">
+                        <label>First name</label>
+                        <input type="text"
+                               name="firstNameField"
+                               ng-model="userCtrl.fname"
+                               placeholder="firstName"
+                               required ng-minlength="2"
+                               class="form-control"
+                               style="margin-bottom: 10px"
+                        />
+
+                        <p ng-show="createForm.firstNameField.$touched && createForm.firstNameField.$invalid" class="help-block">Put a first name</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : (createForm.lastNameField.$invalid) }">
+                        <label>Last name</label>
+                        <input type="text"
+                               name="lastNameField"
+                               ng-model="userCtrl.lname"
+                               placeholder="lastName"
+                               required ng-minlength="2"
+                               class="form-control"
+                               style="margin-bottom: 10px"
+                        />
+                        <p ng-show="createForm.lastNameField.$touched && createForm.lastNameField.$invalid" class="help-block">Put a last name</p>
+                    </div>
+                    <button ng-click="userCtrl.addUser()"
+                            ng-disabled="createForm.$invalid"
+                            class="btn btn-primary" type="button"
+                    > Add user
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- The Edit User Modal -->
+    <div id="custom-modal-edit-user" class="modal">
+        
+        <div ng-click="userCtrl.closeModal('custom-modal-edit-user')" class="cover"></div>
+
+        <div class="modal-content">
+            <span ng-click="userCtrl.closeModal('custom-modal-edit-user')" class="close">&times;</span>
+            <form name="editForm">
+                <div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : (editForm.firstNameField.$invalid) }">
+                        <label>First name</label>
+                        <input type="text"
+                                name="firstNameField"
+                                ng-model="userCtrl.user.fname"
+                                placeholder="firstName"
+                                required ng-minlength="2"
+                                class="form-control"
+                                style="margin-bottom: 10px"
+                        />
+
+                        <p ng-show="editForm.firstNameField.$touched && editForm.firstNameField.$invalid" class="help-block">Put a first name</p>
+                    </div>
+
+                    <div class="form-group" ng-class="{ 'has-error' : (editForm.lastNameField.$invalid) }">
+                        <label>Last name</label>
+                        <input type="text"
+                                name="lastNameField"
+                                ng-model="userCtrl.user.lname"
+                                placeholder="lastName"
+                                required ng-minlength="2"
+                                class="form-control"
+                                style="margin-bottom: 10px"
+                        />
+                        <p ng-show="editForm.lastNameField.$touched && editForm.lastNameField.$invalid" class="help-block">Put a last name</p>
+                    </div>
+                    <button ng-click="userCtrl.updateUser(userCtrl.user)"
+                            ng-disabled="editForm.$invalid"
+                            class="btn btn-primary" type="button"
+                    > Edit user
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- The Delete User Modal -->
+    <div id="custom-modal-delete-user" class="modal">
+        
+        <div ng-click="userCtrl.closeModal('custom-modal-delete-user')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="userCtrl.closeModal('custom-modal-delete-user')" class="close">&times;</span>
+            <form name="deleteForm">
+                <div>
+                    <p>Are you sure you want to delete {{userCtrl.user.fname}} {{userCtrl.user.lname}}?</p>
+                    <button ng-click="userCtrl.closeModal('custom-modal-delete-user')"
+                    class="btn btn-primary" type="button"
+                    > No
+                    </button>
+                    <button ng-click="userCtrl.removeUser(userCtrl.index, userCtrl.user)"
+                            class="btn btn-primary" type="button"
+                    > Yes
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
