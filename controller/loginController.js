@@ -17,35 +17,36 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
             console.log("auth sign in Error Here:");
             console.log(error.code);
             console.log(error.message);
+            
+            //redirect if login fails
+            $window.location.href = './#/error';
         });
 
         var user = firebase.auth().currentUser;
+    }  
 
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
-            
-                userStatus.on('value', function (statusSnap) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
+        
+            userStatus.on('value', function (statusSnap) {
 
-                    if(statusSnap.val().responder){
-                        $rootScope.privilege = USER_ROLES.responder;
-                        $rootScope.privilegeLv = USER_ROLES.responderLv;
-                        if(statusSnap.val().alertmanager){
-                            $rootScope.privilege = USER_ROLES.manager;
-                            $rootScope.privilegeLv = USER_ROLES.managerLv;
-                            if(statusSnap.val().admin){
-                                $rootScope.privilege = USER_ROLES.admin;
-                                $rootScope.privilegeLv = USER_ROLES.adminLv;
-                            }
+                if(statusSnap.val().responder){
+                    $rootScope.privilege = USER_ROLES.responder;
+                    $rootScope.privilegeLv = USER_ROLES.responderLv;
+                    if(statusSnap.val().alertmanager){
+                        $rootScope.privilege = USER_ROLES.manager;
+                        $rootScope.privilegeLv = USER_ROLES.managerLv;
+                        if(statusSnap.val().admin){
+                            $rootScope.privilege = USER_ROLES.admin;
+                            $rootScope.privilegeLv = USER_ROLES.adminLv;
                         }
                     }
-                });
+                }
+            });
 
-                //redirect after login
-                $window.location.href = './#/';
-            } else {
-                console.log('not logged in!')
-            }
-        });
-    }  
+            //redirect after login
+            $window.location.href = './#/';
+        }
+    });
 });
