@@ -1,4 +1,4 @@
-app.controller('dashboardController', function ($routeParams, $scope, $timeout)
+app.controller('dashboardController', function ($scope, $timeout)
 {
     //test information
     this.allUsers = [];

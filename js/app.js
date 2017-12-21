@@ -1,9 +1,15 @@
 var app = angular.module('dashboardapp', ['angular.filter', 'firebase', 'ngMap', 'ngStorage', 'ngRoute', 'ngSanitize']);
 app.constant('USER_ROLES', {
 	all : '*',
-	admin : 'admin',
+    admin : 'admin',
+    manager : 'alertmanager',
 	responder : 'responder',
-	viewer : 'viewer'
+    viewer : 'viewer',
+
+    adminLv : 3,
+    managerLv : 2,
+	responderLv : 1,
+	viewerLv : 0
 }).constant('AUTH_EVENTS', {
 	loginSuccess : 'auth-login-success',
 	loginFailed : 'auth-login-failed',
@@ -13,24 +19,52 @@ app.constant('USER_ROLES', {
 	notAuthorized : 'auth-not-authorized'
 });
 
-this.restrictUser = function($location,$q) {
-    var user = firebase.auth().currentUser;
-    var deferred = $q.defer();
-    if (user) {// User is signed in.
-        deferred.resolve();
-    } else {
-        deferred.reject();
-        $location.path('/login');
-    }
-    return deferred.promise;
-  }
+app.factory('restrictUserByLevel',['$q', '$location', 'USER_ROLES', function($q, $location, USER_ROLES){
+    this.action = function(minPrivilegeLevel) {
+        var deferred = $q.defer();
+        var user = firebase.auth().currentUser;
+    
+        if (user){//is user logged in?
+            var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
+    
+            userStatus.once('value', function (statusSnap) {
+    
+                var privilegeLevel = 0;//viewer
+                if(statusSnap.val().responder){
+                    privilegeLevel = 1;//responder
+                    if(statusSnap.val().alertmanager){
+                        privilegeLevel = 2;//manager
+                        if(statusSnap.val().admin){
+                            privilegeLevel = 3;//admin
+                        }
+                    }
+                }
 
-app.config(function ($routeProvider) {
+                //is user the right privilege level for this page?
+                if (privilegeLevel >= minPrivilegeLevel) {
+                    deferred.resolve();//allow access to page
+                } else {//if user is logged in but doesn't have enough privilege level, redirect to error page explaining that
+                    $location.path('/error/:' + privilegeLevel);
+                    deferred.reject();
+                }
+            });
+        } else {//user is not logged in. Redirect to login page
+            $location.path('/login');
+            deferred.reject();
+        }
+        return deferred.promise;
+    }
+    return this;
+}]);
+
+app.config(function ($routeProvider, USER_ROLES) {
     $routeProvider
         .when("/", {
             templateUrl: "dashboard-index.html",
             resolve:{
-                loggedIn: restrictUser
+                restrictUser: function(restrictUserByLevel) {
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
+                }
             }
         })
         .when("/login", {
@@ -39,25 +73,42 @@ app.config(function ($routeProvider) {
         .when("/alerts", {
             templateUrl: "alerts-index.html",
             resolve:{
-                loggedIn: restrictUser
+                restrictUser: function(restrictUserByLevel) {
+                    return restrictUserByLevel.action(USER_ROLES.managerLv);//2
+                }
             }
         })
         .when("/user", {
             templateUrl: "user.html",
             resolve:{
-                loggedIn: restrictUser
+                restrictUser: function(restrictUserByLevel) {
+                    return restrictUserByLevel.action(USER_ROLES.adminLv);//3
+                }
             }
         })
         .when("/logout", {
             templateUrl: "logout-index.html",
             resolve:{
-                loggedIn: restrictUser
+                restrictUser: function(restrictUserByLevel) {
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
+                }
             }
+        })
+        .when("/error", {
+            templateUrl: "error-index.html"
+        })
+        .when("/error/:lv", {
+            templateUrl: "error-index.html"
+        })
+        .when("/error/:lv/:page", {
+            templateUrl: "error-index.html"
         })
         .otherwise({
             templateUrl: "dashboard-index.html",
             resolve:{
-                loggedIn: restrictUser
+                restrictUser: function(restrictUserByLevel) {
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
+                }
             }
         });
 });
