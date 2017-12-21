@@ -1,8 +1,8 @@
-app.controller('logoutController', function ($scope, $rootScope)
+app.controller('logoutController', function ($rootScope)
 {    
     firebase.auth().signOut().then(function() {
-        console.log('Signed Out');
         $rootScope.privilege = "";
+        $rootScope.privilegeLv = 0;
     }, function(error) {
         console.error('Sign Out Error', error);
     });

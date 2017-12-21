@@ -2,7 +2,6 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
 {    
     this.title = "Log in";
     $scope.submit = function (){
-        console.log("logging in...");
 
         //submitted values
         var email = $scope.email;
@@ -24,18 +23,19 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
 
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                console.log("Logged in.");
-
                 var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
             
                 userStatus.on('value', function (statusSnap) {
 
                     if(statusSnap.val().responder){
                         $rootScope.privilege = USER_ROLES.responder;
+                        $rootScope.privilegeLv = USER_ROLES.responderLv;
                         if(statusSnap.val().alertmanager){
                             $rootScope.privilege = USER_ROLES.manager;
+                            $rootScope.privilegeLv = USER_ROLES.managerLv;
                             if(statusSnap.val().admin){
                                 $rootScope.privilege = USER_ROLES.admin;
+                                $rootScope.privilegeLv = USER_ROLES.adminLv;
                             }
                         }
                     }
@@ -45,7 +45,6 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
                 $window.location.href = './#/';
             } else {
                 console.log('not logged in!')
-                this.error = "Error: not logged in!";
             }
         });
     }  
