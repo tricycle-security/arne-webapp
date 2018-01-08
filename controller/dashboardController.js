@@ -8,6 +8,7 @@ app.controller('dashboardController', function ($scope, $timeout)
     var self = this;
     var statusinfo = database.ref().child('currentstatus');
     var userinfo = database.ref().child('userinfo/usergeninfo');
+    
 
     //Gets users with their onLocation status
     statusinfo.on('child_added', function (snap) {
@@ -26,4 +27,20 @@ app.controller('dashboardController', function ($scope, $timeout)
         }
         });
     });
+    statusinfo.on('child_changed', function (snap) {
+        var tempSnap = snap.val();
+        var users = self.allUsers;
+        for(var i = 0; i < users.length; i++){
+            if(tempSnap.uuid === users[i].uuid){
+                users[i].onLocation = tempSnap.onLocation
+                $timeout(function () {
+                $scope.$apply();
+                });
+                break;
+            }
+        }
+        
+    });
+    
+
  });

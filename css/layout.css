@@ -735,6 +735,65 @@ table.table .avatar {
 
 /* Table layout end*/
 
+/*clickthrough alerts*/
+.alert-clickthrough-title{
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.alert-clickthrough-content{
+    display: table;
+    margin: 0 auto;
+}
+
+.alert-clickthrough-item{
+    display: inline-block;
+    margin-left: 1vw;;
+    margin-right: 1vw;
+}
+
+/*create alert button css*/
+.clickthrough-btn{
+    font-family: Arial;
+    font-size: 16px;
+    background-color: #337ab7;
+    width: 160px;
+    height: 160px;
+    position: relative;
+    margin-bottom: 16px;
+}
+.clickthrough-btn:hover{
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+
+.clickthrough-btn svg path{
+	fill:white;
+}
+
+.clickthrough-btn svg{
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.clickthrough-btn:hover{
+    cursor: pointer;
+}
+
+.clickthrough-icon-div{
+        fill: white;
+	width: 100%;
+	height: 80%;
+	display: block;
+	margin: 0 auto;
+}
+.clickthrough-text-div{
+	color:white;
+	width: 100%;
+	text-align: center;
+}
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
