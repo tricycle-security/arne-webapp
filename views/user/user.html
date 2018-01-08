@@ -21,7 +21,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in userCtrl.users | toArray | filter: { uuid :'!' + fireuid }">
+            <tr ng-repeat="user in userCtrl.allUsersPlusPrivileges | toArray | filter: { uuid :'!' + fireuid }">
                 <td>{{user.fname}} {{user.lname}}</td>
                 <td>{{user.uuid}}</td>
                 <td>
@@ -55,7 +55,6 @@
                                ng-minlength="5"
                                ng-pattern="/^[a-z0-9._]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/"
                                class="form-control"
-
                         />
                         <p ng-show="createForm.userNameField.$touched && createForm.userNameField.$invalid" class="help-block">Email is not valid</p>
                     </div>
@@ -85,6 +84,21 @@
                                style="margin-bottom: 10px"
                         />
                         <p ng-show="createForm.lastNameField.$touched && createForm.lastNameField.$invalid" class="help-block">Put a last name</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Privilege (Responder, Manager, Admin) </label>
+                        <input type="checkbox"
+                                class="form-control" 
+                                ng-model="userCtrl.privilegeResponder"
+                        />
+                        <input type="checkbox"
+                                class="form-control" 
+                                ng-model="userCtrl.privilegeManager"
+                        />
+                        <input type="checkbox"
+                                class="form-control" 
+                                ng-model="userCtrl.privilegeAdmin"
+                        />
                     </div>
                     <button ng-click="userCtrl.addUser()"
                             ng-disabled="createForm.$invalid"
@@ -130,6 +144,21 @@
                                 style="margin-bottom: 10px"
                         />
                         <p ng-show="editForm.lastNameField.$touched && editForm.lastNameField.$invalid" class="help-block">Put a last name</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Privilege (Responder, Manager, Admin) </label>
+                        <input type="checkbox"
+                                class="form-control" 
+                                ng-model="userCtrl.user.responder"
+                        />
+                        <input type="checkbox"
+                                class="form-control" 
+                                ng-model="userCtrl.user.manager"
+                        />
+                        <input type="checkbox"
+                                class="form-control" 
+                                ng-model="userCtrl.user.admin"
+                        />
                     </div>
                     <button ng-click="userCtrl.updateUser(userCtrl.user)"
                             ng-disabled="editForm.$invalid"

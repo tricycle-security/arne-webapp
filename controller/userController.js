@@ -3,13 +3,41 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
     var self = this;
     
     // GET USERINFO AS AN ARRAY
-    self.users = $firebaseArray(userInfoRef);
+    $firebaseArray(userInfoRef);
+    self.allUsersPlusPrivileges = [];
 
+    var userStatus = database.ref().child('userinfo/userstatus');
+    var userinfo = database.ref().child('userinfo/usergeninfo');
 
     firebase.auth().onAuthStateChanged(function (user) {
         var firebaseuid = user.uid;
         $scope.fireuid = firebaseuid;
+        retrieveUsers();
     });
+
+    function retrieveUsers() {
+        //Gets users with their onLocation status
+        userinfo.on('child_added', function (snap) {
+            var tempUserInfo = snap.val();
+            userStatus.child(snap.val().uuid).on('value', userStat => {
+                var tempStatusInfo = userStat.val();
+                if (tempStatusInfo != null) {
+                    var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, 
+                        admin: tempStatusInfo.admin, alertmanager: tempStatusInfo.alertmanager, responder: tempStatusInfo.responder};
+                    self.allUsersPlusPrivileges.push(tempUser); //allusers contains all userinfo + onLocation
+                }
+
+                //don't repeat any users in list
+                for (var i in self.allUsersPlusPrivileges) {
+                    for (var j in self.allUsersPlusPrivileges) {
+                        if(self.allUsersPlusPrivileges[i].uuid == self.allUsersPlusPrivileges[j].uuid && i != j){
+                            self.allUsersPlusPrivileges.splice(i, 1);
+                        }
+                    }
+                }
+            });
+        });
+    }
 
     // ADD USER
     self.addUser = function () {
@@ -17,6 +45,7 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
             console.log("invalid");
             return;
         }
+
         //Use secondary app
         secondaryApp.auth().createUserWithEmailAndPassword(self.email, randomPassword(16)).then(function (firebaseUser) {
             console.log("User " + firebaseUser.uid + " created successfully!");
@@ -30,7 +59,9 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
                 uuid: firebaseUser.uid
             });
             database.ref("/userinfo/userstatus/" + firebaseUser.uid).set({
-                responder: true
+                responder: self.privilegeResponder, 
+                admin: self.privilegeAdmin,
+                alertmanager: self.privilegeManager
             });
             //Logout the second app. Not the admin panel
             secondaryApp.auth().signOut();
@@ -71,6 +102,13 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
     //UPDATE USER METHOD
     self.updateUser = function (user) {
         if (user != null) {
+            //update privilege
+            database.ref().child('/userinfo/userstatus/'+ user.uuid).set({
+                admin: user.admin,
+                //alertmanager: user.manager,
+                responder: user.responder
+            });
+            //update username
             database.ref("/userinfo/usergeninfo/" + user.uuid).set({
                 fname: user.fname,
                 lname: user.lname,
@@ -108,6 +146,10 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
     self.openModal = function (id, user) {//index and user determines which user gets deleted
         $("#" + id).show();
         this.user = user;
+        var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
+        userStatus.once('value', function (statusSnap) {
+            this.statusSnap.val();
+        });
     }
 
     self.closeModal = function (id) {
