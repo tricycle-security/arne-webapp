@@ -6,26 +6,38 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
     $firebaseArray(userInfoRef);
     self.allUsersPlusPrivileges = [];
 
-    firebase.auth().onAuthStateChanged(function (user) {
-        var firebaseuid = user.uid;
-        $scope.fireuid = firebaseuid;
-    });
-
     var userStatus = database.ref().child('userinfo/userstatus');
     var userinfo = database.ref().child('userinfo/usergeninfo');
 
-    //Gets users with their onLocation status
-    userinfo.on('child_added', function (snap) {
-        var tempUserInfo = snap.val();
-        userStatus.child(snap.val().uuid).on('value', userStat => {
-            var tempStatusInfo = userStat.val();
-            if (tempStatusInfo != null) {
-                var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, 
-                    admin: tempStatusInfo.admin, alertmanager: tempStatusInfo.alertmanager, responder: tempStatusInfo.responder};
-                self.allUsersPlusPrivileges.push(tempUser); //allusers contains all userinfo + onLocation
-            }
-        });
+    firebase.auth().onAuthStateChanged(function (user) {
+        var firebaseuid = user.uid;
+        $scope.fireuid = firebaseuid;
+        retrieveUsers();
     });
+
+    function retrieveUsers() {
+        //Gets users with their onLocation status
+        userinfo.on('child_added', function (snap) {
+            var tempUserInfo = snap.val();
+            userStatus.child(snap.val().uuid).on('value', userStat => {
+                var tempStatusInfo = userStat.val();
+                if (tempStatusInfo != null) {
+                    var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, 
+                        admin: tempStatusInfo.admin, alertmanager: tempStatusInfo.alertmanager, responder: tempStatusInfo.responder};
+                    self.allUsersPlusPrivileges.push(tempUser); //allusers contains all userinfo + onLocation
+                }
+
+                //don't repeat any users in list
+                for (var i in self.allUsersPlusPrivileges) {
+                    for (var j in self.allUsersPlusPrivileges) {
+                        if(self.allUsersPlusPrivileges[i].uuid == self.allUsersPlusPrivileges[j].uuid && i != j){
+                            self.allUsersPlusPrivileges.splice(i, 1);
+                        }
+                    }
+                }
+            });
+        });
+    }
 
     // ADD USER
     self.addUser = function () {
@@ -87,29 +99,20 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
         };
     };
 
-    self.updatePrivilege = function (user) {
-        if (user.uuid === undefined) return;
-
-        //DISABLE USER
-        /*database.ref().child('Userinfo/userstatus/'+ user.uuid).set({
-            bhver: false,
-            admin: null,
-            checknpole: false
-        });*/
-    }
-
     //UPDATE USER METHOD
     self.updateUser = function (user) {
         if (user != null) {
-            database.ref("/userinfo/usergeninfo/" + user.uuid).set({
-                fname: user.fname,
-                lname: user.lname,
-                uuid: user.uuid
-            });
+            //update privilege
             database.ref().child('/userinfo/userstatus/'+ user.uuid).set({
                 admin: user.admin,
                 //alertmanager: user.manager,
                 responder: user.responder
+            });
+            //update username
+            database.ref("/userinfo/usergeninfo/" + user.uuid).set({
+                fname: user.fname,
+                lname: user.lname,
+                uuid: user.uuid
             });
             self.closeModal('custom-modal-edit-user');
         }

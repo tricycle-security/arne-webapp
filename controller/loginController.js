@@ -1,6 +1,6 @@
 app.controller('loginController', function ($scope, $rootScope, $window, USER_ROLES)
 {    
-    this.title = "Log in";
+    this.title = "Log in";$rootScope.privilegeLv = USER_ROLES.adminLv;
     $scope.submit = function (){
 
         //submitted values
