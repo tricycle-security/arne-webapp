@@ -41,14 +41,12 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
             console.log("invalid");
             return;
         }
-
+        
         //Use secondary app
-        secondaryApp.auth().createUserWithEmailAndPassword(self.email, randomPassword(16)).then(function (firebaseUser) {
-            console.log("User " + firebaseUser.uid + " created successfully!");
+        secondaryApp.auth().createUserWithEmailAndPassword(self.email, randomPassword(16)).then(function (firebaseUser) {    
             //Send password reset email to currently registered email
             secondaryApp.auth().sendPasswordResetEmail(firebaseUser.email);
             //Set data in both paths with uuid that was returned by creation
-            console.log("Firstname : " + self.fname + "Lastname : " + self.lname + "uid : " + firebaseUser.uid)
             database.ref("/userinfo/usergeninfo/" + firebaseUser.uid).set({
                 fname: self.fname,
                 lname: self.lname,
@@ -57,11 +55,12 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
             database.ref("/userinfo/userstatus/" + firebaseUser.uid).set({
                 enabled: true,
                 responder: self.privilegeResponder, 
-                admin: self.privilegeAdmin,
                 alertmanager: self.privilegeManager,
+                admin: self.privilegeAdmin,
                 checkinpole: false,
                 cardwriter: false
             });
+            
             //Logout the second app. Not the admin panel
             secondaryApp.auth().signOut();
 
@@ -103,9 +102,12 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
         if (user != null) {
             //update privilege
             database.ref().child('/userinfo/userstatus/'+ user.uuid).set({
+                enabled: true,
                 admin: user.admin,
-                //alertmanager: user.manager,
-                responder: user.responder
+                alertmanager: user.alertmanager,
+                responder: user.responder,
+                checkinpole: false,
+                cardwriter: false
             });
             //update username
             database.ref("/userinfo/usergeninfo/" + user.uuid).set({
@@ -161,9 +163,6 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
         $("#" + id).show();
         this.user = user;
         var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
-        userStatus.once('value', function (statusSnap) {
-            this.statusSnap.val();
-        });
     }
 
     self.closeModal = function (id) {
