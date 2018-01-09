@@ -4,21 +4,90 @@
         <div class="alert-clickthrough-title">
             <h3>{{alertCTCtrl.currentView.title}}</h3>
         </div>
-        <div class="alert-clickthrough-content" >            
+        <div class="alert-clickthrough-content">
             <div class="alert-clickthrough-item" ng-repeat="button in alertCTCtrl.currentView.buttons">
                 <alertbutton></alertbutton>
             </div>
         </div>
     </div>
-    <div>
-        <h3>Select your location:</h3>
 
-        <select ng-model="alertCTCtrl.selectedSection" ng-change="alertCTCtrl.generateDropdowns(alertCTCtrl.selectedSection)" ng-options="s.$id as s.name for s in firstSections">
-        </select>
-        <div ng-hide="!levelDropdown.length" class="dropdown-menu-item" ng-repeat="levelDropdown in currentLevelDropdowns">
-            <select ng-model="alertCTCtrl.currentSections[levelDropdown[0].level].$id" ng-change="alertCTCtrl.generateDropdowns(alertCTCtrl.currentSections[levelDropdown[0].level].$id)" ng-options="s.$id as s.name for s in levelDropdown">
-        </select>
+
+    <!-- The Alerts User Modal -->
+    <div id="custom-modal-custom-text" class="modal">
+        <div ng-click="alertCTCtrl.closeModal('custom-modal-custom-text')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="alertCTCtrl.closeModal('custom-modal-custom-text')" class="close">&times;</span>
+            <form name="customForm">
+                <div>
+                    <div class="form-group" ng-class="{ 'has-error' : (customForm.customField.$invalid) }">
+                        <label>Enter custom text here</label>
+                        <input type="text"
+                               name="customField"
+                               id="customfield"
+                               ng-model="alertCTCtrl.customField"
+                               placeholder="Customtext"
+                               ng-required="true"
+                               class="form-control"
+
+                        />
+                    </div>
+                    <button ng-click="alertCTCtrl.closeModal('custom-modal-custom-text')"
+                            class="btn btn-primary" type="button"
+                    > Cancel
+                    </button>
+                    <button ng-click="alertCTCtrl.customModalClick()"
+                            ng-disabled="customForm.$invalid"
+                            class="btn btn-primary" type="button"
+                    > Submit custom
+                    </button>
+                </div>
+            </form>
+
         </div>
-        
+    </div>
+
+    <!-- The Alerts User Modal -->
+    <div id="custom-modal-floorplan" class="modal">
+        <div ng-click="alertCTCtrl.closeModal('custom-modal-floorplan')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="alertCTCtrl.closeModal('custom-modal-floorplan')" class="close">&times;</span>
+
+            <div>
+                <div>
+                    <h3>Select your location:</h3>
+
+                    <select class="form-control" ng-model="alertCTCtrl.selectedSection"
+                            ng-change="alertCTCtrl.generateDropdowns(alertCTCtrl.selectedSection)"
+                            ng-options="s.$id as s.name for s in firstSections">
+                    </select>
+                    <br>
+                    <div ng-hide="!levelDropdown.length" class="dropdown-menu-item"
+                         ng-repeat="levelDropdown in currentLevelDropdowns">
+                        <select class="form-control" ng-model="alertCTCtrl.currentSections[levelDropdown[0].level].$id"
+                                ng-change="alertCTCtrl.generateDropdowns(alertCTCtrl.currentSections[levelDropdown[0].level].$id)"
+                                ng-options="s.$id as s.name for s in levelDropdown">
+                        </select>
+                        <br>
+                    </div>
+
+                </div>
+
+                <button ng-click="alertCTCtrl.closeModal('custom-modal-floorplan')"
+                        class="btn btn-primary" type="button"
+                > Cancel
+                </button>
+                <button ng-click="alertCTCtrl.floorPlanModalClick()"
+                        class="btn btn-primary" type="button"
+                > Submit custom
+                </button>
+            </div>
+
+
+        </div>
     </div>
 </div>
+
