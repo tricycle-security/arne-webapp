@@ -1,8 +1,8 @@
-app.controller('errorController', function ($routeParams)
-{    
-    this.error = "error";
+app.controller('errorController', function ($routeParams, $scope)
+{
+    this.error = $scope.LANG.ERROR;
 
     if($routeParams.lv){
-        this.error = "You do not have the privilege level required to access this page";
+        this.error = $scope.LANG.PRIVILEGES;
     }
 });

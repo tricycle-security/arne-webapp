@@ -4,10 +4,10 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-6">
-                    <h2>Users</h2>
+                    <h2>{{LANG.USERS}}</h2>
                     <button ng-click="userCtrl.openModal('custom-modal-add-user')"
                             class="btn btn-primary" type="button"
-                    > Add user
+                    > {{LANG.ADDUSER}}
                     </button>
                 </div>
             </div>
@@ -15,9 +15,9 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>UUID</th>
-                <th>Actions</th>
+                <th>{{LANG.NAME}}</th>
+                <th>{{LANG.UUID}}</th>
+                <th>{{LANG.ACTIONS}}</th>
             </tr>
             </thead>
             <tbody>
@@ -46,11 +46,11 @@
             <form name="createForm">
                 <div>
                     <div class="form-group" ng-class="{ 'has-error' : (createForm.userNameField.$invalid) }">
-                        <label>Email</label>
+                        <label>{{LANG.EMAIL}}</label>
                         <input type="email"
                                name="userNameField"
                                ng-model="userCtrl.email"
-                               placeholder="Email"
+                               placeholder="{{LANG.EMAIL}}"
                                ng-required="true"
                                ng-minlength="5"
                                ng-pattern="/^[a-z0-9._]+[a-z0-9._]+@[a-z0-9]+\.[a-z.]{2,5}$/"
@@ -61,11 +61,11 @@
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error' : (createForm.firstNameField.$invalid) }">
-                        <label>First name</label>
+                        <label>{{LANG.FIRSTNAME}}</label>
                         <input type="text"
                                name="firstNameField"
                                ng-model="userCtrl.fname"
-                               placeholder="firstName"
+                               placeholder="{{LANG.FIRSTNAME}}"
                                required ng-minlength="2"
                                class="form-control"
                                style="margin-bottom: 10px"
@@ -75,11 +75,11 @@
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error' : (createForm.lastNameField.$invalid) }">
-                        <label>Last name</label>
+                        <label>{{LANG.LASTNAME}}</label>
                         <input type="text"
                                name="lastNameField"
                                ng-model="userCtrl.lname"
-                               placeholder="lastName"
+                               placeholder="{{LANG.LASTNAME}}"
                                required ng-minlength="2"
                                class="form-control"
                                style="margin-bottom: 10px"
@@ -89,7 +89,7 @@
                     <button ng-click="userCtrl.addUser()"
                             ng-disabled="createForm.$invalid"
                             class="btn btn-primary" type="button"
-                    > Add user
+                    > {{LANG.ADDUSER}}
                     </button>
                 </div>
             </form>
@@ -106,35 +106,35 @@
                 <div>
 
                     <div class="form-group" ng-class="{ 'has-error' : (editForm.firstNameField.$invalid) }">
-                        <label>First name</label>
+                        <label>{{LANG.FIRSTNAME}}</label>
                         <input type="text"
-                                name="firstNameField"
-                                ng-model="userCtrl.user.fname"
-                                placeholder="firstName"
-                                required ng-minlength="2"
-                                class="form-control"
-                                style="margin-bottom: 10px"
+                               name="firstNameField"
+                               ng-model="userCtrl.user.fname"
+                               placeholder="{{LANG.FIRSTNAME}}"
+                               required ng-minlength="2"
+                               class="form-control"
+                               style="margin-bottom: 10px"
                         />
 
                         <p ng-show="editForm.firstNameField.$touched && editForm.firstNameField.$invalid" class="help-block">Put a first name</p>
                     </div>
 
                     <div class="form-group" ng-class="{ 'has-error' : (editForm.lastNameField.$invalid) }">
-                        <label>Last name</label>
+                        <label>{{LANG.LASTNAME}}</label>
                         <input type="text"
-                                name="lastNameField"
-                                ng-model="userCtrl.user.lname"
-                                placeholder="lastName"
-                                required ng-minlength="2"
-                                class="form-control"
-                                style="margin-bottom: 10px"
+                               name="lastNameField"
+                               ng-model="userCtrl.user.lname"
+                               placeholder="{{LANG.LASTNAME}}"
+                               required ng-minlength="2"
+                               class="form-control"
+                               style="margin-bottom: 10px"
                         />
                         <p ng-show="editForm.lastNameField.$touched && editForm.lastNameField.$invalid" class="help-block">Put a last name</p>
                     </div>
                     <button ng-click="userCtrl.updateUser(userCtrl.user)"
                             ng-disabled="editForm.$invalid"
                             class="btn btn-primary" type="button"
-                    > Edit user
+                    > {{LANG.EDIT}}
                     </button>
                 </div>
             </form>
@@ -150,14 +150,14 @@
             <span ng-click="userCtrl.closeModal('custom-modal-delete-user')" class="close">&times;</span>
             <form name="deleteForm">
                 <div>
-                    <p>Are you sure you want to delete {{userCtrl.user.fname}} {{userCtrl.user.lname}}?</p>
+                    <p>{{LANG.AREYOUSUREYOUWANTTODELETE}}{{userCtrl.user.fname}} {{userCtrl.user.lname}}?</p>
                     <button ng-click="userCtrl.closeModal('custom-modal-delete-user')"
                     class="btn btn-primary" type="button"
-                    > No
+                    > {{LANG.NO}}
                     </button>
                     <button ng-click="userCtrl.removeUser(userCtrl.index, userCtrl.user)"
                             class="btn btn-primary" type="button"
-                    > Yes
+                    > {{LANG.YES}}
                     </button>
                 </div>
             </form>

@@ -68,18 +68,18 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>{{alertsCtrl.title}}</h3>
+                    <h3>{{LANG.ALERTS}}</h3>
                 </div>
             </div>
         </div>
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Kind</th>
-                <th>Time</th>
-                <th>Description</th>
-                <th>Location</th>
-                <th>Active</th>
+                <th>{{LANG.KIND}}</th>
+                <th>{{LANG.TIME}}</th>
+                <th>{{LANG.DESCRIPTION}}</th>
+                <th>{{LANG.LOCATION}}</th>
+                <th>{{LANG.ACTIVE}}</th>
             </tr>
             </thead>
             <tbody>
@@ -92,9 +92,10 @@
                                                                                                   id="cb3"
                                                                                                   type="checkbox"
                                                                                                   checked/>
-                    <label class="tgl-btn" data-tg-off="Inactive" data-tg-on="Active" for="cb3"/></p>
+                    <label class="tgl-btn" data-tg-off="{{LANG.INACTIVE}}" data-tg-on="{{LANG.ACTIVE}}" for="cb3"/></p>
                     <p ng-if="!alert.active"><input class="tgl tgl-skewed" id="cb3" type="checkbox"/>
-                        <label class="tgl-btn" data-tg-off="Inactive" data-tg-on="Active" for="cb3"/></p></td>
+                        <label class="tgl-btn" data-tg-off="{{LANG.INACTIVE}}" data-tg-on="{{LANG.ACTIVE}}" for="cb3"/>
+                    </p></td>
                 <td>
                     <a ng-click="alertsCtrl.openModal('custom-modal-delete-alert', alert)" class="delete"><i
                             class="material-icons"
@@ -116,14 +117,14 @@
         <span ng-click="alertsCtrl.closeModal('custom-modal-delete-alert')" class="close">&times;</span>
         <form name="deleteForm">
             <div>
-                <p>Are you sure you want to delete this alert</p>
+                <p>{{LANG.DELETEALERTCONFIRM}}</p>
                 <button ng-click="alertsCtrl.closeModal('custom-modal-delete-alert')"
                         class="btn btn-primary" type="button"
-                > No
+                > {{LANG.NO}}
                 </button>
                 <button ng-click="alertsCtrl.removeAlert()"
                         class="btn btn-primary" type="button"
-                > Yes
+                > {{LANG.YES}}
                 </button>
             </div>
         </form>

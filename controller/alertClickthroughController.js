@@ -69,47 +69,56 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
     var buttons = {
         chestpain: {
             svg: $sce.trustAsHtml($scope.CHESTPAINSVG),
-            text: "Chestpain",
+            text: $scope.LANG.CHESTPAIN,
+            id: "chestpain",
             next: true
         },
         fire: {
             svg: $sce.trustAsHtml($scope.FIRESVG),
-            text: "Fire",
+            text: $scope.LANG.FIRE,
+            id: "fire",
             next: true
         },
         injury: {
             svg: $sce.trustAsHtml($scope.INJURYSVG),
-            text: "Injury",
+            text: $scope.LANG.INJURY,
+            id: "injury",
             next: true
         },
         headinjury: {
             svg: $sce.trustAsHtml($scope.HEADINJURYSVG),
-            text: "Headinjury",
+            text: $scope.LANG.HEADINJURY,
+            id: "headinjury",
             next: true
         },
         floorplan: {
             svg: $sce.trustAsHtml($scope.FLOORPLANSVG),
-            text: "Use floorplan",
+            text: $scope.LANG.FLOORPLAN,
+            id: "floorplan",
             next: true
         },
         description: {
             svg: $sce.trustAsHtml($scope.DESCRIPTIONSVG),
-            text: "Description",
+            text: $scope.LANG.DESCRIPTION,
+            id: "description",
             next: true
         },
         edit: {
             svg: $sce.trustAsHtml($scope.EDITSVG),
-            text: "Edit",
+            text: $scope.LANG.EDIT,
+            id: "edit",
             next: true
         },
         custom: {
             svg: $sce.trustAsHtml($scope.CUSTOM),
-            text: "Custom",
+            text: $scope.LANG.CUSTOM,
+            id: "custom",
             next: true
         },
         back: {
             svg: $sce.trustAsHtml($scope.BACKSVG),
-            text: "Back",
+            text: $scope.LANG.BACK,
+            id: "back",
             next: false
         }
     }
@@ -176,25 +185,25 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
 //    init the alert clickthrough with the alert type
     this.currentView = this.views[0];
 //    set the correct view in the clickthrough
-    this.clickButton = function (next, value) {
+    this.clickButton = function (next, value, text) {
         if (next) {
             var parameter = self.currentView.parameter;
             switch (value) {
-                case "Custom":
+                case "custom":
                     document.getElementById('customfield').value = ""
                     self.openModal("custom-modal-custom-text");
                     break;
-                case "Use floorplan":
+                case "floorplan":
                     self.openModal("custom-modal-floorplan");
                     break;
-                case "Description":
+                case "description":
                     var stringBuilder = self.currentAlert.kind + " op locatie " + self.currentAlert.location;
                     console.log(stringBuilder);
                     self.editCurrentAlert("description", String(stringBuilder));
                     self.currentView = self.views[self.currentView.next];
                     break;
                 default:
-                    self.editCurrentAlert(self.currentView.parameter, value);
+                    self.editCurrentAlert(self.currentView.parameter, text);
                     self.currentView = self.views[self.currentView.next];
                     break;
             }
