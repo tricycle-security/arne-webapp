@@ -12,32 +12,28 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
     firebase.auth().onAuthStateChanged(function (user) {
         var firebaseuid = user.uid;
         $scope.fireuid = firebaseuid;
-        retrieveUsers();
     });
 
-    function retrieveUsers() {
-        //Gets users with their onLocation status
-        userinfo.on('child_added', function (snap) {
-            var tempUserInfo = snap.val();
-            userStatus.child(snap.val().uuid).on('value', userStat => {
-                var tempStatusInfo = userStat.val();
-                if (tempStatusInfo != null) {
-                    var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, 
-                        admin: tempStatusInfo.admin, alertmanager: tempStatusInfo.alertmanager, responder: tempStatusInfo.responder};
-                    self.allUsersPlusPrivileges.push(tempUser); //allusers contains all userinfo + onLocation
-                }
+    userinfo.on('child_added', function (snap) {
+        var tempUserInfo = snap.val();
+        userStatus.child(snap.val().uuid).on('value', userStat => {
+            var tempStatusInfo = userStat.val();
+            if (tempStatusInfo != null) {
+                var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, 
+                    admin: tempStatusInfo.admin, alertmanager: tempStatusInfo.alertmanager, responder: tempStatusInfo.responder, enabled: tempStatusInfo.enabled};
+                self.allUsersPlusPrivileges.push(tempUser); //allusers contains all userinfo + onLocation
+            }
 
-                //don't repeat any users in list
-                for (var i in self.allUsersPlusPrivileges) {
-                    for (var j in self.allUsersPlusPrivileges) {
-                        if(self.allUsersPlusPrivileges[i].uuid == self.allUsersPlusPrivileges[j].uuid && i != j){
-                            self.allUsersPlusPrivileges.splice(i, 1);
-                        }
+            //don't repeat any users in list
+            for (var i in self.allUsersPlusPrivileges) {
+                for (var j in self.allUsersPlusPrivileges) {
+                    if(self.allUsersPlusPrivileges[i].uuid == self.allUsersPlusPrivileges[j].uuid && i != j){
+                        self.allUsersPlusPrivileges.splice(i, 1);
                     }
                 }
-            });
+            }
         });
-    }
+    });
 
     // ADD USER
     self.addUser = function () {
@@ -59,9 +55,12 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
                 uuid: firebaseUser.uid
             });
             database.ref("/userinfo/userstatus/" + firebaseUser.uid).set({
+                enabled: true,
                 responder: self.privilegeResponder, 
                 admin: self.privilegeAdmin,
-                alertmanager: self.privilegeManager
+                alertmanager: self.privilegeManager,
+                checkinpole: false,
+                cardwriter: false
             });
             //Logout the second app. Not the admin panel
             secondaryApp.auth().signOut();
@@ -137,6 +136,21 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
             pass += chars.charAt(i);
         }
         return pass;
+    }
+
+    //enable or disable a user
+    self.userEnabler = function (user) {
+        if (user != null) {
+            var isEnabled = true;
+            if(user.enabled){
+                isEnabled = false;
+            }
+
+            //update enabled status
+            database.ref().child('/userinfo/userstatus/'+ user.uuid).set({
+                enabled: isEnabled
+            });
+        }
     }
 
     self.openModal = function (id) {//id is which modal to use

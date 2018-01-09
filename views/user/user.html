@@ -17,6 +17,7 @@
             <tr>
                 <th>Name</th>
                 <th>UUID</th>
+                <th></th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -24,6 +25,11 @@
             <tr ng-repeat="user in userCtrl.allUsersPlusPrivileges | toArray | filter: { uuid :'!' + fireuid }">
                 <td>{{user.fname}} {{user.lname}}</td>
                 <td>{{user.uuid}}</td>
+                <td>
+                    <span ng-if="user.enabled">enabled</span>
+                    <span ng-if="!user.enabled">disabled</span>
+                    <a ng-click="userCtrl.userEnabler(user)">click</a>
+                </td>
                 <td>
                     <a ng-click="userCtrl.openModal('custom-modal-edit-user', user)" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                     <a ng-click="userCtrl.openModal('custom-modal-delete-user', user)" class="delete"><i class="material-icons"
