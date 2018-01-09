@@ -63,7 +63,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "dashboard-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
+                    return restrictUserByLevel.action(USER_ROLES.responderLv);//1
                 }
             }
         })
@@ -90,7 +90,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "logout-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
+                    return restrictUserByLevel.action(USER_ROLES.responderLv);//1
                 }
             }
         })
@@ -107,7 +107,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "dashboard-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
+                    return restrictUserByLevel.action(USER_ROLES.responderLv);//1
                 }
             }
         });
