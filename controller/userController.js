@@ -1,6 +1,11 @@
 app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject", function ($scope, $firebaseArray, $firebaseObject) {
         
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
+        this.newPrivileges = {
+            responder: false,
+            admin: false,
+            manager: false
+        }
         this.privileges = {}
         this.user = {}
         var self = this;
@@ -35,7 +40,7 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
 
 
         // ADD USER
-        self.addUser = function () {
+        this.addUser = function () {
             if (!$scope.createForm.$valid) {
                 console.log("invalid");
                 return;
@@ -53,9 +58,9 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
                 });
                 database.ref("/userinfo/userstatus/" + firebaseUser.uid).set({
                     enabled: true,
-                    responder: self.privilegeResponder,
-                    alertmanager: self.privilegeManager,
-                    admin: self.privilegeAdmin,
+                    responder: self.newPrivileges.responder,
+                    alertmanager: self.newPrivileges.manager,
+                    admin: self.newPrivileges.admin,
                     checkinpole: false,
                     cardwriter: false
                 });

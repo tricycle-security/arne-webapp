@@ -99,15 +99,15 @@
                         <label>Privilege (Responder, Manager, Admin) </label>
                         <input type="checkbox"
                                 class="form-control" 
-                                ng-model="userCtrl.privilegeResponder"
+                                ng-model="userCtrl.newPrivileges.responder"
                         />
                         <input type="checkbox"
                                 class="form-control" 
-                                ng-model="userCtrl.privilegeManager"
+                                ng-model="userCtrl.newPrivileges.manager"
                         />
                         <input type="checkbox"
                                 class="form-control" 
-                                ng-model="userCtrl.privilegeAdmin"
+                                ng-model="userCtrl.newPrivileges.admin"
                         />
                     </div>
                     <button ng-click="userCtrl.addUser()"
