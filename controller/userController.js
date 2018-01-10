@@ -147,9 +147,7 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
         $("#" + id).show();
         this.user = user;
         var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
-        userStatus.once('value', function (statusSnap) {
-            this.statusSnap.val();
-        });
+
     }
 
     self.closeModal = function (id) {

@@ -19,6 +19,7 @@ app.constant('USER_ROLES', {
 	notAuthorized : 'auth-not-authorized'
 });
 
+
 app.factory('restrictUserByLevel',['$q', '$location', 'USER_ROLES', function($q, $location, USER_ROLES){
     this.action = function(minPrivilegeLevel) {
         var deferred = $q.defer();
