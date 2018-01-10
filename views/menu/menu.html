@@ -5,31 +5,31 @@
             <li style="list-style: none; display: inline"></li>
 
             <li ng-if="privilegeLv == 0">
-                    <a href="./#/">{{titleLogin}}</a>
+                <a href="./#/">{{LANG.LOGIN}}</a>
                 </li>
 
             <li style="list-style: none; display: inline"></li>
 
             <li ng-if="privilegeLv > userRoles.responderLv">
-                <a href="./#/">{{titleHome}}</a>
+                <a href="./#/">{{LANG.HOME}}</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>
 
             <li ng-if="privilegeLv >= userRoles.responderLv">
-                <a href="./#/alerts">{{titleAlerts}}</a>
+                <a href="./#/alerts">{{LANG.ALERTS}}</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>
 
             <li ng-if="privilegeLv >= userRoles.adminLv">
-                <a href="./#/user">{{titleUsers}}</a>
+                <a href="./#/user">{{LANG.USERS}}</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>
             
             <li ng-if="privilegeLv >= userRoles.adminLv && privilegeLv != 0">
-                <a href="./#/logout">Logout</a>
+                <a href="./#/logout">{{LANG.LOGOUT}}</a>
             </li>
 
             <li style="list-style: none; display: inline"></li>

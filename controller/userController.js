@@ -3,7 +3,7 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
     var self = this;
     
     // GET USERINFO AS AN ARRAY
-    $firebaseArray(userInfoRef);
+    self.users = $firebaseArray(userInfoRef);
     self.allUsersPlusPrivileges = [];
 
     var userStatus = database.ref().child('userinfo/userstatus');
@@ -15,6 +15,27 @@ app.controller('userController', ['$scope', '$firebaseArray', function ($scope, 
     });
 
     userinfo.on('child_added', function (snap) {
+        var tempUserInfo = snap.val();
+        userStatus.child(snap.val().uuid).on('value', userStat => {
+            var tempStatusInfo = userStat.val();
+            if (tempStatusInfo != null) {
+                var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, 
+                    admin: tempStatusInfo.admin, alertmanager: tempStatusInfo.alertmanager, responder: tempStatusInfo.responder, enabled: tempStatusInfo.enabled};
+                self.allUsersPlusPrivileges.push(tempUser); //allusers contains all userinfo + onLocation
+            }
+
+            //don't repeat any users in list
+            for (var i in self.allUsersPlusPrivileges) {
+                for (var j in self.allUsersPlusPrivileges) {
+                    if(self.allUsersPlusPrivileges[i].uuid == self.allUsersPlusPrivileges[j].uuid && i != j){
+                        self.allUsersPlusPrivileges.splice(i, 1);
+                    }
+                }
+            }
+        });
+    });
+
+    userinfo.on('child_changed', function (snap) {
         var tempUserInfo = snap.val();
         userStatus.child(snap.val().uuid).on('value', userStat => {
             var tempStatusInfo = userStat.val();

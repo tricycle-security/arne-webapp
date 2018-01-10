@@ -1,14 +1,11 @@
-app.controller('alertClickThroughController', function ($firebaseArray, $routeParams, $scope, $sce)
-{
-
-
+app.controller('alertClickThroughController', function ($firebaseArray, $routeParams, $scope, $sce, $timeout) {
     var self = this;
     this.selectedSection = "";
-    this.currentSections = []
+    this.currentSections = [];
     var firstLevelSectionRef = database.ref().child('building_sections').orderByChild("level").startAt(0).endAt(0);
     var sectionsRef = database.ref().child('building_sections');
-    
-    $scope.myTrackingFunction = function(value){
+
+    $scope.myTrackingFunction = function (value) {
         return value + 1;
     }
 
@@ -24,21 +21,21 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
             function filterByID(obj) {
                 return obj.$id === selection;
             }
+
             var section = $scope.sections.filter(filterByID)[0]
-            if(section != null){
+            if (section != null) {
                 self.currentSections = self.currentSections.slice(0, section.level);
                 self.currentSections.push(section);
                 $scope.currentLevelDropdowns = []
-                for(var i = 1; i <= (section.level + 1); i++){
+                for (var i = 1; i <= (section.level + 1); i++) {
                     var curRef = database.ref().child('building_sections').orderByChild("parentId").startAt(Number(self.currentSections[i - 1].$id)).endAt(Number(self.currentSections[i - 1].$id));
                     $scope.currentLevelDropdowns.push($firebaseArray(curRef));
-                }  
-            }          
+                }
+            }
         }
     }
     this.currentAlert = {}
 
-    
 
     this.editCurrentAlert = function (parameter, value) {
         switch (parameter) {
@@ -72,47 +69,56 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
     var buttons = {
         chestpain: {
             svg: $sce.trustAsHtml($scope.CHESTPAINSVG),
-            text: "Chestpain",
+            text: $scope.LANG.CHESTPAIN,
+            id: "chestpain",
             next: true
         },
         fire: {
             svg: $sce.trustAsHtml($scope.FIRESVG),
-            text: "Fire",
+            text: $scope.LANG.FIRE,
+            id: "fire",
             next: true
         },
         injury: {
             svg: $sce.trustAsHtml($scope.INJURYSVG),
-            text: "Injury",
+            text: $scope.LANG.INJURY,
+            id: "injury",
             next: true
         },
         headinjury: {
             svg: $sce.trustAsHtml($scope.HEADINJURYSVG),
-            text: "Headinjury",
+            text: $scope.LANG.HEADINJURY,
+            id: "headinjury",
             next: true
         },
         floorplan: {
             svg: $sce.trustAsHtml($scope.FLOORPLANSVG),
-            text: "Use floorplan",
+            text: $scope.LANG.FLOORPLAN,
+            id: "floorplan",
             next: true
         },
         description: {
             svg: $sce.trustAsHtml($scope.DESCRIPTIONSVG),
-            text: "Description",
+            text: $scope.LANG.DESCRIPTION,
+            id: "description",
             next: true
         },
         edit: {
             svg: $sce.trustAsHtml($scope.EDITSVG),
-            text: "Edit",
+            text: $scope.LANG.EDIT,
+            id: "edit",
             next: true
         },
         custom: {
             svg: $sce.trustAsHtml($scope.CUSTOM),
-            text: "Custom",
+            text: $scope.LANG.CUSTOM,
+            id: "custom",
             next: true
         },
         back: {
             svg: $sce.trustAsHtml($scope.BACKSVG),
-            text: "Back",
+            text: $scope.LANG.BACK,
+            id: "back",
             next: false
         }
     }
@@ -179,36 +185,57 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
 //    init the alert clickthrough with the alert type
     this.currentView = this.views[0];
 //    set the correct view in the clickthrough
-    this.clickButton = function (next, value) {
+    this.clickButton = function (next, value, text) {
         if (next) {
             var parameter = self.currentView.parameter;
-            switch (parameter) {
-            case "kind":
-                if(parameter === "Custom"){
-                    value = "getCustomTypeFunc(parameter)"
-                };
-                break;
-            case "location":
-                if(parameter === "Custom"){
-                    value = "getCustomLocFunc(parameter)"
-                }else{
-                    value = "alertLocationPicker(parameter)"
-                };
-                break;
-            case "description":
-                if(parameter === "Custom"){
-                    value = "getCustomDescFunc(parameter)"
-                }else{
-                    value = "getGeneratedDescFunc(parameter)"
-                }
-                break;
-        }
-            self.editCurrentAlert(self.currentView.parameter, value)
-            self.currentView = self.views[self.currentView.next];
+            switch (value) {
+                case "custom":
+                    document.getElementById('customfield').value = ""
+                    self.openModal("custom-modal-custom-text");
+                    break;
+                case "floorplan":
+                    self.openModal("custom-modal-floorplan");
+                    break;
+                case "description":
+                    var stringBuilder = self.currentAlert.kind + " op locatie " + self.currentAlert.location;
+                    console.log(stringBuilder);
+                    self.editCurrentAlert("description", String(stringBuilder));
+                    self.currentView = self.views[self.currentView.next];
+                    break;
+                default:
+                    self.editCurrentAlert(self.currentView.parameter, text);
+                    self.currentView = self.views[self.currentView.next];
+                    break;
+            }
         } else {
             self.currentView = self.views[self.currentView.previous];
         }
     }
+
+    this.customModalClick = function () {
+        console.log(self.currentView.parameter);
+        self.editCurrentAlert(self.currentView.parameter, self.customField);
+        next();
+        self.closeModal("custom-modal-custom-text");
+    }
+
+    this.floorPlanModalClick = function () {
+        next();
+        self.closeModal("custom-modal-floorplan");
+        var stringBuild = "";
+        for (var i = 0, len = self.currentSections.length; i < len; i++) {
+            stringBuild += self.currentSections[i].name;
+            if (self.currentSections[i] !== self.currentSections[len - 1])
+                stringBuild += ", ";
+            console.log(self.currentSections[len - 1]);
+        }
+        self.editCurrentAlert("location", stringBuild);
+    }
+
+    function next() {
+        self.currentView = self.views[self.currentView.next];
+    }
+
 
     this.createAlert = function (alert) {
 //        console.log('createAlert')
@@ -220,6 +247,7 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
             alert.active = true;
             alert.time = (new Date).getTime();
             self.sendAlert(alert)
+            self.generateDropdowns($scope.firstSections[0].$id);
         }
     }
     this.sendAlert = function (alert) {
@@ -228,4 +256,13 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
         }
     }
 
+    this.openModal = function (id) {//id is which modal to use
+        $("#" + id).show();
+    }
+
+    this.closeModal = function (id) {
+        $("#" + id).hide();
+    }
 });
+
+

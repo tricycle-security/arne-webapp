@@ -1,6 +1,7 @@
 app.controller('alertController', function ($routeParams, $scope, $timeout, $sce)
 {
-    this.title = "Current alerts: "
+    this.title = "Current alerts: ";
+
     this.editableAlert = {
     }
     
@@ -121,4 +122,44 @@ app.controller('alertController', function ($routeParams, $scope, $timeout, $sce
             retrieveAlerts();
         }
     });
+
+
+    self.removeAlert = function () {
+        alert = self.alert;
+        // CHECK THAT ALERT IS PRESENT
+        if (alert.id === undefined) return;
+        remove('alerts/' + alert.id);
+        self.closeModal('custom-modal-delete-alert');
+    };
+
+    self.toggleAlertStatus = function (alert) {
+        if (alert.id === undefined) return;
+        alert.active = !alert.active;
+        $scope.sendAlert(alert);
+    };
+
+
+    function remove(remove) {
+        console.log("starting delete");
+        database.ref().child(remove).remove()
+            .then(function () {
+                console.log("Remove succeeded.")
+            })
+            .catch(function (error) {
+                console.log("Remove failed: " + error.message)
+            });
+    }
+
+    this.openModal = function (id) {//id is which modal to use
+        $("#" + id).show();
+    }
+
+    this.openModal = function (id, alert) {//index and user determines which user gets deleted
+        $("#" + id).show();
+        self.alert = alert;
+    }
+
+    this.closeModal = function (id) {
+        $("#" + id).hide();
+    }
 });
