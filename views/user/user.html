@@ -156,18 +156,17 @@
                         <p ng-show="editForm.lastNameField.$touched && editForm.lastNameField.$invalid" class="help-block">Put a last name</p>
                     </div>
                     <div class="form-group">
-                        <label>Privilege (Responder, Manager, Admin) </label>
-                        <input type="checkbox"
+                        Responder: <input type="checkbox"
                                 class="form-control" 
-                                ng-model="userCtrl.user.responder"
+                                ng-model="userCtrl.privileges.responder"
                         />
-                        <input type="checkbox"
+                        Alert manager: <input type="checkbox"
                                 class="form-control" 
-                                ng-model="userCtrl.user.alertmanager"
+                                ng-model="userCtrl.privileges.alertmanager"
                         />
-                        <input type="checkbox"
+                        Admin: <input type="checkbox"
                                 class="form-control" 
-                                ng-model="userCtrl.user.admin"
+                                ng-model="userCtrl.privileges.admin"
                         />
                     </div>
                     <button ng-click="userCtrl.updateUser(userCtrl.user)"

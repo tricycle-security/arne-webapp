@@ -1,12 +1,12 @@
 app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject", function ($scope, $firebaseArray, $firebaseObject) {
         
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
-        var privelegesRef = database.ref().child('userinfo/userstatus');
+        this.privileges = {}
+        this.user = {}
         var self = this;
 
         // GET USERINFO AS AN ARRAY
         this.users = $firebaseArray(userInfoRef);
-        this.priveleges = $firebaseArray(privelegesRef)
 
         
         self.users.$watch(function (event) {
@@ -102,14 +102,7 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
         self.updateUser = function (user) {
             if (user != null) {
                 //update privilege
-                database.ref().child('/userinfo/userstatus/' + user.uuid).set({
-                    enabled: true,
-                    admin: user.admin,
-                    alertmanager: user.alertmanager,
-                    responder: user.responder,
-                    checkinpole: false,
-                    cardwriter: false
-                });
+                self.privileges.$save();
                 //update username
                 database.ref("/userinfo/usergeninfo/" + user.uuid).set({
                     fname: user.fname,
@@ -160,8 +153,9 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
 
         self.openModal = function (id, user) {//index and user determines which user gets deleted
             $("#" + id).show();
-            this.user = user;
-            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
+            self.user = user
+            self.privileges = $firebaseObject(database.ref().child('userinfo/userstatus/' + user.uuid));
+//            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
         }
 
         self.closeModal = function (id) {
