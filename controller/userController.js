@@ -1,5 +1,5 @@
 app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject", function ($scope, $firebaseArray, $firebaseObject) {
-        
+
         var userInfoRef = database.ref().child('userinfo/usergeninfo');
         this.newPrivileges = {
             responder: false,
@@ -13,10 +13,10 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
         // GET USERINFO AS AN ARRAY
         this.users = $firebaseArray(userInfoRef);
 
-        
+
         self.users.$watch(function (event) {
             if (event.event = "child_added") {
-                for (var i = 0; i < self.users.length; i++) {        
+                for (var i = 0; i < self.users.length; i++) {
                     if (self.users[i].uuid === event.key) {
 //                        var enabledRef = 
                         self.users[i].enabled = $firebaseObject(database.ref().child('userinfo/userstatus/' + event.key + "/enabled"));
@@ -159,11 +159,17 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
         self.openModal = function (id, user) {//index and user determines which user gets deleted
             $("#" + id).show();
             self.user = user
+            
             self.privileges = $firebaseObject(database.ref().child('userinfo/userstatus/' + user.uuid));
 //            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
         }
 
         self.closeModal = function (id) {
             $("#" + id).hide();
+            self.newPrivileges = {
+                responder: false,
+                admin: false,
+                manager: false
+            }
         }
     }]);
