@@ -22,14 +22,15 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="user in userCtrl.allUsersPlusPrivileges | toArray | filter: { uuid :'!' + fireuid }" >
+            <tr ng-repeat="user in userCtrl.users | toArray | filter: { uuid :'!' + fireuid }" >
                 <td>{{user.fname}} {{user.lname}}</td>
                 <td>{{user.uuid}}</td>
                 <td>
-                    <span ng-if="user.enabled" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled]" ng-click="userCtrl.userEnabler(user)">
+<!--                    {{user.enabled.$value}}-->
+                    <span ng-if="user.enabled.$value" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled.$value]" ng-click="userCtrl.userEnabler(user.uuid, user.enabled.$value)">
                         enabled
                     </span>
-                    <span ng-if="!user.enabled" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled]" ng-click="userCtrl.userEnabler(user)">
+                    <span ng-if="!user.enabled.$value" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled.$value]" ng-click="userCtrl.userEnabler(user.uuid, user.enabled.$value)">
                         disabled
                     </span>
                 </td>
