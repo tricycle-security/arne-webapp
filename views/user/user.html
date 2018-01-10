@@ -26,11 +26,12 @@
                 <td>{{user.fname}} {{user.lname}}</td>
                 <td>{{user.uuid}}</td>
                 <td>
-<!--                    {{user.enabled.$value}}-->
-                    <span ng-if="user.enabled.$value" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled.$value]" ng-click="userCtrl.userEnabler(user.uuid, user.enabled.$value)">
+                    <span ng-if="user.enabled.$value" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled.$value]" 
+                        ng-click="userCtrl.openModal('custom-modal-enable-user', user)">
                         enabled
                     </span>
-                    <span ng-if="!user.enabled.$value" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled.$value]" ng-click="userCtrl.userEnabler(user.uuid, user.enabled.$value)">
+                    <span ng-if="!user.enabled.$value" ng-class="{true: 'enabledUser', false: 'disabledUser'}[user.enabled.$value]" 
+                        ng-click="userCtrl.openModal('custom-modal-enable-user', user)">
                         disabled
                     </span>
                 </td>
@@ -194,6 +195,34 @@
                     > {{LANG.NO}}
                     </button>
                     <button ng-click="userCtrl.removeUser(userCtrl.index, userCtrl.user)"
+                            class="btn btn-primary" type="button"
+                    > {{LANG.YES}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- The Confirm Enable/Disable Modal -->
+    <div id="custom-modal-enable-user" class="modal">
+        
+        <div ng-click="userCtrl.closeModal('custom-modal-enable-user')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="userCtrl.closeModal('custom-modal-enable-user')" class="close">&times;</span>
+            <form name="enableForm">
+                <div>
+                    <p ng-if="!userCtrl.user.enabled.$value">
+                        {{LANG.AREYOUSUREYOUWANTTOENABLE}}
+                    </p>
+                    <p ng-if="userCtrl.user.enabled.$value">
+                        {{LANG.AREYOUSUREYOUWANTTODISABLE}}
+                    </p>
+                    <button ng-click="userCtrl.closeModal('custom-modal-enable-user')"
+                    class="btn btn-primary" type="button"
+                    > {{LANG.NO}}
+                    </button>
+                    <button ng-click="userCtrl.closeModal('custom-modal-enable-user'); userCtrl.userEnabler(userCtrl.user.uuid, userCtrl.user.enabled.$value)"
                             class="btn btn-primary" type="button"
                     > {{LANG.YES}}
                     </button>

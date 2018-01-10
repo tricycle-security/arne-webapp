@@ -54,7 +54,10 @@ app.controller('languageController', function ($scope) {
         AREYOUSUREYOUWANTTODELETE: "Weet u zeker dat u %s wilt verwijderen",
         ERROR: "Error",
         PRIVILEGES: "U heeft niet de juiste gebruikers rechten",
-        LOGGEDOUT: "U bent uitgelogd"
+        LOGGEDOUT: "U bent uitgelogd",
+//CONFIRM ENABLE/DISABLE
+        AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebruiker wilt enablen?",
+        AREYOUSUREYOUWANTTODISABLE: "Weet u zeker dat u deze gebruiker wilt disablen?"
     };
 
     $scope.LANG = NL;
