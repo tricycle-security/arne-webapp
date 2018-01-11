@@ -30,7 +30,7 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
                 self.currentSections.push(section);
                 $scope.currentLevelDropdowns = []
                 for(var i = 1; i <= (section.level + 1); i++){
-                    var curRef = database.ref().child('building_sections').orderByChild("parentId").startAt(Number(self.currentSections[i - 1].$id)).endAt(Number(self.currentSections[i - 1].$id));
+                    var curRef = database.ref().child('building_sections').orderByChild("parentId").startAt(self.currentSections[i - 1].$id).endAt(self.currentSections[i - 1].$id);
                     $scope.currentLevelDropdowns.push($firebaseArray(curRef));
                 }  
             }          
