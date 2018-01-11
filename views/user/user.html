@@ -97,16 +97,15 @@
                         <p ng-show="createForm.lastNameField.$touched && createForm.lastNameField.$invalid" class="help-block">Put a last name</p>
                     </div>
                     <div class="form-group">
-                        <label>Privilege (Responder, Manager, Admin) </label>
-                        <input type="checkbox"
+                        Responder: <input type="checkbox"
                                 class="form-control" 
                                 ng-model="userCtrl.newPrivileges.responder"
                         />
-                        <input type="checkbox"
+                        Alert manager: <input type="checkbox"
                                 class="form-control" 
                                 ng-model="userCtrl.newPrivileges.manager"
                         />
-                        <input type="checkbox"
+                        Admin: <input type="checkbox"
                                 class="form-control" 
                                 ng-model="userCtrl.newPrivileges.admin"
                         />

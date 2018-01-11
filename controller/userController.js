@@ -157,12 +157,23 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
 
             if(id = "custom-modal-delete-user"){
                 var fullName = user.fname + " " + user.lname;
-                $scope.LANG.AREYOUSUREYOUWANTTODELETE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt verwijderen?";
+                
+                if($scope.LANG.LANGUAGE == "EN"){
+                    $scope.LANG.AREYOUSUREYOUWANTTODELETE =  "Are you sure you want to delete user \'" + fullName + "\'?";
+                } else if($scope.LANG.LANGUAGE == "NL"){
+                    $scope.LANG.AREYOUSUREYOUWANTTODELETE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt verwijderen?";
+                }
             }
             if(id = "custom-modal-enable-user"){
                 var fullName = user.fname + " " + user.lname;
-                $scope.LANG.AREYOUSUREYOUWANTTOENABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt enablen?";
-                $scope.LANG.AREYOUSUREYOUWANTTODISABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt disablen?";
+                if($scope.LANG.LANGUAGE == "EN"){
+                    $scope.LANG.AREYOUSUREYOUWANTTOENABLE =  "Are you sure you want to enable user \'" + fullName + "\'?";
+                    $scope.LANG.AREYOUSUREYOUWANTTODISABLE =  "Are you sure you want to disble user \'" + fullName + "\'?";
+                } else if($scope.LANG.LANGUAGE == "NL"){
+                    $scope.LANG.AREYOUSUREYOUWANTTOENABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt enablen?";
+                    $scope.LANG.AREYOUSUREYOUWANTTODISABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt disablen?";
+                }
+                
             }
         }
 
