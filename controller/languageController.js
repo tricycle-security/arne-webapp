@@ -51,14 +51,14 @@ app.controller('languageController', function ($scope) {
         ACTIONS: "Acties",
         FIRSTNAME: "Voornaam",
         LASTNAME: "Achternaam",
-        AREYOUSUREYOUWANTTODELETE: "Weet u zeker dat u %s wilt verwijderen",
+        AREYOUSUREYOUWANTTODELETE: "Weet u zeker dat u deze gebruiker wilt verwijderen",
         ERROR: "Error",
         PRIVILEGES: "U heeft niet de juiste gebruikers rechten",
         LOGGEDOUT: "U bent uitgelogd",
 //CONFIRM ENABLE/DISABLE
-        AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebruiker wilt enablen?",
+        AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebuiker wilt enablen?",
         AREYOUSUREYOUWANTTODISABLE: "Weet u zeker dat u deze gebruiker wilt disablen?"
     };
-
+    
     $scope.LANG = NL;
 });

@@ -18,7 +18,6 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
             if (event.event = "child_added") {
                 for (var i = 0; i < self.users.length; i++) {
                     if (self.users[i].uuid === event.key) {
-//                        var enabledRef = 
                         self.users[i].enabled = $firebaseObject(database.ref().child('userinfo/userstatus/' + event.key + "/enabled"));
                         break;
                     }
@@ -81,13 +80,6 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
             // CHECK THAT USER IS VALID
             if (user.uuid === undefined)
                 return;
-            //DISABLE USER
-            // database.ref().child('Userinfo/userstatus/'+ user.uuid).set({
-            // bhver: false,
-            // admin: null,
-            // checknpole: false
-            // });
-
 
             if (user.uuid.length >= 28 && $scope.fireuid != user.uuid) {
                 // //Remove user from both paths
@@ -162,6 +154,16 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
             
             self.privileges = $firebaseObject(database.ref().child('userinfo/userstatus/' + user.uuid));
 //            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
+
+            if(id = "custom-modal-delete-user"){
+                var fullName = user.fname + " " + user.lname;
+                $scope.LANG.AREYOUSUREYOUWANTTODELETE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt verwijderen?";
+            }
+            if(id = "custom-modal-enable-user"){
+                var fullName = user.fname + " " + user.lname;
+                $scope.LANG.AREYOUSUREYOUWANTTOENABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt enablen?";
+                $scope.LANG.AREYOUSUREYOUWANTTODISABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt disablen?";
+            }
         }
 
         self.closeModal = function (id) {
