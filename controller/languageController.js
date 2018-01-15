@@ -1,5 +1,8 @@
-app.controller('languageController', function ($scope) {
+app.controller('languageController', function ($rootScope, $scope) {
     var NL = {
+//Current Language
+        LANGUAGE: "NL",
+//Menu
         HOME: "Home",
         ALERTS: "Meldingen",
         USERS: "Gebruikers",
@@ -27,7 +30,7 @@ app.controller('languageController', function ($scope) {
         DESCRIPTION: "Beschrijving",
         SUBMITALERT: "Voeg toe",
         EDIT: "Aanpassen",
-        //Alert
+//Alert
         INACTIVE: "Non-actief",
         ACTIVE: "Actief",
         ALERTTYPE: "Wat is het alert type",
@@ -57,9 +60,79 @@ app.controller('languageController', function ($scope) {
         PRIVILEGES: "U heeft niet de juiste gebruikers rechten",
         LOGGEDOUT: "U bent uitgelogd",
 //CONFIRM ENABLE/DISABLE
-        AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebuiker wilt enablen?",
+        AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebruiker wilt enablen?",
         AREYOUSUREYOUWANTTODISABLE: "Weet u zeker dat u deze gebruiker wilt disablen?"
     };
     
-    $scope.LANG = NL;
+    var EN = {
+//Current Language
+        LANGUAGE: "EN",
+//Menu
+        HOME: "Home",
+        ALERTS: "Alerts",
+        USERS: "Users",
+        LOGIN: "Login",
+        LOGOUT: "Logout",
+        FLOORPLANBUILDER: "Floorplanbuilder",
+//Login
+        EMAIL: "Email: ",
+        PASSWORD: "Password: ",
+        SUBMITLOGIN: "Submit",
+//Home dashboard
+        AVAILABLEBHV: "Available Emergency Personnel",
+        NAME: "Name",
+        AVAILABILITY: "Availability",
+        AVAILABLE: "Available",
+        UNAVAILABLE: "Unavailable",
+//Buttons
+        CHESTPAIN: "Chestpain",
+        FIRE: "Fire",
+        INJURY: "Injurity",
+        HEADINJURY: "Head injury",
+        CUSTOM: "Custom",
+        FLOORPLAN: "Floorplan",
+        BACK: "Back",
+        DESCRIPTION: "Description",
+        SUBMITALERT: "Create alert",
+        EDIT: "Edit",
+//Alert
+        INACTIVE: "Inactive",
+        ACTIVE: "Active",
+        ALERTTYPE: "What is the alert type?",
+        ADDALERT: "Add alert",
+//Floorplan popup
+        SELECTLOCATION: "Select your location",
+        CANCEL: "Cancel",
+        SUBMITCUSTOM: "Submit",
+//Custom popup
+        CUSTOMPOPUPENTER: "Add your own text",
+        CUSTOMPOPUPTEXTFIELD: "Your text",
+        KIND: "Type",
+        TIME: "Date",
+        LOCATION: "Location",
+//Popup alert
+        NO: "No",
+        YES: "Yes",
+        DELETEALERTCONFIRM: "Are you sure you want to delete this alert?",
+//USERS
+        ADDUSER: "Add",
+        UUID: "Unique ID",
+        ACTIONS: "Actions",
+        FIRSTNAME: "Firstname",
+        LASTNAME: "Lastname",
+        AREYOUSUREYOUWANTTODELETE: "Are you sure you want to delete this user?",
+        ERROR: "Error",
+        PRIVILEGES: "You do not have required user privileges for this action",
+        LOGGEDOUT: "You have been logged out",
+//CONFIRM ENABLE/DISABLE
+        AREYOUSUREYOUWANTTOENABLE: "Are you sure you want to enable this alert?",
+        AREYOUSUREYOUWANTTODISABLE: "Are you sure you want to disable this alert?"
+    };
+
+    //default language
+    $rootScope.LANG = NL;
+
+    //languages
+    $rootScope.NL = NL;
+    $rootScope.EN = EN;
 });
