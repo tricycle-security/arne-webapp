@@ -1,7 +1,7 @@
-app.directive('dashboard', function ()
+app.directive('cardcouple', function ()
 {
         return {
             restrict: 'E',
-            templateUrl: "views/dashboard/dashboard.html",
+            templateUrl: "views/cardcouple/cardcouple.html",
         };
 });
