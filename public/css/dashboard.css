@@ -1,0 +1,171 @@
+/* DashboardComponent's private CSS styles */
+[class*='col-'] {
+    float: left;
+    padding-right: 20px;
+    padding-bottom: 20px;
+  }
+  [class*='col-']:last-of-type {
+    padding-right: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  *, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  h3 {
+    text-align: center; margin-bottom: 0;
+  }
+  h4 {
+    position: relative;
+  }
+  .grid {
+    margin: 0;
+  }
+  .col-1-4 {
+    width: 25%;
+  }
+  .module {
+    padding: 20px;
+    text-align: center;
+    color: #eee;
+    max-height: 120px;
+    min-width: 120px;
+    background-color: #607D8B;
+    border-radius: 2px;
+  }
+  .module:hover {
+    background-color: #EEE;
+    cursor: pointer;
+    color: #607d8b;
+  }
+  .grid-pad {
+    padding: 10px 0;
+  }
+  .grid-pad > [class*='col-']:last-of-type {
+    padding-right: 20px;
+  }
+  @media (max-width: 600px) {
+    .module {
+      font-size: 10px;
+      max-height: 75px; }
+  }
+  @media (max-width: 1024px) {
+    .grid {
+      margin: 0;
+    }
+    .module {
+      min-width: 60px;
+    }
+  }
+
+.color-available {
+  color: limegreen;
+}
+
+.color-unavailable {
+  color: maroon;
+}
+
+.tgl {
+    display: none;
+}
+
+.tgl, .tgl:after, .tgl:before, .tgl *, .tgl *:after, .tgl *:before, .tgl + .tgl-btn {
+    box-sizing: border-box;
+}
+
+.tgl::selection, .tgl:after::selection, .tgl:before::selection, .tgl *::selection, .tgl *:after::selection, .tgl *:before::selection, .tgl + .tgl-btn::selection {
+    background: none;
+}
+
+.tgl + .tgl-btn {
+    outline: 0;
+    display: block;
+    width: 5em;
+    height: 2em;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tgl + .tgl-btn:after, .tgl + .tgl-btn:before {
+    position: relative;
+    display: block;
+    content: "";
+    width: 50%;
+    height: 100%;
+}
+
+.tgl + .tgl-btn:after {
+    left: 0;
+}
+
+.tgl + .tgl-btn:before {
+    display: none;
+}
+
+.tgl:checked + .tgl-btn:after {
+    left: 50%;
+}
+
+.tgl-skewed + .tgl-btn {
+    overflow: hidden;
+    backface-visibility: hidden;
+    transition: all .2s ease;
+    font-family: sans-serif;
+    background: #d98686;
+}
+
+.tgl-skewed + .tgl-btn:after, .tgl-skewed + .tgl-btn:before {
+    display: inline-block;
+    transition: all .2s ease;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    line-height: 2em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.tgl-skewed + .tgl-btn:after {
+    left: 100%;
+    content: attr(data-tg-on);
+}
+
+.tgl-skewed + .tgl-btn:before {
+    left: 0;
+    content: attr(data-tg-off);
+}
+
+.tgl-skewed + .tgl-btn:active {
+    background: #888;
+}
+
+.tgl-skewed + .tgl-btn:active:before {
+    left: -10%;
+}
+
+.tgl-skewed:checked + .tgl-btn {
+    background: #86d993;
+}
+
+.tgl-skewed:checked + .tgl-btn:before {
+    left: -100%;
+}
+
+.tgl-skewed:checked + .tgl-btn:after {
+    left: 0;
+}
+
+.tgl-skewed:checked + .tgl-btn:active:after {
+    left: 10%;
+}
+
+.material-icons {
+    cursor: pointer;
+    background: none;
+}
