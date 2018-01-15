@@ -1,7 +1,12 @@
 <div class="sectionview" ng-class="'section' + section.level">
     <span class="sectionname">{{section.name}}</span>
     <span class="sectionlevel" ng-click="floorplanbuilderCtrl.openModal('delete-section-modal', section)">Remove</span></br>
-    <span class="sectionchilds">children: </span> <select ng-model="section.selectedSectionId" ng-change="floorplanbuilderCtrl.selectSection(section)" ng-options="s.$id as s.name for s in section.children"></select> <span class="sectionadd" ng-click="floorplanbuilderCtrl.addSection('test', 'test', section.level + 1, section.id)">+</span>
+    <span class="sectionchilds">children: </span> 
+    <select ng-model="section.selectedSectionId" 
+        ng-change="floorplanbuilderCtrl.selectSection(section)" 
+        ng-options="s.$id as s.name for s in section.children">
+    </select> 
+    <span class="sectionadd" ng-click="floorplanbuilderCtrl.openModal('add-section-modal', section)">+</span>
     <!--display selected child element-->
     <div ng-repeat ="section in section.selectedSections" >
         <sectionview></sectionview>

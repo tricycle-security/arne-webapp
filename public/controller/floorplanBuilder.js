@@ -46,18 +46,25 @@ app.controller('floorplanbuilderController', function ($firebaseArray, $scope, $
         }
     }
 
-    this.addSection = function (modalId, name, level, parentId) {
+    this.addSection = function (modalId, name, level, parentId, section) {
+        //check if section has parent
+        if(typeof section != 'undefined'){
+            level = section.level + 1;
+            parentId = section.id;
+        }
+
         var tempSection = {
             level: level,
             name: name,
         }
+
         if (parentId !== null)
             tempSection.parentId = parentId;
 
         var id = firebase.database().ref().child('building_sections').push().key.replace(/-/g, "").replace(/_/g, "");
         database.ref().child('building_sections').child(id).set(tempSection);
 
-//        self.closeModal(modalId);
+        self.closeModal(modalId);
     }
 
     this.removeSection = function (section, modalId) {
@@ -140,12 +147,15 @@ app.controller('floorplanbuilderController', function ($firebaseArray, $scope, $
         }
     });
 
-    this.openModal = function (id) {//id is which modal to use
+    this.openModal = function (id) {
         $("#" + id).show();
     }
 
-    this.openModal = function (id, section) {//index and user determines which user gets deleted
+    this.openModal = function (id, section) {//section determines which section gets deleted
         $("#" + id).show();
+        /*console.log(section);
+        console.log(section.level);
+        console.log(section.id);*/
         self.section = section;
     }
 
