@@ -2,11 +2,6 @@ app.controller('menuController', function ($scope, $rootScope, USER_ROLES)
 {    
     $scope.userRoles = USER_ROLES;
 
-    $scope.titleLogin = "Login";
-    $scope.titleHome = "Home";
-    $scope.titleAlerts= "Alerts";
-    $scope.titleUsers = "Users";
-
     $rootScope.privilege = "";
     $rootScope.privilegeLv = 0;
 
@@ -20,4 +15,12 @@ app.controller('menuController', function ($scope, $rootScope, USER_ROLES)
             })
         }, 1000);
     }, true);
+
+    this.changeLanguage = function (languageCode) {
+        if(languageCode == "EN"){
+            $rootScope.LANG = $scope.EN;
+        } else if(languageCode == "NL"){
+            $rootScope.LANG = $scope.NL;
+        }
+    }
 });

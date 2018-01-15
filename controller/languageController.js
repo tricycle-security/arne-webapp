@@ -1,4 +1,4 @@
-app.controller('languageController', function ($scope) {
+app.controller('languageController', function ($rootScope, $scope) {
     var NL = {
 //Current Language
         LANGUAGE: "NL",
@@ -59,7 +59,7 @@ app.controller('languageController', function ($scope) {
         PRIVILEGES: "U heeft niet de juiste gebruikers rechten",
         LOGGEDOUT: "U bent uitgelogd",
 //CONFIRM ENABLE/DISABLE
-        AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebuiker wilt enablen?",
+        AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebruiker wilt enablen?",
         AREYOUSUREYOUWANTTODISABLE: "Weet u zeker dat u deze gebruiker wilt disablen?"
     };
     
@@ -127,5 +127,10 @@ app.controller('languageController', function ($scope) {
         AREYOUSUREYOUWANTTODISABLE: "Are you sure you want to disable this alert?"
     };
 
-    $scope.LANG = NL;
+    //default language
+    $rootScope.LANG = NL;
+
+    //languages
+    $rootScope.NL = NL;
+    $rootScope.EN = EN;
 });
