@@ -207,6 +207,14 @@ img {
 /*    height: 800px;*/
 }
 
+.enabledUser {
+    color: limegreen;
+}
+
+.disabledUser {
+    color: maroon;
+}
+
 .column_w210 { /* NOT width 210! affects side menu!*/
     padding: 0 20px;
     margin-top: 40px;

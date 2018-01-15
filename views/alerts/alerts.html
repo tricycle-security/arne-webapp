@@ -1,65 +1,5 @@
 <div class="container">
 
-
-    <!--TODO make a view of this!-->
-<!--    <div class="grid grid-pad">
-        <form name="alertForm">
-            <div class="form-group" ng-class="{ 'has-error' : (alertForm.description.$invalid) }">
-                <label>Description: </label>
-                <input type="text"
-                       name="description"
-                       ng-model="alertsCtrl.editableAlert.description"
-                       placeholder="Kleine brand"
-                       required ng-minlength="2"
-                       class="form-control"
-                       style="margin-bottom: 10px"
-                />
-                <p ng-show="(alertForm.description.$invalid)" class="help-block">Put a description with mininmum length
-                    2</p>
-            </div>
-
-            <div class="form-group" ng-class="{ 'has-error' : (alertForm.kind.$invalid) }">
-                <label>Kind: </label>
-                <input type="text"
-                       name="kind"
-                       ng-model="alertsCtrl.editableAlert.kind"
-                       placeholder="Brand"
-                       required ng-minlength="2"
-                       class="form-control"
-                       style="margin-bottom: 10px"
-                />
-                <p ng-show="(alertForm.kind.$invalid)" class="help-block">Put a kind with mininmum length 2</p>
-            </div>
-
-            <div class="form-group" ng-class="{ 'has-error' : (alertForm.location.$invalid) }">
-                <label>location: </label>
-                <input type="text"
-                       name="location"
-                       ng-model="alertsCtrl.editableAlert.location"
-                       placeholder="Wijnhaven 107"
-                       required ng-minlength="2"
-                       class="form-control"
-                       style="margin-bottom: 10px"
-                />
-                <p ng-show="(alertForm.location.$invalid)" class="help-block">Put a location with mininmum length 2</p>
-            </div>
-            <div class="form-group">
-                <label>Active: </label>
-                <input class="form-control" type="checkbox" ng-model="alertsCtrl.editableAlert.active"
-                       ng-init="alertsCtrl.editableAlert.active = true">
-            </div>
-            <button ng-click="alertsCtrl.createAlert(alertsCtrl.editableAlert)"
-                    ng-disabled="alertForm.$invalid"
-                    class="btn btn-primary" type="button"
-            > Create Alert
-            </button>
-            <button ng-click="alertsCtrl.editAlert(alertsCtrl.editableAlert)"
-                    ng-disabled="alertForm.$invalid"
-                    class="btn btn-primary" type="button"
-            > Edit alert
-            </button>
-        </form>
-    </div>-->
     <alertclickthrough></alertclickthrough>
 
 
@@ -68,17 +8,18 @@
         <div class="table-title">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3>{{alertsCtrl.title}}</h3>
+                    <h3>{{LANG.ALERTS}}</h3>
                 </div>
             </div>
         </div>
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th>Kind</th>
-                <th>Time</th>
-                <th>Description</th>
-                <th>Active</th>
+                <th>{{LANG.KIND}}</th>
+                <th>{{LANG.TIME}}</th>
+                <th>{{LANG.DESCRIPTION}}</th>
+                <th>{{LANG.LOCATION}}</th>
+                <th>{{LANG.ACTIVE}}</th>
             </tr>
             </thead>
             <tbody>
@@ -86,14 +27,48 @@
                 <td><b>{{alert.kind}}</b></td>
                 <td>{{alert.time | date:'dd-MM-yyyy HH:mm'}}</td>
                 <td>{{alert.description}}</td>
-                <td>{{alert.active}}</td>
-                <td><a href="" ng-click="alertsCtrl.selectAlert(alert)" class="edit"><i class="material-icons"
-                                                                                        data-toggle="tooltip"
-                                                                                        title="edit">&#xE254;</i></a>
+                <td>{{alert.location}}</td>
+                <td ng-click="alertsCtrl.toggleAlertStatus(alert)"><p ng-if="alert.active"><input class="tgl tgl-skewed"
+                                                                                                  id="cb3"
+                                                                                                  type="checkbox"
+                                                                                                  checked/>
+                    <label class="tgl-btn" data-tg-off="{{LANG.INACTIVE}}" data-tg-on="{{LANG.ACTIVE}}" for="cb3"/></p>
+                    <p ng-if="!alert.active"><input class="tgl tgl-skewed" id="cb3" type="checkbox"/>
+                        <label class="tgl-btn" data-tg-off="{{LANG.INACTIVE}}" data-tg-on="{{LANG.ACTIVE}}" for="cb3"/>
+                    </p></td>
+                <td>
+                    <a ng-click="alertsCtrl.openModal('custom-modal-delete-alert', alert)" class="delete"><i
+                            class="material-icons"
+                            data-toggle="tooltip"
+                            title="Delete">&#xE872;</i></a>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<!-- The Alerts User Modal -->
+<div id="custom-modal-delete-alert" class="modal">
+    <div ng-click="alertsCtrl.closeModal('custom-modal-delete-alert')" class="cover"></div>
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span ng-click="alertsCtrl.closeModal('custom-modal-delete-alert')" class="close">&times;</span>
+        <form name="deleteForm">
+            <div>
+                <p>{{LANG.DELETEALERTCONFIRM}}</p>
+                <button ng-click="alertsCtrl.closeModal('custom-modal-delete-alert')"
+                        class="btn btn-primary" type="button"
+                > {{LANG.NO}}
+                </button>
+                <button ng-click="alertsCtrl.removeAlert()"
+                        class="btn btn-primary" type="button"
+                > {{LANG.YES}}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
 
