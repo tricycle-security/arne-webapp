@@ -144,25 +144,33 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
             }
         }
 
-        self.openModal = function (id) {//id is which modal to use
+        
+
+
+
+        self.openModal = function (id, user) {//index and user determines which user gets deleted
             $("#" + id).show();
+            this.user = user;
+            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
+
         }
+
 
         self.openModal = function (id, user) {//index and user determines which user gets deleted
             $("#" + id).show();
             self.user = user
-            
+
             self.privileges = $firebaseObject(database.ref().child('userinfo/userstatus/' + user.uuid));
 //            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
 
-            if(id = "custom-modal-delete-user"){
+            if (id = "custom-modal-delete-user") {
                 var fullName = user.fname + " " + user.lname;
-                $scope.LANG.AREYOUSUREYOUWANTTODELETE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt verwijderen?";
+                $scope.LANG.AREYOUSUREYOUWANTTODELETE = "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt verwijderen?";
             }
-            if(id = "custom-modal-enable-user"){
+            if (id = "custom-modal-enable-user") {
                 var fullName = user.fname + " " + user.lname;
-                $scope.LANG.AREYOUSUREYOUWANTTOENABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt enablen?";
-                $scope.LANG.AREYOUSUREYOUWANTTODISABLE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt disablen?";
+                $scope.LANG.AREYOUSUREYOUWANTTOENABLE = "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt enablen?";
+                $scope.LANG.AREYOUSUREYOUWANTTODISABLE = "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt disablen?";
             }
         }
 

@@ -25,6 +25,10 @@
             <li ng-if="privilegeLv >= userRoles.adminLv">
                 <a href="./#/user">{{LANG.USERS}}</a>
             </li>
+            
+            <li ng-if="privilegeLv >= userRoles.adminLv">
+                <a href="./#/floorplanbuilder">{{LANG.FLOORPLANBUILDER}}</a>
+            </li>
 
             <li style="list-style: none; display: inline"></li>
             

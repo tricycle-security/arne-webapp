@@ -5,6 +5,7 @@ app.controller('languageController', function ($scope) {
         USERS: "Gebruikers",
         LOGIN: "Inloggen",
         LOGOUT: "Uitloggen",
+        FLOORPLANBUILDER: "Plattegrond opbouw",
 //Login
         EMAIL: "Email: ",
         PASSWORD: "Password: ",

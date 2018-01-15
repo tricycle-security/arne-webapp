@@ -19,6 +19,7 @@ app.constant('USER_ROLES', {
 	notAuthorized : 'auth-not-authorized'
 });
 
+
 app.factory('restrictUserByLevel',['$q', '$location', 'USER_ROLES', function($q, $location, USER_ROLES){
     this.action = function(minPrivilegeLevel) {
         var deferred = $q.defer();
@@ -80,6 +81,14 @@ app.config(function ($routeProvider, USER_ROLES) {
         })
         .when("/user", {
             templateUrl: "user.html",
+            resolve:{
+                restrictUser: function(restrictUserByLevel) {
+                    return restrictUserByLevel.action(USER_ROLES.adminLv);//3
+                }
+            }
+        })
+        .when("/floorplanbuilder", {
+            templateUrl: "floorplanbuilder-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
                     return restrictUserByLevel.action(USER_ROLES.adminLv);//3
