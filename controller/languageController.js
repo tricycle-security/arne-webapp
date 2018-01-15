@@ -8,6 +8,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         USERS: "Gebruikers",
         LOGIN: "Inloggen",
         LOGOUT: "Uitloggen",
+        FLOORPLANBUILDER: "Plattegrond opbouw",
 //Login
         EMAIL: "Email: ",
         PASSWORD: "Password: ",
@@ -72,6 +73,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         USERS: "Users",
         LOGIN: "Login",
         LOGOUT: "Logout",
+        FLOORPLANBUILDER: "Floorplanbuilder",
 //Login
         EMAIL: "Email: ",
         PASSWORD: "Password: ",

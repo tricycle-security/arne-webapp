@@ -36,8 +36,6 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
             $scope.fireuid = firebaseuid;
         });
 
-
-
         // ADD USER
         this.addUser = function () {
             if (!$scope.createForm.$valid) {
@@ -144,18 +142,22 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
             }
         }
 
-        self.openModal = function (id) {//id is which modal to use
+        self.openModal = function (id, user) {//index and user determines which user gets deleted
             $("#" + id).show();
+            this.user = user;
+            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
+
         }
+
 
         self.openModal = function (id, user) {//index and user determines which user gets deleted
             $("#" + id).show();
             self.user = user
-            
+
             self.privileges = $firebaseObject(database.ref().child('userinfo/userstatus/' + user.uuid));
 //            var userStatus = database.ref().child('userinfo/userstatus/' + user.uuid);
 
-            if(id = "custom-modal-delete-user"){
+            if (id = "custom-modal-delete-user") {
                 var fullName = user.fname + " " + user.lname;
                 
                 if($scope.LANG.LANGUAGE == "EN"){
@@ -164,7 +166,7 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
                     $scope.LANG.AREYOUSUREYOUWANTTODELETE =  "Weet u zeker dat u gebruiker \'" + fullName + "\' wilt verwijderen?";
                 }
             }
-            if(id = "custom-modal-enable-user"){
+            if (id = "custom-modal-enable-user") {
                 var fullName = user.fname + " " + user.lname;
                 if($scope.LANG.LANGUAGE == "EN"){
                     $scope.LANG.AREYOUSUREYOUWANTTOENABLE =  "Are you sure you want to enable user \'" + fullName + "\'?";
