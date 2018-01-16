@@ -98,8 +98,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout, $sce
     }
 
 
-    $scope.sendAlert = function (alert) {
-
+    this.sendAlert = function (alert) {
         if (alert != null) {
             firebase.database().ref('alerts/' + alert.id).set(alert);
         }
@@ -111,7 +110,7 @@ app.controller('alertController', function ($routeParams, $scope, $timeout, $sce
     this.editAlert = function (alert) {    
 
         self.editableAlert = alert
-        $scope.sendAlert(alert)
+        self.sendAlert(alert)
     }
 
     var notRunning = true
@@ -132,10 +131,10 @@ app.controller('alertController', function ($routeParams, $scope, $timeout, $sce
         self.closeModal('custom-modal-delete-alert');
     };
 
-    self.toggleAlertStatus = function (alert) {
+    this.toggleAlertStatus = function (alert) {
         if (alert.id === undefined) return;
         alert.active = !alert.active;
-        $scope.sendAlert(alert);
+        self.sendAlert(alert);
     };
 
 
