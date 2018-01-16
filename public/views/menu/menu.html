@@ -1,26 +1,18 @@
 <div ng-controller="menuController as menuCtrl">
     <a href="./#/" id="logo"></a>
-    <nav>
+    <nav id="menu">
         <ul>
-            <li style="list-style: none; display: inline"></li>
-
-            <li ng-if="privilege == ''">
+            <li ng-if="privilegeLv == -1">
                 <a href="./#/">{{LANG.LOGIN}}</a>
-                </li>
-
-            <li style="list-style: none; display: inline"></li>
-
-            <li ng-if="privilege !== ''">
-                <a href="./#/">{{LANG.HOME}}</a>
             </li>
 
-            <li style="list-style: none; display: inline"></li>
+            <li ng-if="privilegeLv != -1">
+                <a href="./#/">{{LANG.HOME}}</a>
+            </li>
 
             <li ng-if="privilegeLv >= userRoles.responderLv">
                 <a href="./#/alerts">{{LANG.ALERTS}}</a>
             </li>
-
-            <li style="list-style: none; display: inline"></li>
 
             <li ng-if="privilegeLv >= userRoles.adminLv">
                 <a href="./#/user">{{LANG.USERS}}</a>
@@ -33,10 +25,8 @@
             <li ng-if="privilegeLv >= userRoles.adminLv">
                 <a href="./#/card">{{LANG.CARD}}</a>
             </li>
-
-            <li style="list-style: none; display: inline"></li>
             
-            <li ng-if="privilege !== ''">
+            <li ng-if="privilege != ''">
                 <a href="./#/logout">{{LANG.LOGOUT}}</a>
             </li>
 
@@ -51,8 +41,6 @@
                     <img src="./images/Flag_of_the_Netherlands.svg" height="12" width="22"/>
                 </a>
             </li>
-
-            <li style="list-style: none; display: inline"></li>
         </ul>
     </nav>
 </div>
