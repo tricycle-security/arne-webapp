@@ -857,18 +857,32 @@ table.table .avatar {
     list-style-type: none;
 }
 
-.sectionname {
-
-}
-
 .sectionlevel {
     color: maroon;
 }
 
-.sectionchilds {
-    
-}
-
 .sectionadd {
     color: limegreen;
+}
+
+* {
+    margin: 0;
+}
+
+/* Sticky Footer */
+html, body {
+    height: 100%;
+}
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -180px; 
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+#footer, .page-wrap:after {
+    /* .push must be the same height as footer */
+    height: 180px; 
 }
