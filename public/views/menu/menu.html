@@ -10,7 +10,7 @@
 
             <li style="list-style: none; display: inline"></li>
 
-            <li ng-if="privilegeLv > userRoles.responderLv">
+            <li ng-if="privilegeLv >= userRoles.responderLv">
                 <a href="./#/">{{LANG.HOME}}</a>
             </li>
 
@@ -36,7 +36,7 @@
 
             <li style="list-style: none; display: inline"></li>
             
-            <li ng-if="privilegeLv >= userRoles.adminLv && privilegeLv != 0">
+            <li ng-if="privilegeLv != 0">
                 <a href="./#/logout">{{LANG.LOGOUT}}</a>
             </li>
 
