@@ -40,7 +40,6 @@ app.factory('restrictUserByLevel',['$q', '$location', 'USER_ROLES', function($q,
                         }
                     }
                 }
-
                 //is user the right privilege level for this page?
                 if (privilegeLevel >= minPrivilegeLevel) {
                     deferred.resolve();//allow access to page
@@ -64,7 +63,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "dashboard-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.responderLv);//1
+                    return restrictUserByLevel.action(USER_ROLES.viewerLv);//0
                 }
             }
         })

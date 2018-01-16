@@ -17,20 +17,22 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
             console.log("auth sign in Error Here:");
             console.log(error.code);
             console.log(error.message);
-            
+
             //redirect if login fails
             $window.location.href = './#/error';
         });
-
+        
         var user = firebase.auth().currentUser;
     }  
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
-        
+            
             userStatus.on('value', function (statusSnap) {
 
+                $rootScope.privilege = USER_ROLES.viewer;
+                $rootScope.privilegeLv = USER_ROLES.viewerLv;
                 if(statusSnap.val().responder){
                     $rootScope.privilege = USER_ROLES.responder;
                     $rootScope.privilegeLv = USER_ROLES.responderLv;
@@ -43,8 +45,9 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
                         }
                     }
                 }
+                
             });
-
+            
             //redirect after login
             $window.location.href = './#/';
         }
