@@ -850,3 +850,25 @@ table.table .avatar {
     height: 100%;
     z-index: 101;
 }
+
+/* floorplan table styling - sectionview*/
+.sectionview {
+    margin-right: 15px;
+    list-style-type: none;
+}
+
+.sectionname {
+
+}
+
+.sectionlevel {
+    color: maroon;
+}
+
+.sectionchilds {
+    
+}
+
+.sectionadd {
+    color: limegreen;
+}

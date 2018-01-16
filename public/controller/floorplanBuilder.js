@@ -153,9 +153,6 @@ app.controller('floorplanbuilderController', function ($firebaseArray, $scope, $
 
     this.openModal = function (id, section) {//section determines which section gets deleted
         $("#" + id).show();
-        /*console.log(section);
-        console.log(section.level);
-        console.log(section.id);*/
         self.section = section;
     }
 

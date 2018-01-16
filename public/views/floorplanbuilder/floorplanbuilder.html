@@ -4,7 +4,7 @@
     </div>
     <!-- //open in modal and allow for name selction-->
 
-    <span ng-click="floorplanbuilderCtrl.openModal('add-section-modal')">+</span>
+    <span class="sectionadd" ng-click="floorplanbuilderCtrl.openModal('add-section-modal')">+</span>
 
     <!-- Add Section Modal -->
     <div id="add-section-modal" class="modal">
@@ -23,7 +23,7 @@
                                     ng-model="floorplanbuilderCtrl.name"
                                     placeholder="Name"
                                     ng-required="true"
-                                    ng-minlength="5"
+                                    ng-minlength="2"
                                     class="form-control"
                             />
                             <p ng-show="addForm.userNameField.$touched && addForm.userNameField.$invalid" class="help-block">Name is not valid</p>
@@ -38,7 +38,6 @@
                 </form>
             </div>
         </div>
-
 
     <!-- Delete Section Modal -->
     <div id="delete-section-modal" class="modal">
