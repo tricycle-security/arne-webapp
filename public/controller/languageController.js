@@ -63,7 +63,13 @@ app.controller('languageController', function ($rootScope, $scope) {
         LOGGEDOUT: "U bent uitgelogd",
 //CONFIRM ENABLE/DISABLE
         AREYOUSUREYOUWANTTOENABLE: "Weet u zeker dat u deze gebruiker wilt enablen?",
-        AREYOUSUREYOUWANTTODISABLE: "Weet u zeker dat u deze gebruiker wilt disablen?"
+        AREYOUSUREYOUWANTTODISABLE: "Weet u zeker dat u deze gebruiker wilt disablen?",
+//FOOTER
+        ABOUT: 'Over ARNE',
+        CONTACT: 'Contacteer Tricycle',
+        COPYRIGHT: 'Copyright © 2017 ',
+        COMPANYNAME: 'Tricycle',
+        COMPANYWEBSITESIG: 'ARNE een website door Tricycle'
     };
     
     var EN = {
@@ -130,7 +136,13 @@ app.controller('languageController', function ($rootScope, $scope) {
         LOGGEDOUT: "You have been logged out",
 //CONFIRM ENABLE/DISABLE
         AREYOUSUREYOUWANTTOENABLE: "Are you sure you want to enable this alert?",
-        AREYOUSUREYOUWANTTODISABLE: "Are you sure you want to disable this alert?"
+        AREYOUSUREYOUWANTTODISABLE: "Are you sure you want to disable this alert?",
+//FOOTER
+        ABOUT: 'About ARNE',
+        CONTACT: 'Contact Tricycle',
+        COPYRIGHT: 'Copyright © 2017 ',
+        COMPANYNAME: 'Tricycle',
+        COMPANYWEBSITESIG: 'ARNE a website by Tricycle'
     };
 
     //default language

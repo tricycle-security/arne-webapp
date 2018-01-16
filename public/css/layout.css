@@ -177,24 +177,16 @@ img {
 }
 
 /* menu */
-
-#menu {
-    clear: both;
-/*        width: 960px;*/
-    height: 120px;
-    margin-bottom: 20px;
-    background-color:maroon;
-/*	background: url(/web/images/menu_bg.jpg) repeat-x;*/
-
+@media only screen and (max-width: 740px) {/* rules that only apply for canvases narrower than 740 */
+    #menu {
+        font-size: 10px;
+    }
 }
 
-#menu ul{
-    list-style: none;
-}
-
-#menu ul li{
-    margin: 0 10px;
-    float: left;
+@media only screen and (max-width: 650px) {/* rules that only apply for canvases narrower than 650 */
+    #menu {
+        font-size: 8px;
+    }
 }
 
 #content_wrapper {
@@ -849,4 +841,40 @@ table.table .avatar {
     width: 100%;
     height: 100%;
     z-index: 101;
+}
+
+/* floorplan table styling - sectionview*/
+.sectionview {
+    margin-right: 15px;
+    list-style-type: none;
+}
+
+.sectionlevel {
+    color: maroon;
+}
+
+.sectionadd {
+    color: limegreen;
+}
+
+* {
+    margin: 0;
+}
+
+/* Sticky Footer */
+html, body {
+    height: 100%;
+}
+.page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -180px; 
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+#footer, .page-wrap:after {
+    /* .push must be the same height as footer */
+    height: 180px; 
 }
