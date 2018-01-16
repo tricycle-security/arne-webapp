@@ -86,6 +86,14 @@ app.config(function ($routeProvider, USER_ROLES) {
                 }
             }
         })
+        .when("/card", {
+            templateUrl: "card-index.html",
+            resolve:{
+                restrictUser: function(restrictUserByLevel) {
+                    return restrictUserByLevel.action(USER_ROLES.adminLv);//3
+                }
+            }
+        })
         .when("/floorplanbuilder", {
             templateUrl: "floorplanbuilder-index.html",
             resolve:{
