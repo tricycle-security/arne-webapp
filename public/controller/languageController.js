@@ -8,7 +8,8 @@ app.controller('languageController', function ($rootScope, $scope) {
         USERS: "Gebruikers",
         LOGIN: "Inloggen",
         LOGOUT: "Uitloggen",
-        FLOORPLANBUILDER: "Plattegrond opbouw",
+        FLOORPLANBUILDER: "Plattegrond",
+        CARD:"Kaarten",
 //Login
         EMAIL: "Email: ",
         PASSWORD: "Password: ",
@@ -21,7 +22,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         UNAVAILABLE: "Afwezig",
 //Buttons
         CHESTPAIN: "Borstpijn",
-        FIRE: "Vuur",
+        FIRE: "Brand",
         INJURY: "Letsel",
         HEADINJURY: "Hoofdletsel",
         CUSTOM: "Eigen text",
@@ -45,6 +46,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         KIND: "Type",
         TIME: "Datum",
         LOCATION: "Locatie",
+        REMOVEUSER: "Verwijder gebruiker",
 //Popup alert
         NO: "Nee",
         YES: "Ja",
@@ -74,6 +76,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         LOGIN: "Login",
         LOGOUT: "Logout",
         FLOORPLANBUILDER: "Floorplanbuilder",
+        CARD:"Cards",
 //Login
         EMAIL: "Email: ",
         PASSWORD: "Password: ",
@@ -110,6 +113,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         KIND: "Type",
         TIME: "Date",
         LOCATION: "Location",
+        REMOVEUSER: "Remove user",
 //Popup alert
         NO: "No",
         YES: "Yes",
