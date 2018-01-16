@@ -1,0 +1,66 @@
+<div ng-controller="cardCoupleController as cardCoupleCtrl">
+    <table>
+        <th>Cards</th>
+        <tr ng-repeat="card in cardCoupleCtrl.cards">
+            <td>{{card.$id}}</td> <td>{{card.status}}</td> <td>{{card.uuid}}</td>
+            <td>{{card.user.fname}} {{card.user.lname}}</td>
+            <td ng-click="cardCoupleCtrl.openCardModal('manage-card-modal', card)">Manage card</td> 
+            <td ng-hide="card.status === 'inactive'" ng-click="cardCoupleCtrl.openCardModal('change-card-modal', card, 'disable')">Disable card</td>  
+            <td ng-hide="card.status !== 'inactive'" ng-click="cardCoupleCtrl.openCardModal('change-card-modal', card, 'enable')">Enable card</td>
+        </tr>
+    </table>
+
+    <div id="change-card-modal" class="modal">
+
+        <div ng-click="cardCoupleCtrl.closeModal('change-card-modal')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="cardCoupleCtrl.closeModal('change-card-modal')" class="close">&times;</span>
+            <form name="deleteForm">
+                <div>
+                    <p>Are you sure you want to {{cardCoupleCtrl.change}} {{cardCoupleCtrl.card.$id}}?</p>
+                    <button ng-click="cardCoupleCtrl.closeModal('change-card-modal')"
+                            class="btn btn-primary" type="button"
+                            > No
+                    </button>
+                    <button ng-click="cardCoupleCtrl.disableCard('change-card-modal')"
+                            class="btn btn-primary" type="button"
+                            > Yes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="manage-card-modal" class="modal">
+        <div ng-click="cardCoupleCtrl.closeModal('manage-card-modal')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="cardCoupleCtrl.closeModal('manage-card-modal')" class="close">&times;</span>
+            <form name="customForm">
+                <div>
+                    <div class="form-group">
+                        <label>Select the user to add to the card: </label>
+                        <select class="form-control" ng-model="cardCoupleCtrl.selectedUser"
+                                ng-options="s as s.fname + ' ' + s.lname for s in cardCoupleCtrl.users">
+                        </select>
+                    </div>
+                    <button ng-click="cardCoupleCtrl.closeModal('manage-card-modal')"
+                            class="btn btn-primary" type="button"
+                            > {{LANG.CANCEL}}
+                    </button>
+                    <button ng-click="cardCoupleCtrl.selectUser('manage-card-modal', '')"
+                            class="btn btn-primary" type="button"
+                            > {{LANG.SUBMITCUSTOM}}
+                    </button>
+                    <button ng-click="cardCoupleCtrl.selectUser('manage-card-modal', 'none')"
+                            class="btn btn-primary" type="button"
+                            > {{LANG.REMOVEUSER}}
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
