@@ -22,7 +22,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         UNAVAILABLE: "Afwezig",
 //Buttons
         CHESTPAIN: "Borstpijn",
-        FIRE: "Vuur",
+        FIRE: "Brand",
         INJURY: "Letsel",
         HEADINJURY: "Hoofdletsel",
         CUSTOM: "Eigen text",

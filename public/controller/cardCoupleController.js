@@ -8,21 +8,7 @@ app.controller('cardCoupleController', function ($firebaseArray, $firebaseObject
 
     this.cards.$watch(function (event) {
         //add the block
-        if (event.event === 'child_added') {
-            for (var j = 0; j < self.cards.length; j++) {
-                if (self.cards[j].$id === event.key) {
-                    if (self.cards[j].uuid !== 'none') {
-                        self.cards[j].user = $firebaseObject(database.ref().child('userinfo/usergeninfo').child(self.cards[j].uuid));
-                    } else {
-                        self.cards[j].user = {
-                            fname: 'No user on the card',
-                            lname: ''
-                        };
-                    }
-                }
-            }
-        }
-       if (event.event === 'child_changed') {
+        if (event.event === 'child_added' || event.event === 'child_changed') {
             for (var j = 0; j < self.cards.length; j++) {
                 if (self.cards[j].$id === event.key) {
                     if (self.cards[j].uuid !== 'none') {
