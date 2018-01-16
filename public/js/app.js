@@ -74,7 +74,7 @@ app.config(function ($routeProvider, USER_ROLES) {
             templateUrl: "alerts-index.html",
             resolve:{
                 restrictUser: function(restrictUserByLevel) {
-                    return restrictUserByLevel.action(USER_ROLES.managerLv);//2
+                    return restrictUserByLevel.action(USER_ROLES.responderLv);//2
                 }
             }
         })
