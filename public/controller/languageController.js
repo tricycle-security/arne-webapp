@@ -2,6 +2,7 @@ app.controller('languageController', function ($rootScope, $scope) {
     var NL = {
 //Current Language
         LANGUAGE: "NL",
+        
 //Menu
         HOME: "Home",
         ALERTS: "Meldingen",
@@ -20,7 +21,16 @@ app.controller('languageController', function ($rootScope, $scope) {
         AVAILABILITY: "Beschikbaar",
         AVAILABLE: "Aanwezig",
         UNAVAILABLE: "Afwezig",
+//Alert clickthrough
+        ALERTTYPE: "Wat voor een soort melding?",
+        ALERTLOCATION: "Wat is de locatie?",
+        ALERTDESC: "Wil je de beschrijving aanpassen?",
+        ALERTSEND: "Wil je de melding versturen?",
+        ALERTSUCCESS: "Melding verstuurd!",
+        
+        
 //Buttons
+        SENDALERT: "Verstuur melding",
         CHESTPAIN: "Borstpijn",
         FIRE: "Brand",
         INJURY: "Letsel",
@@ -28,13 +38,12 @@ app.controller('languageController', function ($rootScope, $scope) {
         CUSTOM: "Eigen text",
         FLOORPLAN: "Plattegrond",
         BACK: "Terug",
-        DESCRIPTION: "Beschrijving",
+        DESCRIPTION: "Gebruik standaard",
         SUBMITALERT: "Voeg toe",
         EDIT: "Aanpassen",
 //Alert
         INACTIVE: "Non-actief",
         ACTIVE: "Actief",
-        ALERTTYPE: "Wat is het alert type",
         ADDALERT: "Voeg alert toe",
 //Floorplan popup
         SELECTLOCATION: "Selecteer uw locatie",
@@ -93,7 +102,15 @@ app.controller('languageController', function ($rootScope, $scope) {
         AVAILABILITY: "Availability",
         AVAILABLE: "Available",
         UNAVAILABLE: "Unavailable",
+        //Alert clickthrough
+        ALERTTYPE: "What is the alert type?",
+        ALERTLOCATION: "What is the location?",
+        ALERTDESC: "Do you want to adjust the description?",
+        ALERTSEND: "Do you want to send the alert?",
+        ALERTSUCCESS: "Send alert!",   
+        
 //Buttons
+        SENDALERT: "Send alert",
         CHESTPAIN: "Chestpain",
         FIRE: "Fire",
         INJURY: "Injurity",
@@ -101,7 +118,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         CUSTOM: "Custom",
         FLOORPLAN: "Floorplan",
         BACK: "Back",
-        DESCRIPTION: "Description",
+        DESCRIPTION: "Use generated",
         SUBMITALERT: "Create alert",
         EDIT: "Edit",
 //Alert
