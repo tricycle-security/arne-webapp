@@ -1,47 +1,56 @@
 <div>
-    <div ng-repeat="section in floorplanbuilderCtrl.baseSections">
-        <sectionview></sectionview>
-    </div>
-    <!-- //open in modal and allow for name selction-->
 
-    <span class="sectionadd" ng-click="floorplanbuilderCtrl.openModal('add-section-modal')">+</span>
+    <div class="table-wrapper">
+        <div class="map-container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div ng-repeat="section in floorplanbuilderCtrl.baseSections">
+                        <sectionview></sectionview>
+                    </div>
+                    <!-- //open in modal and allow for name selction-->
+                    <span class="sectionadd" ng-click="floorplanbuilderCtrl.openModal('add-section-modal')">+</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Section Modal -->
     <div id="add-section-modal" class="modal">
-        
-            <div ng-click="floorplanbuilderCtrl.closeModal('add-section-modal')" class="cover"></div>
-    
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span ng-click="floorplanbuilderCtrl.closeModal('add-section-modal')" class="close">&times;</span>
-                <form name="addForm">
-                    <div>
-                        <div class="form-group" ng-class="{ 'has-error' : (addForm.userNameField.$invalid) }">
-                            <label>Name</label>
-                            <input type="name"
-                                    name="userNameField"
-                                    ng-model="floorplanbuilderCtrl.name"
-                                    placeholder="Name"
-                                    ng-required="true"
-                                    ng-minlength="2"
-                                    class="form-control"
-                            />
-                            <p ng-show="addForm.userNameField.$touched && addForm.userNameField.$invalid" class="help-block">Name is not valid</p>
-                        </div>
 
-                        <!-- Submit button -->
-                        <button ng-click="floorplanbuilderCtrl.addSection('add-section-modal', addForm.userNameField.$viewValue, 0, null, floorplanbuilderCtrl.section)"
-                                class="btn btn-primary" type="button"
-                        > Yes
-                        </button>
+        <div ng-click="floorplanbuilderCtrl.closeModal('add-section-modal')" class="cover"></div>
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span ng-click="floorplanbuilderCtrl.closeModal('add-section-modal')" class="close">&times;</span>
+            <form name="addForm">
+                <div>
+                    <div class="form-group" ng-class="{ 'has-error' : (addForm.userNameField.$invalid) }">
+                        <label>Name</label>
+                        <input type="name"
+                               name="userNameField"
+                               ng-model="floorplanbuilderCtrl.name"
+                               placeholder="Name"
+                               ng-required="true"
+                               ng-minlength="2"
+                               class="form-control"
+                        />
+                        <p ng-show="addForm.userNameField.$touched && addForm.userNameField.$invalid"
+                           class="help-block">Name is not valid</p>
                     </div>
-                </form>
-            </div>
+
+                    <!-- Submit button -->
+                    <button ng-click="floorplanbuilderCtrl.addSection('add-section-modal', addForm.userNameField.$viewValue, 0, null, floorplanbuilderCtrl.section)"
+                            class="btn btn-primary" type="button"
+                    > Yes
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
 
     <!-- Delete Section Modal -->
     <div id="delete-section-modal" class="modal">
-        
+
         <div ng-click="floorplanbuilderCtrl.closeModal('delete-section-modal')" class="cover"></div>
 
         <!-- Modal content -->
@@ -53,7 +62,7 @@
 
                     <!-- Confirmation buttons -->
                     <button ng-click="floorplanbuilderCtrl.closeModal('delete-section-modal')"
-                    class="btn btn-primary" type="button"
+                            class="btn btn-primary" type="button"
                     > No
                     </button>
                     <button ng-click="floorplanbuilderCtrl.removeSection(floorplanbuilderCtrl.section, 'delete-section-modal')"

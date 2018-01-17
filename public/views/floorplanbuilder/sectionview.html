@@ -1,14 +1,21 @@
-<ul class="sectionview" ng-class="'section' + section.level">
-    <span class="sectionname">{{section.name}}</span>
-    <span class="sectionlevel" ng-click="floorplanbuilderCtrl.openModal('delete-section-modal', section)">Remove</span></br>
-    <span class="sectionchilds">Children: </span> 
-    <select ng-model="section.selectedSectionId" 
+<ul class=" sectionview" ng-class="'section' + section.level">
+    <div class="sectionwhole">
+        <span class="sectionname"><b>{{section.name}}</b></span>
+        <span class="sectionlevel" ng-click="floorplanbuilderCtrl.openModal('delete-section-modal', section)"><i
+                class="delete-icon material-icons">&#xE92B;</i></span></br>
+        <span class=" sectionchilds">Children: </span>
+        <select class="form-selection form-control" ng-model="section.selectedSectionId"
         ng-change="floorplanbuilderCtrl.selectSection(section)" 
         ng-options="s.$id as s.name for s in section.children">
-    </select> 
-    <span class="sectionadd" ng-click="floorplanbuilderCtrl.openModal('add-section-modal', section)">+</span>
+    </select>
+        <span class=" sectionadd" ng-click="floorplanbuilderCtrl.openModal('add-section-modal', section)">+</span>
     <!--display selected child element-->
-    <div ng-repeat ="section in section.selectedSections" >
-        <sectionview></sectionview>
     </div>
+    <div class="sectionpartial">
+        <div ng-repeat ="section in section.selectedSections" >
+            <div class="spacer"></div>
+            <sectionview></sectionview>
+        </div>
+    </div>
+
 </ul>
