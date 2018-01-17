@@ -1,11 +1,15 @@
-app.controller('loginController', function ($scope, $rootScope, $window, USER_ROLES)
-{    
+app.controller('loginController', function ($timeout, $scope, $rootScope, $window, USER_ROLES) {
+    var self = this;
     this.title = "Log in";
-    $scope.submit = function (){
 
+
+    self.submit = function () {
+        console.log("submit");
         //submitted values
-        var email = $scope.email;
-        var password = $scope.password;
+        var email = self.email;
+        var password = self.password;
+
+        console.log(self.email);
 
         //Submitted value must not be null, null values prevents code from executing onAuthStateChanged()
         if (email == null || password == null) {
@@ -18,15 +22,23 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
             console.log(error.code);
             console.log(error.message);
 
+            $scope.errorMsg = error.message;
+            $timeout(function () {
+                $scope.errorMsg = error.message;
+                console.log($scope.errorMsg);
+                //  $window.location.href = './#/login';
+            }, 1000);
+
             //redirect if login fails
-            $window.location.href = './#/error';
+
         });
-        
+
         var user = firebase.auth().currentUser;
     }  
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+            console.log("statechanged")
             var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
             
             userStatus.on('value', function (statusSnap) {
