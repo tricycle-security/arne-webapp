@@ -15,7 +15,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         PASSWORD: "Password: ",
         SUBMITLOGIN: "Inloggen",
 //Home dashboard
-        AVAILABLEBHV: "Beschrikbare BHV'ers",
+        AVAILABLEBHV: "Beschikbare BHV'ers",
         NAME: "Naam",
         AVAILABILITY: "Beschikbaar",
         AVAILABLE: "Aanwezig",
