@@ -106,7 +106,7 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
         },
         description: {
             svg: $sce.trustAsHtml($scope.DESCRIPTIONSVG),
-            text: $scope.LANG.DESCRIPTION,
+            text: $scope.LANG.DESCRIPTIONBUTTON,
             id: "description",
             next: true
         },

@@ -38,13 +38,14 @@ app.controller('languageController', function ($rootScope, $scope) {
         CUSTOM: "Eigen text",
         FLOORPLAN: "Plattegrond",
         BACK: "Terug",
-        DESCRIPTION: "Gebruik standaard",
+        DESCRIPTIONBUTTON: "Gebruik standaard",
         SUBMITALERT: "Voeg toe",
         EDIT: "Aanpassen",
 //Alert
         INACTIVE: "Non-actief",
         ACTIVE: "Actief",
         ADDALERT: "Voeg alert toe",
+        DESCRIPTION:"Beschrijving",
 //Floorplan popup
         SELECTLOCATION: "Selecteer uw locatie",
         CANCEL: "Annuleer",
@@ -118,14 +119,14 @@ app.controller('languageController', function ($rootScope, $scope) {
         CUSTOM: "Custom",
         FLOORPLAN: "Floorplan",
         BACK: "Back",
-        DESCRIPTION: "Use generated",
+        DESCRIPTIONBUTTON: "Use generated",
         SUBMITALERT: "Create alert",
         EDIT: "Edit",
 //Alert
         INACTIVE: "Inactive",
         ACTIVE: "Active",
-        ALERTTYPE: "What is the alert type?",
         ADDALERT: "Add alert",
+        DESCRIPTION:"Description",
 //Floorplan popup
         SELECTLOCATION: "Select your location",
         CANCEL: "Cancel",
