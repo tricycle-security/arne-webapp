@@ -139,13 +139,10 @@ app.controller('alertController', function ($routeParams, $scope, $timeout, $sce
 
 
     function remove(remove) {
-        console.log("starting delete");
         database.ref().child(remove).remove()
             .then(function () {
-                console.log("Remove succeeded.")
             })
             .catch(function (error) {
-                console.log("Remove failed: " + error.message)
             });
     }
 

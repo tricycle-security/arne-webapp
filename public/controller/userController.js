@@ -15,7 +15,7 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
 
 
         self.users.$watch(function (event) {
-            if (event.event = "child_added") {
+            if (event.event === "child_added") {
                 for (var i = 0; i < self.users.length; i++) {
                     if (self.users[i].uuid === event.key) {
                         self.users[i].enabled = $firebaseObject(database.ref().child('userinfo/userstatus/' + event.key + "/enabled"));
@@ -23,9 +23,7 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
                     }
                 }
             }
-            if (event.event = "child_changed") {
-                console.log("changed");
-            }
+
         });
 
         var userStatus = database.ref().child('userinfo/userstatus');
@@ -39,7 +37,6 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
         // ADD USER
         this.addUser = function () {
             if (!$scope.createForm.$valid) {
-                console.log("invalid");
                 return;
             }
 
@@ -88,7 +85,6 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
                 self.closeModal('custom-modal-delete-user');
             }
             else {
-                console.log("You can't delete yourself")
             }
             ;
         };
@@ -109,13 +105,10 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
         };
 
         function remove(remove) {
-            console.log("starting delete");
             database.ref().child(remove).remove()
                     .then(function () {
-                        console.log("Remove succeeded.")
                     })
                     .catch(function (error) {
-                        console.log("Remove failed: " + error.message)
                     });
         }
 
@@ -136,9 +129,7 @@ app.controller('userController', ['$scope', '$firebaseArray', "$firebaseObject",
                 var isEnabled = !boolean;
 
                 //update enabled status
-                database.ref().child('/userinfo/userstatus/' + uuid).set({
-                    enabled: isEnabled
-                });
+                database.ref().child('/userinfo/userstatus/' + uuid+'/enabled').set(isEnabled);
             }
         }
 

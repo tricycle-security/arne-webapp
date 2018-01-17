@@ -1,4 +1,4 @@
-var app = angular.module('dashboardapp', ['angular.filter', 'firebase', 'ngMap', 'ngStorage', 'ngRoute', 'ngSanitize']);
+var app = angular.module('dashboardapp', ['angular.filter', 'firebase', 'ngRoute', 'ngSanitize']);
 app.constant('USER_ROLES', {
 	all : '*',
     admin : 'admin',

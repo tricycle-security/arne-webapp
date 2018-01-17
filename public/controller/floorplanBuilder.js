@@ -35,11 +35,6 @@ app.controller('floorplanbuilderController', function ($firebaseArray, $scope, $
                         }
                     });
                 section.selectedSections = [tempSectionObject]
-                console.log(section.children[i])
-                //TODO remove section if it is removed
-//                section.children[i].$watch(function (event) {
-//                    console.log(event);
-//                });
 
                 break;
             }
@@ -82,11 +77,9 @@ app.controller('floorplanbuilderController', function ($firebaseArray, $scope, $
 
                     })
                     .catch(function (error) {
-                        console.log("Error:", error);
                     });
         }
         catch (err) {
-            console.log(err)
         }
         finally {
             database.ref().child('building_sections').child(sectionId).remove();

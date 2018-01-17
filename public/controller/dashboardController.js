@@ -19,7 +19,6 @@ app.controller('dashboardController', function ($scope, $timeout)
             var tempUser = {fname: tempUserInfo.fname, lname: tempUserInfo.lname, uuid: tempUserInfo.uuid, onLocation: tempSnap.onLocation};
 
             self.allUsers.push(tempUser); //allusers contains all userinfo + onLocation
-            //console.log(self.allUsers);
 
             $timeout(function () {
                 $scope.$apply();

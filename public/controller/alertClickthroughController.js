@@ -198,7 +198,6 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
                     break;
                 case "description":
                     var stringBuilder = self.currentAlert.kind + " op locatie " + self.currentAlert.location;
-                    console.log(stringBuilder);
                     self.editCurrentAlert("description", String(stringBuilder));
                     self.currentView = self.views[self.currentView.next];
                     break;
@@ -213,7 +212,6 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
     }
 
     this.customModalClick = function () {
-        console.log(self.currentView.parameter);
         self.editCurrentAlert(self.currentView.parameter, self.customField);
         next();
         self.closeModal("custom-modal-custom-text");
@@ -227,7 +225,6 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
             stringBuild += self.currentSections[i].name;
             if (self.currentSections[i] !== self.currentSections[len - 1])
                 stringBuild += ", ";
-            console.log(self.currentSections[len - 1]);
         }
         self.editCurrentAlert("location", stringBuild);
     }
@@ -238,8 +235,6 @@ app.controller('alertClickThroughController', function ($firebaseArray, $routePa
 
 
     this.createAlert = function (alert) {
-//        console.log('createAlert')
-//        console.log(self.editableAlert)
         if (alert != null) {
 //            alert.active = true
             var id = firebase.database().ref().child('alerts').push().key;
