@@ -17,12 +17,11 @@ app.controller('loginController', function ($timeout, $scope, $rootScope, $windo
 
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
 
-            $scope.errorMsg = error.message;
-            $timeout(function () {
+            
+            $timeout(function () {          
                 $scope.errorMsg = error.message;
-                //  $window.location.href = './#/login';
-            }, 1000);
-
+                $scope.$apply();
+            });
             //redirect if login fails
 
         });
