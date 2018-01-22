@@ -16,16 +16,7 @@ try {
 }
 catch (Exception)
 {
-    console.log('firebase already exists');
-    console.log(Exception);
 }
 finally {
     firebaseSet = true;
 }
-
-//Sign in
-firebase.auth().signOut().then(function() {
-    console.log('Signed Out');
-}, function(error) {
-    console.error('Sign Out Error', error);
-});

@@ -1,11 +1,13 @@
-app.controller('loginController', function ($scope, $rootScope, $window, USER_ROLES)
-{    
+app.controller('loginController', function ($timeout, $scope, $rootScope, $window, USER_ROLES) {
+    var self = this;
     this.title = "Log in";
-    $scope.submit = function (){
 
+
+    self.submit = function () {
         //submitted values
-        var email = $scope.email;
-        var password = $scope.password;
+        var email = self.email;
+        var password = self.password;
+
 
         //Submitted value must not be null, null values prevents code from executing onAuthStateChanged()
         if (email == null || password == null) {
@@ -13,41 +15,45 @@ app.controller('loginController', function ($scope, $rootScope, $window, USER_RO
             password = "password";
         }
 
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            console.log("auth sign in Error Here:");
-            console.log(error.code);
-            console.log(error.message);
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+
+            $scope.errorMsg = error.message;
+            $timeout(function () {
+                $scope.errorMsg = error.message;
+                //  $window.location.href = './#/login';
+            }, 1000);
 
             //redirect if login fails
-            $window.location.href = './#/error';
+
         });
-        
+
         var user = firebase.auth().currentUser;
-    }  
+    }
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var userStatus = database.ref().child('userinfo/userstatus/' + user.uid);
-            
+
             userStatus.on('value', function (statusSnap) {
 
                 $rootScope.privilege = USER_ROLES.viewer;
                 $rootScope.privilegeLv = USER_ROLES.viewerLv;
-                if(statusSnap.val().responder){
+                if (statusSnap.val().responder) {
                     $rootScope.privilege = USER_ROLES.responder;
                     $rootScope.privilegeLv = USER_ROLES.responderLv;
-                    if(statusSnap.val().alertmanager){
-                        $rootScope.privilege = USER_ROLES.manager;
-                        $rootScope.privilegeLv = USER_ROLES.managerLv;
-                        if(statusSnap.val().admin){
-                            $rootScope.privilege = USER_ROLES.admin;
-                            $rootScope.privilegeLv = USER_ROLES.adminLv;
-                        }
-                    }
                 }
-                
+                if (statusSnap.val().alertmanager) {
+                    $rootScope.privilege = USER_ROLES.manager;
+                    $rootScope.privilegeLv = USER_ROLES.managerLv;
+                }
+                if (statusSnap.val().admin) {
+                    $rootScope.privilege = USER_ROLES.admin;
+                    $rootScope.privilegeLv = USER_ROLES.adminLv;
+                }
+
+
             });
-            
+
             //redirect after login
             $window.location.href = './#/';
         }

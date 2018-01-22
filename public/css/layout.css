@@ -855,6 +855,9 @@ table.table .avatar {
 
 .sectionadd {
     color: limegreen;
+    font-size: 20px;
+    margin-top: 5px;
+    font-weight: 700;
 }
 
 * {
@@ -877,4 +880,39 @@ html, body {
 #footer, .page-wrap:after {
     /* .push must be the same height as footer */
     height: 180px; 
+}
+
+.sectionwhole {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.sectionpartial {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    color: black;
+
+}
+
+.delete-icon {
+    font-size: 20px !important;
+}
+
+.spacer {
+    border-bottom: 5px solid #26a4b3;
+    width: 100%;
+}
+
+.form-selection {
+    width: 100%;
+}
+
+.map-container {
+    background: #ececec;
+    padding: 16px 30px;
+    border-radius: 3px 3px 0 0;
 }
