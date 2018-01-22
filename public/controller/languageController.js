@@ -35,7 +35,7 @@ app.controller('languageController', function ($rootScope, $scope) {
         FIRE: "Brand",
         INJURY: "Letsel",
         HEADINJURY: "Hoofdletsel",
-        CUSTOM: "Eigen text",
+        CUSTOM: "Eigen tekst",
         FLOORPLAN: "Plattegrond",
         BACK: "Terug",
         DESCRIPTIONBUTTON: "Gebruik standaard",
