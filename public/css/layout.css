@@ -1,5 +1,4 @@
 body {
-    margin: 100px 0 0 0;
     padding: 0;
     line-height: 1.5em;
     font-family: Arial, Helvetica, sans-serif;
@@ -23,11 +22,15 @@ body #container {
 }
 
 a:link, a:visited {
-    color: #fcdd31;
+    color: #26a4b3;
     text-decoration: underline;
     font-weight: normal;
 }
-a:active, a:hover { color: #fcdd31; text-decoration: none; }
+
+a:active, a:hover {
+    color: #1d7f8a;
+    text-decoration: none;
+}
 
 p {
     margin: 0px;
@@ -258,15 +261,7 @@ img {
 
 /* footer */
 
-#footer {
-    clear: both;
-/*	width: 960px;*/
-    padding: 20px 0 20px 0;
-    text-align: center;
-    border-top: 1px solid #8b8a8b;
-    background-color: #313233;
-/*	background: #343233 url(../images/footer.jpg) no-repeat;*/
-}
+
 
 .footer_list {
     margin: 0px;
@@ -858,6 +853,7 @@ table.table .avatar {
     font-size: 20px;
     margin-top: 5px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 * {
@@ -866,20 +862,16 @@ table.table .avatar {
 
 /* Sticky Footer */
 html, body {
-    height: 100%;
+
 }
 .page-wrap {
-    min-height: 100%;
+    margin-top: 87px;
     /* equal to footer height */
-    margin-bottom: -180px; 
+    padding-bottom: 60px;
 }
 .page-wrap:after {
     content: "";
     display: block;
-}
-#footer, .page-wrap:after {
-    /* .push must be the same height as footer */
-    height: 180px; 
 }
 
 .sectionwhole {
@@ -915,4 +907,20 @@ html, body {
     background: #ececec;
     padding: 16px 30px;
     border-radius: 3px 3px 0 0;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+#footer {
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+#footer .footer-block {
+    margin: 20px 0;
 }
